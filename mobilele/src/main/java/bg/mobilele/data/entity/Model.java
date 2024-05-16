@@ -22,6 +22,7 @@ public class Model extends BaseEntity{
     private LocalDateTime created;
     private LocalDateTime modified;
     @ManyToOne
+    @JoinColumn(name = "brand_id", referencedColumnName = "id")
     private Brand brand;
 
     public String getModelName() {
@@ -87,4 +88,5 @@ public class Model extends BaseEntity{
     public void setBrand(Brand brand) {
         this.brand = brand;
     }
+
 }

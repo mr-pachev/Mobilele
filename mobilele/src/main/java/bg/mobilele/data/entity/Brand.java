@@ -48,4 +48,6 @@ public class Brand extends BaseEntity{
     public void setModels(Set<Model> models) {
         this.models = models;
     }
+
+
 }

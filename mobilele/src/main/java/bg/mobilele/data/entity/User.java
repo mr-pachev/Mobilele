@@ -2,6 +2,9 @@ package bg.mobilele.data.entity;
 
 import bg.mobilele.data.enums.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.type.descriptor.jdbc.TinyIntAsSmallIntJdbcType;
 
 import java.time.LocalDateTime;
@@ -10,12 +13,18 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity{
+    @Column(unique = true, nullable = false)
+    @Size(min=2, max=20)
     private String username;
+    @NotNull
+    @Size(min=4, max=20)
     private String password;
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
+    @Size(min=2, max=20)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
+    @Size(min=2, max=20)
     private String lastName;
 
     @Column(name = "is_active")

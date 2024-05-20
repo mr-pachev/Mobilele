@@ -1,20 +1,32 @@
 package bg.mobilele.service.impl;
 
 import bg.mobilele.data.DTO.UserRegistrationDTO;
+import bg.mobilele.data.entity.User;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void registrationUser(UserRegistrationDTO userRegistrationDTO) {
+        User user = new User();
+        user.setUsername(userRegistrationDTO.getUsername());
+        user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
+        user.setEmail(userRegistrationDTO.getEmail());
+        user.setFirstName(userRegistrationDTO.getFirstName());
+        user.setLastName(userRegistrationDTO.getLastName());
+        user.setActive(true);
 
+        userRepository.save(user);
     }
 }

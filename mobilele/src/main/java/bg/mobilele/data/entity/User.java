@@ -17,7 +17,7 @@ public class User extends BaseEntity{
     @Size(min=2, max=20)
     private String username;
     @NotNull
-    @Size(min=4, max=20)
+//    @Size(min=4, max=20)
     private String password;
     @Column(name = "first_name", nullable = false)
     @Size(min=2, max=20)

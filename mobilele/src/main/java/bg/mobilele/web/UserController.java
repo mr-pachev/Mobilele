@@ -3,20 +3,21 @@ package bg.mobilele.web;
 import bg.mobilele.data.DTO.UserRegistrationDTO;
 import bg.mobilele.data.entity.User;
 import bg.mobilele.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class RegisterController {
+public class UserController {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public RegisterController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("users/register")
@@ -26,14 +27,15 @@ public class RegisterController {
 
     @PostMapping("users/register")
     public String registerUser(UserRegistrationDTO userRegistrationDTO) {
+
         User user = new User();
         user.setUsername(userRegistrationDTO.getUsername());
-        user.setPassword(userRegistrationDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         user.setFirstName(userRegistrationDTO.getFirstName());
         user.setLastName(userRegistrationDTO.getLastName());
         user.setActive(true);
 
-
+        userRepository.save(user);
 
         return "redirect:/";
     }

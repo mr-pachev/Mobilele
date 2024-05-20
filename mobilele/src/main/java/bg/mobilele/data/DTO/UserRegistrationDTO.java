@@ -2,7 +2,6 @@ package bg.mobilele.data.DTO;
 
 public class UserRegistrationDTO {
     private String username;
-
     private String password;
     private String firstName;
     private String lastName;

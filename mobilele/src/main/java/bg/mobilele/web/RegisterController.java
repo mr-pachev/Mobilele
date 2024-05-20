@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class RegisterController {
     @GetMapping("users/register")
-    public ModelAndView register(UserRegistrationDTO userRegistrationDTO) {
+    public ModelAndView showRegistrationForm() {
         return new ModelAndView("auth-register");
     }
 }

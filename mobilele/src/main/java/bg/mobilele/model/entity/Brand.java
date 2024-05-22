@@ -1,4 +1,4 @@
-package bg.mobilele.data.entity;
+package bg.mobilele.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

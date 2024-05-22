@@ -1,7 +1,8 @@
 package bg.mobilele.service.impl;
 
-import bg.mobilele.data.DTO.UserRegistrationDTO;
-import bg.mobilele.data.entity.User;
+import bg.mobilele.model.DTO.UserLoginDTO;
+import bg.mobilele.model.DTO.UserRegistrationDTO;
+import bg.mobilele.model.entity.User;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,5 +29,11 @@ public class UserServiceImpl implements UserService {
         user.setActive(true);
 
         userRepository.save(user);
+    }
+
+    @Override
+    public boolean isLogin(UserLoginDTO userLoginDTO) {
+
+        return false;
     }
 }

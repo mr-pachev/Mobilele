@@ -1,4 +1,4 @@
-package bg.mobilele.data.enums;
+package bg.mobilele.model.enums;
 
 public enum Role {
     User, Admin

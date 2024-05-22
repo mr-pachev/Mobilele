@@ -1,14 +1,11 @@
-package bg.mobilele.data.entity;
+package bg.mobilele.model.entity;
 
-import bg.mobilele.data.enums.Category;
+import bg.mobilele.model.enums.Category;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
-import java.time.Year;
 import java.util.Set;
 
 @Entity

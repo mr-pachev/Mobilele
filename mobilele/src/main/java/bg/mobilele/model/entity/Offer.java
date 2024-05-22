@@ -1,7 +1,7 @@
-package bg.mobilele.data.entity;
+package bg.mobilele.model.entity;
 
-import bg.mobilele.data.enums.Engine;
-import bg.mobilele.data.enums.Transmission;
+import bg.mobilele.model.enums.Engine;
+import bg.mobilele.model.enums.Transmission;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 

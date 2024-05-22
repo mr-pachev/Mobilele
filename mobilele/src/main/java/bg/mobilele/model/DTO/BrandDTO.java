@@ -1,6 +1,4 @@
-package bg.mobilele.data.DTO;
-
-import bg.mobilele.data.entity.Model;
+package bg.mobilele.model.DTO;
 
 import java.util.Set;
 

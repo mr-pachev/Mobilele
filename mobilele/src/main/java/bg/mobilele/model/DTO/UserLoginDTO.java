@@ -1,4 +1,4 @@
-package bg.mobilele.data.DTO;
+package bg.mobilele.model.DTO;
 
 public class UserLoginDTO {
     private String username;

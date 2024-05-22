@@ -1,6 +1,6 @@
 package bg.mobilele.web;
 
-import bg.mobilele.data.DTO.UserLoginDTO;
+import bg.mobilele.model.DTO.UserLoginDTO;
 import bg.mobilele.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

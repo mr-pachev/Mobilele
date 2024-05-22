@@ -1,6 +1,6 @@
-package bg.mobilele.data.entity;
+package bg.mobilele.model.entity;
 
-import bg.mobilele.data.enums.Role;
+import bg.mobilele.model.enums.Role;
 import jakarta.persistence.*;
 
 import java.util.Set;

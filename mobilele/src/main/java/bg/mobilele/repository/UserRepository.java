@@ -1,6 +1,6 @@
 package bg.mobilele.repository;
 
-import bg.mobilele.data.entity.User;
+import bg.mobilele.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

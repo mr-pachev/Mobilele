@@ -1,4 +1,4 @@
-package bg.mobilele.data.entity;
+package bg.mobilele.model.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

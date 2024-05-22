@@ -28,7 +28,7 @@ public class LoginController {
        boolean isExist = userService.isLogin(userLoginDTO);
 
         if(isExist){
-            return "redirect:details";
+            return "redirect:register";
         }
 
         return "redirect:/";

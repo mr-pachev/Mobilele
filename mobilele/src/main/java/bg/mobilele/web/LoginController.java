@@ -35,6 +35,7 @@ public class LoginController {
 
         if(loginUser.isPresent()){
             currentUser.setLogin(true);
+            currentUser.setUsername(loginUser.get().getUsername());
             currentUser.setFirstName(loginUser.get().getFirstName());
             currentUser.setLastName(loginUser.get().getLastName());
 

@@ -11,7 +11,7 @@
 
 <div class="container-fluid">
     <h5 class="text-center text-white mt-5">Welcome to MobiLeLeLe,
-        <th:block th:if="${@currentUser.isLogin()}" th:text="${@currentUser.fullName()}"></th:block>
+        <th:block th:if="${@currentUser.isLogin()}" th:text="${@currentUser.getUsername()}"></th:block>
         <th:block th:unless="${@currentUser.isLogin()}">guest</th:block>
     </h5>
 </div>

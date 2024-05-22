@@ -35,10 +35,14 @@ public class LoginController {
 
         if(loginUser.isPresent()){
             currentUser.setLogin(true);
+            currentUser.setFirstName(loginUser.get().getFirstName());
+            currentUser.setLastName(loginUser.get().getLastName());
 
-            return "redirect:register";
+            return "redirect:/";
+        }else{
+            currentUser.logout();
+            return "redirect:/";
         }
 
-        return "redirect:/";
     }
 }

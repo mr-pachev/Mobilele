@@ -3,13 +3,17 @@ package bg.mobilele.service.impl;
 import bg.mobilele.model.DTO.UserLoginDTO;
 import bg.mobilele.model.DTO.UserRegistrationDTO;
 import bg.mobilele.model.entity.User;
+import bg.mobilele.model.entity.UserRole;
+import bg.mobilele.model.enums.Role;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,7 +27,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registrationUser(UserRegistrationDTO userRegistrationDTO) {
+        Optional<User> newUser = userRepository.findByUsername(userRegistrationDTO.getUsername());
+        if(newUser.isPresent()){
+            return;
+        }
+
         User user = new User();
+        Set<User> currentUser = new HashSet<>();
+
         user.setUsername(userRegistrationDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         user.setEmail(userRegistrationDTO.getEmail());
@@ -33,6 +44,16 @@ public class UserServiceImpl implements UserService {
         user.setCreated(LocalDateTime.now());
         user.setModified(LocalDateTime.now());
 
+        UserRole userRole = new UserRole();
+        currentUser.add(user);
+        userRole.setUsers(currentUser);
+
+        if(userRepository.count() == 0){
+           userRole.setRole(Role.Admin);
+        }else {
+           userRole.setRole(Role.User);
+        }
+        user.setUserRole(userRole);
         userRepository.save(user);
     }
 

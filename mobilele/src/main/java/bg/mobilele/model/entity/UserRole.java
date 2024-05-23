@@ -3,6 +3,7 @@ package bg.mobilele.model.entity;
 import bg.mobilele.model.enums.Role;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity

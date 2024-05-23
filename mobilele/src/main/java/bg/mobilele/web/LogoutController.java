@@ -2,7 +2,7 @@ package bg.mobilele.web;
 
 import bg.mobilele.util.CurrentUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LogoutController {
@@ -12,5 +12,11 @@ public class LogoutController {
         this.currentUser = currentUser;
     }
 
+    @GetMapping("/users/logout")
+    public String logout(){
+        currentUser.logout();
+
+        return "redirect:/";
+    }
 
 }

@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = new User();
-        Set<User> currentUser = new HashSet<>();
 
         user.setUsername(userRegistrationDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
@@ -44,16 +43,6 @@ public class UserServiceImpl implements UserService {
         user.setCreated(LocalDateTime.now());
         user.setModified(LocalDateTime.now());
 
-        UserRole userRole = new UserRole();
-        currentUser.add(user);
-        userRole.setUsers(currentUser);
-
-        if(userRepository.count() == 0){
-           userRole.setRole(Role.Admin);
-        }else {
-           userRole.setRole(Role.User);
-        }
-        user.setUserRole(userRole);
         userRepository.save(user);
     }
 

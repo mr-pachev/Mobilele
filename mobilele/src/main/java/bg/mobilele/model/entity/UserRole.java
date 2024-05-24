@@ -8,17 +8,16 @@ import java.util.Set;
 @Entity
 @Table(name = "roles")
 public class UserRole extends BaseEntity{
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String role;
 
     @OneToMany(targetEntity = User.class, mappedBy = "userRole")
     private Set<User> users;
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

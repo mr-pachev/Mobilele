@@ -18,9 +18,10 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
-                <input  id="firstName" name="firstName" type="text" class="form-control"
+                <input  id="firstName" name="firstName"
+                        type="text" class="form-control"
                        placeholder="First name"/>
-                <p class="errors alert alert-danger">
+                <p class="is-invalid errors alert alert-danger">
                     First name is required.
                 </p>
             </div>
@@ -70,8 +71,8 @@
         <div class="form-group">
             <label class="text-center text-white font-weight-bold" for="roles">Roles</label>
             <select  id="roles" name="role" class="form-control" multiple>
-                <option>
-                </option>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
             </select>
             <p class="errors alert alert-danger">
                 Selecting a role is required.

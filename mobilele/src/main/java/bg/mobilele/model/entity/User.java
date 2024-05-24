@@ -11,20 +11,16 @@ import java.util.Set;
 @Table(name = "users")
 public class User extends BaseEntity{
     @Column(unique = true, nullable = false)
-    @Size(min=2, max=20)
     private String username;
     @NotNull
-//    @Size(min=4, max=20)
     private String password;
 
     @NotNull
     private String email;
     @Column(name = "first_name", nullable = false)
-    @Size(min=2, max=20)
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
-    @Size(min=2, max=20)
     private String lastName;
 
     @Column(name = "is_active")

@@ -3,42 +3,39 @@ package bg.mobilele.service.impl;
 import bg.mobilele.model.DTO.UserLoginDTO;
 import bg.mobilele.model.DTO.UserRegistrationDTO;
 import bg.mobilele.model.entity.User;
-import bg.mobilele.model.entity.UserRole;
-import bg.mobilele.model.enums.Role;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper mapper;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper mapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.mapper = mapper;
     }
 
     @Override
     public void registrationUser(UserRegistrationDTO userRegistrationDTO) {
         Optional<User> newUser = userRepository.findByUsername(userRegistrationDTO.getUsername());
         if(newUser.isPresent()){
+            System.out.println("--- This user already exist! ---");
             return;
         }
 
-        User user = new User();
 
-        user.setUsername(userRegistrationDTO.getUsername());
+        User user = mapper.map(userRegistrationDTO, User.class);
+
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
-        user.setEmail(userRegistrationDTO.getEmail());
-        user.setFirstName(userRegistrationDTO.getFirstName());
-        user.setLastName(userRegistrationDTO.getLastName());
         user.setActive(true);
         user.setCreated(LocalDateTime.now());
         user.setModified(LocalDateTime.now());

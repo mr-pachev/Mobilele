@@ -46,10 +46,15 @@ public class UserServiceImpl implements UserService {
         user.setActive(true);
         user.setCreated(LocalDateTime.now());
         user.setModified(LocalDateTime.now());
+
+        Set<User> currentUsers = new HashSet<>();
+        currentUsers.add(user);
+        userRole.setUsers(currentUsers);
+
         user.setUserRole(userRole);
 
+        userRoleRepository.save(userRole);
         userRepository.save(user);
-
     }
 
     @Override

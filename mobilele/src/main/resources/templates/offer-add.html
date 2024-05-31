@@ -54,7 +54,9 @@
                 <label class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
                 <select id="transmission" class="form-control">
                     <option value="">- Select transmission type -</option>
-                    <option> Transmission type
+                    <option th:each="type: ${transmissionType}"
+                            th:value="${type}"
+                            th:text="${type}"> Transmission type
                     </option>
                 </select>
                 <p class="errors alert alert-danger">

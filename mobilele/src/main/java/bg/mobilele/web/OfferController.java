@@ -1,6 +1,7 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.enums.Engine;
+import bg.mobilele.model.enums.Transmission;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class OfferController {
     @GetMapping("offers/add")
     public String addOffer(Model model){
         model.addAttribute("engineType", Engine.values());
+        model.addAttribute("transmissionType", Transmission.values());
 
         return ("offer-add");
     }

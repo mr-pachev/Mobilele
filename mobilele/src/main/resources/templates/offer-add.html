@@ -41,8 +41,9 @@
                 <label class="text-center text-white font-weight-bold" for="engine">Engine</label>
                 <select id="engine" name="engine" class="form-control">
                     <option value="">- Select engine type -</option>
-                    <option th:each="type: ${engineType}">
-                        Engine type
+                    <option th:each="type: ${engineType}"
+                            th:value="${type}"
+                            th:text="${type}">
                     </option>
                 </select>
                 <p class="errors alert alert-danger">

@@ -20,11 +20,11 @@ public class Model extends BaseEntity{
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Min(1920)
-    @Column(name = "start_year", nullable = false)
+//    @Min(1920)
+//    @Column(name = "start_year", nullable = false)
     private Integer startYear;
 
-    @Column(name = "end_year", nullable = false)
+//    @Column(name = "end_year", nullable = false)
     private Integer endYear;
 
     private LocalDateTime created;

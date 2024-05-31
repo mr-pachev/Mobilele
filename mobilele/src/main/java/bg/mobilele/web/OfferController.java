@@ -21,6 +21,7 @@ public class OfferController {
         model.addAttribute("engineType", Engine.values());
         model.addAttribute("transmissionType", Transmission.values());
 
+
         return ("offer-add");
     }
 

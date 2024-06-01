@@ -7,12 +7,15 @@ import jakarta.validation.constraints.Size;
 
 public class UserRegistrationDTO {
     @NotNull
-    @Column(unique = true)
+    @Column(name="username", unique = true)
     @Size(min = 4, max = 10)
     private String username;
     @NotNull
     @Size(min = 4, max = 10)
     private String password;
+    @NotNull
+    @Size(min = 4, max = 10)
+    private String confirmPassword;
     @Email
     @NotNull
     @Column(unique = true)
@@ -25,6 +28,8 @@ public class UserRegistrationDTO {
     private String lastName;
     @NotNull
     private String role;
+
+    private boolean isExistUsername;
 
     public String getUsername() {
         return username;
@@ -40,6 +45,14 @@ public class UserRegistrationDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getEmail() {
@@ -72,5 +85,13 @@ public class UserRegistrationDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isExistUsername() {
+        return isExistUsername;
+    }
+
+    public void setExistUsername(boolean existUsername) {
+        isExistUsername = existUsername;
     }
 }

@@ -21,20 +21,22 @@
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
                 <input  id="firstName" name="firstName"
                         th:field="*{firstName}"
+                        th:errorclass="is-invalid"
                         type="text" class="form-control"
                        placeholder="First name"/>
-                <p class="is-invalid errors alert alert-danger">
-                    First name is required.
+                <p class="invalid-feedback errors alert alert-danger">
+                    First name must contain 4 to 10 letters.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="lastName" class="text-white font-weight-bold">Last Name</label>
                 <input id="lastName" name="lastName"
                        th:field="*{lastName}"
+                       th:errorclass="is-invalid"
                        type="text" class="form-control"
                        placeholder="Last name"/>
-                <p class="errors alert alert-danger">
-                    Last name is required.
+                <p class="invalid-feedback errors alert alert-danger">
+                    Last name must contain 4 to 10 letters.
                 </p>
             </div>
         </div>
@@ -43,19 +45,25 @@
                 <label for="username" class="text-white font-weight-bold">Username</label>
                 <input id="username" name="username"
                        th:field="*{username}"
+                       th:errorclass="is-invalid"
                        type="text" class="form-control"
                        placeholder="Username"/>
-                <p class="errors alert alert-danger">
-                    Username is required.
+                <p class="errors alert alert-danger"
+                   th:if="${userRegistrationDTO.isExistUsername()}">
+                   Username is busy.
+                </p>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Username must contain 4 to 10 letters.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="email" class="text-white font-weight-bold">Email</label>
                 <input id="email" name="email"
                        th:field="*{email}"
+                       th:errorclass="is-invalid"
                        type="email" class="form-control"
                        placeholder="Email"/>
-                <p class="errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     Email is required.
                 </p>
             </div>
@@ -63,26 +71,31 @@
                 <label for="password" class="text-white font-weight-bold">Password</label>
                 <input id="password" name="password"
                        type="password" class="form-control"
+                       th:errorclass="is-invalid"
                        placeholder="Password"/>
-                <p class="errors alert alert-danger">
-                    Password is required.
+                <p class="invalid-feedback errors alert alert-danger">
+                    Password must contain 4 to 10 characters.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="confirm password" class="text-white font-weight-bold">Confirm password</label>
-                <input id="confirm password" name="confirmPassword" type="password" class="form-control"
+                <label for="confirmPassword" class="text-white font-weight-bold">Confirm password</label>
+                <input id="confirmPassword" name="confirmPassword"
+                       th:errorclass="is-invalid"
+                       type="password" class="form-control"
                        placeholder="Confirm password"/>
-                <p class="errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     Unconfirmed password.
                 </p>
             </div>
         </div>
         <div class="form-group">
             <label class="text-center text-white font-weight-bold" for="roles">Roles</label>
-            <select  id="roles" name="role" class="form-control" multiple>
+            <select  id="roles" name="role"
+                     th:errorclass="is-invalid"
+                     class="form-control" multiple>
                 <option value="user">User</option>
             </select>
-            <p class="errors alert alert-danger">
+            <p class="invalid-feedback errors alert alert-danger">
                 Selecting a role is required.
             </p>
         </div>

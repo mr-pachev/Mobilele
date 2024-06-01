@@ -33,11 +33,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registrationUser(UserRegistrationDTO userRegistrationDTO) {
-        Optional<User> newUser = userRepository.findByUsername(userRegistrationDTO.getUsername());
-        if(newUser.isPresent()){
-            System.out.println("--- This user already exist! ---");
-            return;
-        }
         User user = mapper.map(userRegistrationDTO, User.class);
         UserRole userRole = mapper.map(userRegistrationDTO, UserRole.class);
 

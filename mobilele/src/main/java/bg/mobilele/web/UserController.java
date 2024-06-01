@@ -1,6 +1,7 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.UserRegistrationDTO;
+import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/")
 public class UserController {
    private final UserService userService;
+   private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("users/register")
@@ -35,12 +38,13 @@ public class UserController {
                                 BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) {
 
-        if(bindingResult.hasErrors()){
+        userRegistrationDTO.setExistUsername(userRepository.findByUsername(userRegistrationDTO.getUsername()).isPresent());
+
+        if(bindingResult.hasErrors() || userRegistrationDTO.isExistUsername()){
             redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
             return "redirect:/users/register";
         }
-
         userService.registrationUser(userRegistrationDTO);
 
         return "redirect:/";

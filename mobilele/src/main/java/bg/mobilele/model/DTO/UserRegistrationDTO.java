@@ -33,6 +33,7 @@ public class UserRegistrationDTO {
 
     private boolean emailIsExist;
 
+    private boolean unConfPass;
     public String getUsername() {
         return username;
     }
@@ -103,5 +104,13 @@ public class UserRegistrationDTO {
 
     public void setEmailIsExist(boolean emailIsExist) {
         this.emailIsExist = emailIsExist;
+    }
+
+    public boolean isUnConfPass() {
+        return unConfPass;
+    }
+
+    public void setUnConfPass(boolean unConfPass) {
+        this.unConfPass = unConfPass;
     }
 }

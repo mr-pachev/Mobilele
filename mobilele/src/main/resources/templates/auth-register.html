@@ -25,7 +25,7 @@
                         type="text" class="form-control"
                        placeholder="First name"/>
                 <p class="invalid-feedback errors alert alert-danger">
-                    First name must contain 4 to 10 letters.
+                    First name must contain 3 to 10 letters.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
@@ -36,7 +36,7 @@
                        type="text" class="form-control"
                        placeholder="Last name"/>
                 <p class="invalid-feedback errors alert alert-danger">
-                    Last name must contain 4 to 10 letters.
+                    Last name must contain 3 to 10 letters.
                 </p>
             </div>
         </div>
@@ -88,6 +88,10 @@
                        type="password" class="form-control"
                        placeholder="Confirm password"/>
                 <p class="invalid-feedback errors alert alert-danger">
+                    Username must contain 4 to 10 letters.
+                </p>
+                <p class="errors alert alert-danger"
+                   th:if="${userRegistrationDTO.isUnConfPass()}">
                     Unconfirmed password.
                 </p>
             </div>
@@ -97,7 +101,9 @@
             <select  id="roles" name="role"
                      th:errorclass="is-invalid"
                      class="form-control" multiple>
-                <option value="user">User</option>
+                <option th:each="type :${roles}"
+                        th:value="${type}"
+                        th:text="${type}">User</option>
             </select>
             <p class="invalid-feedback errors alert alert-danger">
                 Selecting a role is required.

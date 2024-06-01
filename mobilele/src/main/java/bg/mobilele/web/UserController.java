@@ -1,6 +1,7 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.UserRegistrationDTO;
+import bg.mobilele.model.enums.Role;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
 import jakarta.validation.Valid;
@@ -29,6 +30,7 @@ public class UserController {
         if (!model.containsAttribute("userRegistrationDTO")) {
             model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
         }
+        model.addAttribute("roles", Role.values());
 
         return ("auth-register");
     }
@@ -40,11 +42,17 @@ public class UserController {
 
         //checking and setting username if it exists
         userRegistrationDTO.setUserIsExist(userRepository.findByUsername(userRegistrationDTO.getUsername()).isPresent());
-
         //checking and setting email if it exists
         userRegistrationDTO.setEmailIsExist(userRepository.findByEmail(userRegistrationDTO.getEmail()).isPresent());
 
-        if (bindingResult.hasErrors() || userRegistrationDTO.isUserIsExist() || userRegistrationDTO.isEmailIsExist()) {
+        if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())){
+            userRegistrationDTO.setUnConfPass(true);
+        }
+
+        if (bindingResult.hasErrors()
+                || userRegistrationDTO.isUserIsExist()
+                || userRegistrationDTO.isEmailIsExist()
+                || userRegistrationDTO.isUnConfPass()) {
             redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
             return "redirect:/users/register";

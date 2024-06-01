@@ -29,7 +29,9 @@ public class UserRegistrationDTO {
     @NotNull
     private String role;
 
-    private boolean isExistUsername;
+    private boolean userIsExist;
+
+    private boolean emailIsExist;
 
     public String getUsername() {
         return username;
@@ -87,11 +89,19 @@ public class UserRegistrationDTO {
         this.role = role;
     }
 
-    public boolean isExistUsername() {
-        return isExistUsername;
+    public boolean isUserIsExist() {
+        return userIsExist;
     }
 
-    public void setExistUsername(boolean existUsername) {
-        isExistUsername = existUsername;
+    public void setUserIsExist(boolean userIsExist) {
+        this.userIsExist = userIsExist;
+    }
+
+    public boolean isEmailIsExist() {
+        return emailIsExist;
+    }
+
+    public void setEmailIsExist(boolean emailIsExist) {
+        this.emailIsExist = emailIsExist;
     }
 }

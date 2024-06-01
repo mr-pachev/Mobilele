@@ -49,7 +49,7 @@
                        type="text" class="form-control"
                        placeholder="Username"/>
                 <p class="errors alert alert-danger"
-                   th:if="${userRegistrationDTO.isExistUsername()}">
+                   th:if="${userRegistrationDTO.isUserIsExist()}">
                    Username is busy.
                 </p>
                 <p class="invalid-feedback errors alert alert-danger">
@@ -63,6 +63,10 @@
                        th:errorclass="is-invalid"
                        type="email" class="form-control"
                        placeholder="Email"/>
+                <p class="errors alert alert-danger"
+                   th:if="${userRegistrationDTO.isEmailIsExist()}">
+                    Email is busy.
+                </p>
                 <p class="invalid-feedback errors alert alert-danger">
                     Email is required.
                 </p>

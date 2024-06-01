@@ -50,7 +50,7 @@ public class ApplicationBeanConfiguration {
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:i18n/messages");
-        messageSource.setDefaultEncoding("UTF-8");// todo: check if utf-8 is finally default
+        messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
 

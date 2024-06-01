@@ -15,8 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/")
 public class UserController {
-   private final UserService userService;
-   private final UserRepository userRepository;
+    private final UserService userService;
+    private final UserRepository userRepository;
 
     public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
@@ -35,12 +35,16 @@ public class UserController {
 
     @PostMapping("users/register")
     public String registerUser(@Valid UserRegistrationDTO userRegistrationDTO,
-                                BindingResult bindingResult,
+                               BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) {
 
-        userRegistrationDTO.setExistUsername(userRepository.findByUsername(userRegistrationDTO.getUsername()).isPresent());
+        //checking and setting username if it exists
+        userRegistrationDTO.setUserIsExist(userRepository.findByUsername(userRegistrationDTO.getUsername()).isPresent());
 
-        if(bindingResult.hasErrors() || userRegistrationDTO.isExistUsername()){
+        //checking and setting email if it exists
+        userRegistrationDTO.setEmailIsExist(userRepository.findByEmail(userRegistrationDTO.getEmail()).isPresent());
+
+        if (bindingResult.hasErrors() || userRegistrationDTO.isUserIsExist() || userRegistrationDTO.isEmailIsExist()) {
             redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
             return "redirect:/users/register";

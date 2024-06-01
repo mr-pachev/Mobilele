@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService {
             System.out.println("--- This user already exist! ---");
             return;
         }
-
         User user = mapper.map(userRegistrationDTO, User.class);
         UserRole userRole = mapper.map(userRegistrationDTO, UserRole.class);
 

@@ -1,12 +1,29 @@
 package bg.mobilele.model.DTO;
 
-public class UserRegistrationDTO {
-    private String username;
-    private String password;
-    private String email;
-    private String firstName;
-    private String lastName;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
+public class UserRegistrationDTO {
+    @NotNull
+    @Column(unique = true)
+    @Size(min = 4, max = 10)
+    private String username;
+    @NotNull
+    @Size(min = 4, max = 10)
+    private String password;
+    @Email
+    @NotNull
+    @Column(unique = true)
+    private String email;
+    @NotNull
+    @Size(min = 3, max = 10)
+    private String firstName;
+    @NotNull
+    @Size(min = 3, max = 10)
+    private String lastName;
+    @NotNull
     private String role;
 
     public String getUsername() {

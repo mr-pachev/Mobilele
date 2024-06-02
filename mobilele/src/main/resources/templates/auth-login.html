@@ -12,22 +12,32 @@
     <form
             th:action="@{/users/login}"
             th:method="post"
+            th:object="${userLoginDTO}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="form-group">
             <label for="username" class="text-white font-weight-bold">Username</label>
-            <input value="username" id="username" name="username" type="text" class="form-control"
+            <input value="username" id="username" name="username"
+                   th:field="*{username}"
+                   th:errorclass="is-invalid"
+                   type="text" class="form-control"
                    placeholder="Username"/>
+            <p class="invalid-feedback errors alert alert-danger">
+                Invalid username or password.
+            </p>
         </div>
         <div class="form-group">
             <label for="password" class="text-white font-weight-bold">Password</label>
-            <input  value="password" id="password" name="password" type="password" class="form-control"
+            <input  value="password" id="password" name="password"
+                    th:field="*{password}"
+                    th:errorclass="is-invalid"
+                    type="password" class="form-control"
                    placeholder="Password"/>
-
+            <p class="invalid-feedback errors alert alert-danger">
+                Invalid username or password.
+            </p>
         </div>
-        
-        <p class="errors alert alert-danger">
-            Invalid username or password.
-        </p>
+
+
 
         <div class="row">
             <div class="col col-md-4">

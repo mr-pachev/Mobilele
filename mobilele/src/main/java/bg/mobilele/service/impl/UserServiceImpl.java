@@ -4,10 +4,10 @@ import bg.mobilele.model.DTO.UserLoginDTO;
 import bg.mobilele.model.DTO.UserRegistrationDTO;
 import bg.mobilele.model.entity.User;
 import bg.mobilele.model.entity.UserRole;
-import bg.mobilele.model.enums.Role;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.repository.UserRoleRepository;
 import bg.mobilele.service.UserService;
+import bg.mobilele.util.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -52,12 +52,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> isLogin(UserLoginDTO userLoginDTO) {
-        Optional<User> currentUser = userRepository.findByUsername(userLoginDTO.getUsername());
+    public boolean isLogin(UserLoginDTO userLoginDTO) {
+        Optional<User> loginUser = userRepository.findByUsername(userLoginDTO.getUsername());
+        CurrentUser currentUser = new CurrentUser();
 
-        if(currentUser.isPresent() && passwordEncoder.matches(userLoginDTO.getPassword(), currentUser.get().getPassword())){
-            return currentUser;
+        if(loginUser.isPresent() && passwordEncoder.matches(userLoginDTO.getPassword(), loginUser.get().getPassword())){
+            currentUser.setLogin(true);
+            currentUser.setUsername(currentUser.getUsername());
+            currentUser.setFirstName(currentUser.getFirstName());
+            currentUser.setLastName(loginUser.get().getLastName());
+
+            return true;
         }
-        return null;
+        userLoginDTO.setIsLoginUser(true);
+        return false;
     }
 }

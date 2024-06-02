@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface UserService {
     void registrationUser(UserRegistrationDTO userRegistrationDTO);
-    Optional<User> isLogin(UserLoginDTO userLoginDTO);
+    boolean isLogin(UserLoginDTO userLoginDTO);
 }

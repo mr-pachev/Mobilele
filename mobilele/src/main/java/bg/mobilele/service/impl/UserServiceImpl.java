@@ -44,13 +44,19 @@ public class UserServiceImpl implements UserService {
         user.setCreated(LocalDateTime.now());
         user.setModified(LocalDateTime.now());
 
-        UserRole userRole = user.getUserRole();
-        Set<User> users =
+        //setting UserRole field
+        UserRole userRole;
 
-        user.setUserRole(user.getUserRole());
-//        UserRole.add(user);
-//        userRole.setUsers(userSet);
-//        user.setUserRole(userRole);
+        if(userRegistrationDTO.getRole().equals("User")){
+            userRole = userRoleRepository.findAllById(1);
+        }else {
+            userRole = userRoleRepository.findAllById(2);
+        }
+
+        Set<User> users = userRole.getUsers();
+        users.add(user);
+
+        user.setUserRole(userRole);
 
         //setting sessions currentUser
         currentUser.setLogin(true);
@@ -58,7 +64,6 @@ public class UserServiceImpl implements UserService {
         currentUser.setFirstName(user.getFirstName());
         currentUser.setLastName(user.getLastName());
 
-//        userRoleRepository.save(userRole);
         userRepository.save(user);
     }
 

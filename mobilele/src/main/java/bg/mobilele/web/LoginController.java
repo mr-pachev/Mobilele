@@ -34,7 +34,6 @@ public class LoginController {
         if (!model.containsAttribute("userLoginDTO")) {
             model.addAttribute("userLoginDTO", new UserLoginDTO());
         }
-
         return "auth-login";
     }
 
@@ -43,7 +42,7 @@ public class LoginController {
                         BindingResult bindingResult,
                         RedirectAttributes rAtt) {
 
-        if (bindingResult.hasErrors() || userService.isLogin(userLoginDTO)) {
+        if (!userService.isLogin(userLoginDTO)) {
             rAtt.addFlashAttribute("userLoginDTO", userLoginDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
             return "redirect:/users/login";
@@ -51,6 +50,5 @@ public class LoginController {
 
         currentUser.logout();
         return "redirect:/";
-
     }
 }

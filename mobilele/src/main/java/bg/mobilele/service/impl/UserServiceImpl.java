@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 
             return true;
         }
-        userLoginDTO.setIsLoginUser(true);
+        userLoginDTO.setLoginUser(true);
         return false;
     }
 }

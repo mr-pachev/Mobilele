@@ -1,5 +1,6 @@
 package bg.mobilele.util;
 
+import bg.mobilele.model.DTO.UserLoginDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -54,5 +55,9 @@ public class CurrentUser {
         sb.append(firstName).append(" ").append(lastName);
 
         return sb.toString();
+    }
+
+    public void loginStatus(UserLoginDTO userLoginDTO){
+        setLogin(userLoginDTO.isLoginUser());
     }
 }

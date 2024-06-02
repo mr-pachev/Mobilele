@@ -1,9 +1,6 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.UserLoginDTO;
-import bg.mobilele.model.DTO.UserRegistrationDTO;
-import bg.mobilele.model.entity.User;
-import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
 import bg.mobilele.util.CurrentUser;
 import jakarta.validation.Valid;
@@ -14,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -45,10 +40,12 @@ public class LoginController {
         if (!userService.isLogin(userLoginDTO)) {
             rAtt.addFlashAttribute("userLoginDTO", userLoginDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
+
+            currentUser.logout();
+
             return "redirect:/users/login";
         }
 
-        currentUser.logout();
         return "redirect:/";
     }
 }

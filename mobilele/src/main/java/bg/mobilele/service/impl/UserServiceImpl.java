@@ -24,11 +24,14 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper mapper;
 
-    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, ModelMapper mapper) {
+    private final CurrentUser currentUser;
+
+    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, ModelMapper mapper, CurrentUser currentUser) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
         this.mapper = mapper;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -54,12 +57,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isLogin(UserLoginDTO userLoginDTO) {
         Optional<User> loginUser = userRepository.findByUsername(userLoginDTO.getUsername());
-        CurrentUser currentUser = new CurrentUser();
 
         if(loginUser.isPresent() && passwordEncoder.matches(userLoginDTO.getPassword(), loginUser.get().getPassword())){
             currentUser.setLogin(true);
-            currentUser.setUsername(currentUser.getUsername());
-            currentUser.setFirstName(currentUser.getFirstName());
+            currentUser.setUsername(loginUser.get().getUsername());
+            currentUser.setFirstName(loginUser.get().getFirstName());
             currentUser.setLastName(loginUser.get().getLastName());
 
             return true;

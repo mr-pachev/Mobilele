@@ -36,26 +36,29 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registrationUser(UserRegistrationDTO userRegistrationDTO) {
+        //setting new user fields
         User user = mapper.map(userRegistrationDTO, User.class);
-        UserRole userRole = mapper.map(userRegistrationDTO, UserRole.class);
 
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         user.setActive(true);
         user.setCreated(LocalDateTime.now());
         user.setModified(LocalDateTime.now());
 
-        Set<User> userSet = new HashSet<>();
-        userSet.add(user);
-        userRole.setUsers(userSet);
-        user.setUserRole(userRole);
+        UserRole userRole = user.getUserRole();
+        Set<User> users =
 
-        //setting currentUser
+        user.setUserRole(user.getUserRole());
+//        UserRole.add(user);
+//        userRole.setUsers(userSet);
+//        user.setUserRole(userRole);
+
+        //setting sessions currentUser
         currentUser.setLogin(true);
         currentUser.setUsername(user.getUsername());
         currentUser.setFirstName(user.getFirstName());
         currentUser.setLastName(user.getLastName());
 
-        userRoleRepository.save(userRole);
+//        userRoleRepository.save(userRole);
         userRepository.save(user);
     }
 
@@ -64,6 +67,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> loginUser = userRepository.findByUsername(userLoginDTO.getUsername());
 
         if(loginUser.isPresent() && passwordEncoder.matches(userLoginDTO.getPassword(), loginUser.get().getPassword())){
+            //setting sessions currentUser
             currentUser.setLogin(true);
             currentUser.setUsername(loginUser.get().getUsername());
             currentUser.setFirstName(loginUser.get().getFirstName());

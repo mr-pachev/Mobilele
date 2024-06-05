@@ -15,12 +15,12 @@
                 </li>
                 <li class="nav-item">
                     <div th:if="${@currentUser.isLogin()}">
-                        <a class="nav-link" href="/offers/add">Add Offer</a>
+                        <a class="nav-link" href="/offers/add" th:classappend="${activeLink == 'addOffer'}? 'active'">Add Offer</a>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div th:if="${@currentUser.isLogin()}">
-                        <a class="nav-link" href="/offers/all">All Offers</a>
+                        <a class="nav-link" href="/offers/all" th:classappend="${activeLink == 'allOffer'}? 'active'">All Offers</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -39,17 +39,17 @@
                 </li>
                 <li class="nav-item">
                     <div th:if="${@currentUser.isLogin()}" class="form-inline my-2 my-lg-0 border px-3">
-                        <a class="nav-link" href="/users/logout">Logout</a>
+                        <a class="nav-link" href="/users/logout" th:classappend="${activeLink == 'logout'}? 'active'">Logout</a>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div th:unless="${@currentUser.isLogin()}">
-                        <a class="nav-link" href="/users/register">Register</a>
+                        <a class="nav-link" href="/users/register" th:classappend="${activeLink == 'register'}? 'active'">Register</a>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div th:unless="${@currentUser.isLogin()}">
-                        <a class="nav-link" href="/users/login">Login</a>
+                        <a class="nav-link" href="/users/login" th:classappend="${activeLink == 'login'}? 'active'">Login</a>
                     </div>
                 </li>
 

@@ -19,6 +19,7 @@ public class LoginController {
     private final UserService userService;
     private final CurrentUser currentUser;
 
+
     public LoginController(UserService userService, CurrentUser currentUser) {
         this.userService = userService;
         this.currentUser = currentUser;
@@ -45,6 +46,14 @@ public class LoginController {
 
             return "redirect:/users/login";
         }
+
+        return "redirect:/";
+    }
+
+    @PostMapping("users/logout")
+    public String logout() {
+
+        currentUser.logout();
 
         return "redirect:/";
     }

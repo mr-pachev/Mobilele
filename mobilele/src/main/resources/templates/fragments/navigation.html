@@ -39,7 +39,10 @@
                 </li>
                 <li class="nav-item">
                     <div th:if="${@currentUser.isLogin()}" class="form-inline my-2 my-lg-0 border px-3">
-                        <a class="nav-link" href="/users/logout" th:classappend="${activeLink == 'logout'}? 'active'">Logout</a>
+                        <form th:method="post"
+                              th:action="@{/users/logout}">
+                            <input class="btn btn-link" type="submit" value="Logout" th:classappend="${activeLink == 'logout'}? 'active'"/>
+                        </form>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -56,5 +59,4 @@
             </ul>
         </div>
     </nav>
-
 </div>

@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="~{fragments/head.html}">
 </head>
-
 <body>
-
 <div th:replace="~{fragments/navigation::navigation(activeLink=${'addOffer'})}"></div>
 
-
 <div class="container">
-    <h2 class="text-center text-white">Upload Offer</h2>
-    <form method="POST"
+    <h2 class="text-center text-white">Add Offer</h2>
+    <form th:action="@{/offers/add}"
+          th:method="post"
+          th:object="${addOfferDTO}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="model">Model</label>
+                <label class="text-center text-white font-weight-bold" th:for="model">Model</label>
                 <select id="model" class="form-control">
                     <option value="">- Select a model -</option>
                     <optgroup label="Brand name">
@@ -28,10 +26,11 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="price" class="text-white font-weight-bold">Price</label>
+                <label th:for="price" class="text-white font-weight-bold">Price</label>
                 <input id="price" type="number" min="0" step="100" class="form-control"
-                       placeholder="Suggested price"/>
-                <p  class="errors alert alert-danger">
+                       placeholder="Suggested price"
+                       th:field="*{price}"/>
+                <p class="errors alert alert-danger">
                     Suggested price is required.
                 </p>
             </div>
@@ -52,7 +51,7 @@
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
-                <select id="transmission" class="form-control">
+                <select id="transmission" name="transmission" class="form-control">
                     <option value="">- Select transmission type -</option>
                     <option th:each="type: ${transmissionType}"
                             th:value="${type}"
@@ -66,18 +65,20 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="year" class="text-white font-weight-bold">Year</label>
-                <input id="year" type="number" min="1900" max="2099" step="1" class="form-control"
-                       placeholder="Manufacturing year"/>
+                <label th:for="year" class="text-white font-weight-bold">Year</label>
+                <input id="year" type="number" step="1" class="form-control"
+                       placeholder="Manufacturing year"
+                       th:field="*{year}"/>
                 <p class="errors alert alert-danger">
                     Manufacturing year is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="mileage" class="text-white font-weight-bold">Mileage</label>
-                <input id="mileage" type="number" min="0" max="900000" step="1000"
+                <label th:for="mileage" class="text-white font-weight-bold">Mileage</label>
+                <input id="mileage" type="number" step="1000"
                        class="form-control"
-                       placeholder="Mileage in kilometers"/>
+                       placeholder="Mileage in kilometers"
+                       th:field="*{mileage}"/>
                 <p class="errors alert alert-danger">
                     Mileage in kilometers is required.
                 </p>
@@ -85,17 +86,19 @@
         </div>
 
         <div class="form-group">
-            <label class="text-white font-weight-bold" for="description">Description</label>
+            <label class="text-white font-weight-bold" th:for="description">Description</label>
             <textarea id="description" type="textarea" class="form-control" rows="3"
-                      placeholder="Description"></textarea>
+                      placeholder="Description"
+                      th:field="*{description}"></textarea>
             <p class="errors alert alert-danger">
                 Description is required.
             </p>
         </div>
         <div class="form-group">
-            <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
+            <label class="text-white font-weight-bold" th:for="imageUrl">Image URL</label>
             <input id="imageUrl" type="url" class="form-control"
-                   placeholder="Put vehicle image URL here">
+                   placeholder="Put vehicle image URL here"
+                   th:field="*{imageUr}">
             <p class="errors alert alert-danger">
                 Vehicle image URL is required.
             </p>
@@ -112,7 +115,7 @@
 </div>
 
 <div>
-    <footer> </footer>
+    <footer></footer>
 </div>
 
 </body>

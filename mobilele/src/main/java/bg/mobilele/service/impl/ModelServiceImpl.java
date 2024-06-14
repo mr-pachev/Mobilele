@@ -8,20 +8,11 @@ import bg.mobilele.repository.ModelRepository;
 import bg.mobilele.service.ModelService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ModelServiceImpl implements ModelService {
-    private final ModelRepository modelRepository;
-    private final BrandRepository brandRepository;
 
-    public ModelServiceImpl(ModelRepository modelRepository, BrandRepository brandRepository) {
-        this.modelRepository = modelRepository;
-        this.brandRepository = brandRepository;
-    }
-
-    @Override
-    public List<Model> allModels() {
-        return modelRepository.findAll();
-    }
 }

@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head.html}">
+    <script>
+        // Функция за обновяване на моделите според избраната марка
+        function updateModels() {
+            var selectedBrand = document.getElementById("brand").value;
+            var modelSelect = document.getElementById("model");
+            var models = /*[[${modelsMap}]]*/ {}; // Съдържа всички модели, групирани по марки
+
+            // Изчистване на съществуващите опции
+            while (modelSelect.options.length > 1) {
+                modelSelect.remove(1);
+            }
+
+            if (selectedBrand && models[selectedBrand]) {
+                models[selectedBrand].forEach(function(model) {
+                    var option = document.createElement("option");
+                    option.value = model;
+                    option.text = model;
+                    modelSelect.appendChild(option);
+                });
+            }
+        }
+    </script>
 </head>
 <body>
 <div th:replace="~{fragments/navigation::navigation(activeLink=${'addOffer'})}"></div>
@@ -16,10 +38,17 @@
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="brand">Brand</label>
                 <select id="brand" name="brand" class="form-control">
-                    <option value="">- Select a model -</option>
+                    <option value="">- Select a brand -</option>
                     <option th:each="type: ${brands}"
                             th:value="${type.name}"
                             th:text="${type.name}">
+                    </option>
+                </select>
+                <select id="model" name="model" class="form-control">
+                    <option value="">- Select a model -</option>
+                    <option th:each="model: ${models}"
+                            th:value="${model.modelName}"
+                            th:text="${model.modelName}">
                     </option>
                 </select>
                 <p class="errors alert alert-danger">

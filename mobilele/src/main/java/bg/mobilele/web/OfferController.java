@@ -47,8 +47,7 @@ public class OfferController {
 
         model.addAttribute("engineType", Engine.values());
         model.addAttribute("transmissionType", Transmission.values());
-        model.addAttribute("brands", brandService.allBrand());
-        model.addAttribute("models", modelService.allModels());
+        model.addAttribute("brands", brandService.allBrands());
 
         return ("offer-add");
     }

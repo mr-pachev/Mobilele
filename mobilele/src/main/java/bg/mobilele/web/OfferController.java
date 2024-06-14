@@ -24,7 +24,6 @@ public class OfferController {
 
     private final OfferService offerService;
     private final BrandService brandService;
-
     private final ModelService modelService;
 
     public OfferController(OfferService offerService, BrandService brandService, ModelService modelService) {
@@ -34,12 +33,12 @@ public class OfferController {
     }
 
     @GetMapping("offers/all")
-    public String allOffers(){
+    public String allOffers() {
         return ("offers");
     }
 
     @GetMapping("offers/add")
-    public String addOffer(Model model){
+    public String addOffer(Model model) {
 
         if (!model.containsAttribute("addOfferDTO")) {
             model.addAttribute("addOfferDTO", new AddOfferDTO());
@@ -47,7 +46,7 @@ public class OfferController {
 
         model.addAttribute("engineType", Engine.values());
         model.addAttribute("transmissionType", Transmission.values());
-        model.addAttribute("modelsMap", brandService.allBrands());
+        model.addAttribute("brands", brandService.allBrands());
 
         return ("offer-add");
     }
@@ -55,15 +54,13 @@ public class OfferController {
     @PostMapping("offers/add")
     public String addOffer(@Valid AddOfferDTO addOfferDTO,
                            BindingResult bindingResult,
-                           RedirectAttributes rAtt){
+                           RedirectAttributes rAtt) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
             return "redirect:/offers/add";
         }
-
-
 
         offerService.addOffer(addOfferDTO);
         return "details";

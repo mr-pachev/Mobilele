@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, Long> {
-    Set<Brand> findAllByName(String brandName);
+    Brand findByName(String brandName);
 }

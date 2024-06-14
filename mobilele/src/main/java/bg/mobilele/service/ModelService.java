@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface ModelService {
-public List<Model> allCurrentModels(AddOfferDTO addOfferDTO);
+    public List<Model> allModel();
 }

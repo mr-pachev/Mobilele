@@ -14,18 +14,14 @@ import java.util.Map;
 
 @Service
 public class ModelServiceImpl implements ModelService {
-    private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
 
-    public ModelServiceImpl(BrandRepository brandRepository, ModelRepository modelRepository) {
-        this.brandRepository = brandRepository;
+    public ModelServiceImpl(ModelRepository modelRepository) {
         this.modelRepository = modelRepository;
     }
 
     @Override
-    public List<Model> allCurrentModels(AddOfferDTO addOfferDTO) {
-        Brand currentBrand = brandRepository.findByName(addOfferDTO.getBrand());
-
-        return modelRepository.findAllByBrand(currentBrand);
+    public List<Model> allModel() {
+        return modelRepository.findAll();
     }
 }

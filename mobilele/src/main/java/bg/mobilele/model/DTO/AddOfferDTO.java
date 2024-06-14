@@ -10,6 +10,9 @@ public class AddOfferDTO {
     private BigDecimal price;
     private String transmission;
     private Integer year;
+    private String brand;
+
+    private String model;
     private long offerId;
 
     public String getDescription() {
@@ -74,5 +77,21 @@ public class AddOfferDTO {
 
     public void setOfferId(long offerId) {
         this.offerId = offerId;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 }

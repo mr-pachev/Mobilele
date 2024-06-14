@@ -10,5 +10,5 @@ import java.util.UUID;
 
 @Repository
 public interface ModelRepository extends JpaRepository<Model, Long> {
-    Set<Model> findByBrand(Brand brand);
+    Model findByBrand(Brand brand);
 }

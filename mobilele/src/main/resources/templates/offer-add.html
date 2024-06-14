@@ -1,28 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head.html}">
-    <script>
-        // Функция за обновяване на моделите според избраната марка
-        function updateModels() {
-            var selectedBrand = document.getElementById("brand").value;
-            var modelSelect = document.getElementById("model");
-            var models = /*[[${modelsMap}]]*/ {}; // Съдържа всички модели, групирани по марки
-
-            // Изчистване на съществуващите опции
-            while (modelSelect.options.length > 1) {
-                modelSelect.remove(1);
-            }
-
-            if (selectedBrand && models[selectedBrand]) {
-                models[selectedBrand].forEach(function(model) {
-                    var option = document.createElement("option");
-                    option.value = model;
-                    option.text = model;
-                    modelSelect.appendChild(option);
-                });
-            }
-        }
-    </script>
 </head>
 <body>
 <div th:replace="~{fragments/navigation::navigation(activeLink=${'addOffer'})}"></div>

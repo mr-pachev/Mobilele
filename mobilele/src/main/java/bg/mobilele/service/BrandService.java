@@ -9,5 +9,5 @@ import java.util.Map;
 import java.util.Set;
 
 public interface BrandService {
-    public Map<String, Model> allBrands();
+    public List<Brand> allBrands();
 }

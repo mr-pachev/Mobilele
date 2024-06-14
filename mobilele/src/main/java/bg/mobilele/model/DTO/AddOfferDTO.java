@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class AddOfferDTO {
     private String description;
     private String engine;
-    private String imageUr;
+    private String imageUrl;
     private Integer mileage;
     private BigDecimal price;
     private String transmission;
@@ -31,12 +31,12 @@ public class AddOfferDTO {
         this.engine = engine;
     }
 
-    public String getImageUr() {
-        return imageUr;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageUr(String imageUr) {
-        this.imageUr = imageUr;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Integer getMileage() {

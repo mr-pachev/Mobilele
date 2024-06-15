@@ -115,7 +115,8 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Submit Offer"/>
+                    <input type="submit" class="btn btn-info btn-lg" value="Submit Offer"
+                           th:href="@{/details/{id}(id=${addOfferDTO.getOfferId()})}"/>
                 </div>
             </div>
         </div>

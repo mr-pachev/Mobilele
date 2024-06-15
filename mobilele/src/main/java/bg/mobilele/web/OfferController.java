@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -64,7 +65,14 @@ public class OfferController {
         }
 
         offerService.addOffer(addOfferDTO);
-        return "details";
+        return "/details";
     }
 
+    @GetMapping("/details/{id}")
+    public String viewOfferDetail(@PathVariable("id") long id, Model model){
+
+        model.addAttribute("offersDetails", offerService.offerDetails(id));
+
+    return "details";
+    }
 }

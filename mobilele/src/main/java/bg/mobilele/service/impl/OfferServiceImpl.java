@@ -42,4 +42,14 @@ public class OfferServiceImpl implements OfferService {
         offerRepository.save(offer);
     }
 
+    @Override
+    public AddOfferDTO offerDetails(long id) {
+        Offer offer = offerRepository.findById(id);
+        AddOfferDTO addOfferDTO = mapper.map(offer, AddOfferDTO.class);
+
+        System.out.println();
+
+        return addOfferDTO;
+    }
+
 }

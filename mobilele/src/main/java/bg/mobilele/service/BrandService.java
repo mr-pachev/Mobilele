@@ -10,4 +10,5 @@ import java.util.Set;
 
 public interface BrandService {
     public List<Brand> allBrands();
+    public Brand findByBrandName(String brandName);
 }

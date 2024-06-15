@@ -31,6 +31,10 @@ public class Offer extends BaseEntity{
     private Model model;
 
     @ManyToOne
+    @JoinColumn(name = "brand_id", referencedColumnName = "id")
+    private Brand brand;
+
+    @ManyToOne
     @JoinColumn(name = "seller_id", referencedColumnName = "id")
     private User seller;
 
@@ -122,5 +126,11 @@ public class Offer extends BaseEntity{
         this.seller = seller;
     }
 
+    public Brand getBrand() {
+        return brand;
+    }
 
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
 }

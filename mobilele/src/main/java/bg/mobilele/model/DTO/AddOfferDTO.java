@@ -11,7 +11,6 @@ public class AddOfferDTO {
     private String transmission;
     private Integer year;
     private String brand;
-
     private String model;
     private long offerId;
 

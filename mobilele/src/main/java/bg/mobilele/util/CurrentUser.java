@@ -10,6 +10,8 @@ public class CurrentUser {
     private String username;
     private String firstName;
     private String lastName;
+
+    private long currentUserId;
     private boolean isLogin;
 
     public String getUsername() {
@@ -55,6 +57,14 @@ public class CurrentUser {
         sb.append(firstName).append(" ").append(lastName);
 
         return sb.toString();
+    }
+
+    public long getCurrentUserId() {
+        return currentUserId;
+    }
+
+    public void setCurrentUserId(long currentUserId) {
+        this.currentUserId = currentUserId;
     }
 
     public void loginStatus(UserLoginDTO userLoginDTO){

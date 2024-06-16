@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -53,6 +54,12 @@ public class OfferServiceImpl implements OfferService {
         AddOfferDTO addOfferDTO = mapper.map(offer, AddOfferDTO.class);
 
         return addOfferDTO;
+    }
+
+    @Override
+    public List<Offer> allOfferInCurrentSeller(long sellerId) {
+
+        return offerRepository.findAllBySeller_Id(sellerId);
     }
 
     @Override

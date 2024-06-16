@@ -1,12 +1,14 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.AddOfferDTO;
+import bg.mobilele.model.entity.Offer;
 import bg.mobilele.model.enums.Engine;
 import bg.mobilele.model.enums.Transmission;
 import bg.mobilele.repository.ModelRepository;
 import bg.mobilele.service.BrandService;
 import bg.mobilele.service.ModelService;
 import bg.mobilele.service.OfferService;
+import bg.mobilele.util.CurrentUser;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,16 +26,13 @@ public class OfferController {
     private final OfferService offerService;
     private final BrandService brandService;
     private final ModelService modelService;
+    private final CurrentUser currentUser;
 
-    public OfferController(OfferService offerService, BrandService brandService, ModelService modelService) {
+    public OfferController(OfferService offerService, BrandService brandService, ModelService modelService, CurrentUser currentUser) {
         this.offerService = offerService;
         this.brandService = brandService;
         this.modelService = modelService;
-    }
-
-    @GetMapping("offers/all")
-    public String allOffers() {
-        return ("offers");
+        this.currentUser = currentUser;
     }
 
     @GetMapping("offers/add")
@@ -66,6 +65,15 @@ public class OfferController {
 
         offerService.addOffer(addOfferDTO);
         return "/details";
+    }
+
+    @GetMapping("offers/all")
+    public String viewAllOffer(Model model){
+        List<Offer> offerList = offerService.allOfferInCurrentSeller(currentUser.getCurrentUserId());
+
+        model.addAttribute("offers", offerList);
+
+        return "offers";
     }
 
     @GetMapping("/details/{id}")

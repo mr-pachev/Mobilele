@@ -63,8 +63,9 @@ public class OfferController {
         addOfferDTO.setCreated(LocalDateTime.now());
         addOfferDTO.setModified(LocalDateTime.now());
 
-        offerService.addOffer(addOfferDTO);
-        return "/details";
+      long offerId = offerService.addOffer(addOfferDTO);
+
+        return "redirect:/details/" + offerId;
     }
 
     @GetMapping("offers/all")
@@ -78,8 +79,9 @@ public class OfferController {
 
     @GetMapping("/details/{id}")
     public String viewOfferDetail(@PathVariable("id") long id, Model model){
+        AddOfferDTO addOfferDTO = offerService.offerDetails(id);
 
-        model.addAttribute("offersDetails", offerService.offerDetails(id));
+        model.addAttribute("addOfferDTO", offerService.offerDetails(id));
 
     return "details";
     }

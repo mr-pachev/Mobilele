@@ -1,6 +1,7 @@
 package bg.mobilele.model.DTO;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class AddOfferDTO {
     private String description;
@@ -13,6 +14,8 @@ public class AddOfferDTO {
     private String brand;
     private String model;
     private long offerId;
+    private LocalDateTime created;
+    private LocalDateTime modified;
 
     public String getDescription() {
         return description;
@@ -92,5 +95,21 @@ public class AddOfferDTO {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public LocalDateTime getModified() {
+        return modified;
+    }
+
+    public void setModified(LocalDateTime modified) {
+        this.modified = modified;
     }
 }

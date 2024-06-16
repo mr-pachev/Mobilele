@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -63,6 +64,8 @@ public class OfferController {
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
             return "redirect:/offers/add";
         }
+        addOfferDTO.setCreated(LocalDateTime.now());
+        addOfferDTO.setModified(LocalDateTime.now());
 
         offerService.addOffer(addOfferDTO);
         return "/details";

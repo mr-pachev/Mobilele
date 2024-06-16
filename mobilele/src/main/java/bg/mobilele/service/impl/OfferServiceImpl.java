@@ -42,8 +42,6 @@ public class OfferServiceImpl implements OfferService {
         offer.setBrand(brand);
 
         offer.setModel(model);
-        offer.setCreated(LocalDateTime.now());
-        offer.setModified(LocalDateTime.now());
         offer.setSeller(userRepository.findByUsername(currentUser.getUsername()).orElse(null));
 
         offerRepository.save(offer);

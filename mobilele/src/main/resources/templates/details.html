@@ -81,13 +81,13 @@
             </div>
             <ul class="offer-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text"><span>• Mileage <span th:text="*{mileage}"></span></span></div>
-                    <div class="card-text"><span>• Price<span th:text="*{price}"></span></span></div>
-                    <div class="card-text"><span>• Engine type<span th:text="*{engine}"></span></span></div>
-                    <div class="card-text"><span>• Transmission type<span th:text="*{transmission}"></span></span></div>
-                    <div class="card-text"><span>• Offer created</span></div>
-                    <div class="card-text"><span>• Offer modified</span></div>
-                    <div class="card-text"><span>• Seller - </span></div>
+                    <div class="card-text"><span>• Mileage: <span th:text="*{mileage}"></span></span></div>
+                    <div class="card-text"><span>• Price: <span th:text="*{price}"></span></span></div>
+                    <div class="card-text"><span>• Engine type: <span th:text="*{engine}"></span></span></div>
+                    <div class="card-text"><span>• Transmission type:<span th:text="*{transmission}"></span></span></div>
+                    <div class="card-text"><span>• Offer created: <span th:text="*{created}"></span></span></div>
+                    <div class="card-text"><span>• Offer modified: <span th:text="*{modified}"></span></span></div>
+                    <div class="card-text"><span>• Seller - <span th:text="${@currentUser.firstName} + ' ' + ${@currentUser.lastName}"></span></span></div>
                 </li>
             </ul>
             <div class="card-body">

@@ -69,7 +69,7 @@
 <div class="container-fluid"
      th:action="@{/details/{id}(id=${addOfferDTO.getOfferId()})}"
      th:object="${addOfferDTO}"
-     th:method="post"
+     th:method="POST"
 >
     <h2 class="text-center text-white mt-5">Details</h2>
     <div class="offers row mx-auto d-flex flex-row justify-content-center">
@@ -77,14 +77,17 @@
 
             <div class="card-body pb-1">
                 <h5 class="card-title">
-                    Offer: <span th:text="*{year}"></span> Brand: <span th:text="*{brand}"></span> Model: <span th:text="*{model}"></span></h5>
+                    Offer: <span th:text="*{year}"></span>
+                    Brand: <span th:text="*{brand}"></span>
+                    Model: <span th:text="*{model}"></span>
+                </h5>
             </div>
             <ul class="offer-details list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="card-text"><span>• Mileage: <span th:text="*{mileage}"></span></span></div>
                     <div class="card-text"><span>• Price: <span th:text="*{price}"></span></span></div>
                     <div class="card-text"><span>• Engine type: <span th:text="*{engine}"></span></span></div>
-                    <div class="card-text"><span>• Transmission type:<span th:text="*{transmission}"></span></span></div>
+                    <div class="card-text"><span>• Transmission type: <span th:text="*{transmission}"></span></span></div>
                     <div class="card-text"><span>• Offer created: <span th:text="*{created}"></span></span></div>
                     <div class="card-text"><span>• Offer modified: <span th:text="*{modified}"></span></span></div>
                     <div class="card-text"><span>• Seller - <span th:text="${@currentUser.firstName} + ' ' + ${@currentUser.lastName}"></span></span></div>
@@ -92,7 +95,7 @@
             </ul>
             <div class="card-body">
                 <a class="card-link" href="/">Update</a>
-                <form th:method="delete"
+                <form th:method="DELETE"
                       th:action="@{/details/{id}(id=${addOfferDTO.getOfferId()})}">
                     <input class="btn btn-link" type="submit" value="Delete"/>
                 </form>

@@ -53,6 +53,7 @@ public class OfferServiceImpl implements OfferService {
     public AddOfferDTO offerDetails(long id) {
         Offer offer = offerRepository.findById(id);
         AddOfferDTO addOfferDTO = mapper.map(offer, AddOfferDTO.class);
+        addOfferDTO.setBrand(offer.getBrand().getName());
 
         return addOfferDTO;
     }

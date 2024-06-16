@@ -10,6 +10,7 @@ import bg.mobilele.service.ModelService;
 import bg.mobilele.service.OfferService;
 import bg.mobilele.util.CurrentUser;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -68,6 +69,15 @@ public class OfferController {
         return "redirect:/details/" + offerId;
     }
 
+    @GetMapping("details/{id}")
+    public String viewOfferDetail(@PathVariable("id") long id, Model model){
+        AddOfferDTO addOfferDTO = offerService.offerDetails(id);
+
+        model.addAttribute("addOfferDTO", offerService.offerDetails(id));
+
+        return "details";
+    }
+
     @GetMapping("offers/all")
     public String viewAllOffer(Model model){
         List<Offer> offerList = offerService.allOfferInCurrentSeller(currentUser.getCurrentUserId());
@@ -77,21 +87,12 @@ public class OfferController {
         return "offers";
     }
 
-    @GetMapping("/details/{id}")
-    public String viewOfferDetail(@PathVariable("id") long id, Model model){
-        AddOfferDTO addOfferDTO = offerService.offerDetails(id);
-
-        model.addAttribute("addOfferDTO", offerService.offerDetails(id));
-
-    return "details";
-    }
-
-    @DeleteMapping("/details/{id}")
+    @DeleteMapping("details/{id}")
     public String deleteOffer(@PathVariable("id") Long id) {
 
         offerService.deleteOffer(id);
 
-        return "redirect:/offers";
+        return "redirect:/offers/all";
     }
 
 }

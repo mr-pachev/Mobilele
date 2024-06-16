@@ -8,7 +8,7 @@
 <div class="container">
     <h2 class="text-center text-white">Add Offer</h2>
     <form th:action="@{/offers/add}"
-          th:method="post"
+          th:method="POST"
           th:object="${addOfferDTO}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
@@ -17,9 +17,9 @@
                 <label class="text-center text-white font-weight-bold" for="brand">Brand</label>
                 <select id="brand" name="brand" class="form-control">
                     <option value="">- Select a brand -</option>
-                    <option th:each="type: ${brands}"
-                            th:value="${type.name}"
-                            th:text="${type.name}">
+                    <option th:each="brand: ${brands}"
+                            th:value="${brand.name}"
+                            th:text="${brand.name}">
                     </option>
                 </select>
                 <select id="model" name="model" class="form-control">

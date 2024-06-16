@@ -43,6 +43,10 @@ public class OfferController {
             model.addAttribute("addOfferDTO", new AddOfferDTO());
         }
 
+        if(!currentUser.isLogin()){
+            return "redirect:/";
+        }
+
         model.addAttribute("engineType", Engine.values());
         model.addAttribute("transmissionType", Transmission.values());
         model.addAttribute("brands", brandService.allBrands());
@@ -64,13 +68,13 @@ public class OfferController {
         addOfferDTO.setCreated(LocalDateTime.now());
         addOfferDTO.setModified(LocalDateTime.now());
 
-      long offerId = offerService.addOffer(addOfferDTO);
+        long offerId = offerService.addOffer(addOfferDTO);
 
         return "redirect:/details/" + offerId;
     }
 
     @GetMapping("details/{id}")
-    public String viewOfferDetail(@PathVariable("id") long id, Model model){
+    public String viewOfferDetail(@PathVariable("id") long id, Model model) {
         AddOfferDTO addOfferDTO = offerService.offerDetails(id);
 
         model.addAttribute("addOfferDTO", offerService.offerDetails(id));
@@ -79,7 +83,11 @@ public class OfferController {
     }
 
     @GetMapping("offers/all")
-    public String viewAllOffer(Model model){
+    public String viewAllOffer(Model model) {
+        if(!currentUser.isLogin()){
+            return "redirect:/";
+        }
+
         List<Offer> offerList = offerService.allOfferInCurrentSeller(currentUser.getCurrentUserId());
 
         model.addAttribute("offers", offerList);

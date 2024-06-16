@@ -1,17 +1,34 @@
 package bg.mobilele.model.DTO;
 
+import jakarta.validation.constraints.*;
+
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AddOfferDTO {
+    @NotBlank
+    @Size(min = 10, max = 500)
     private String description;
+    @NotBlank
     private String engine;
+    @NotBlank
     private String imageUrl;
+    @NotNull
+    @Positive
     private Integer mileage;
+    @NotNull
+    @Positive
     private BigDecimal price;
+    @NotBlank
     private String transmission;
+    @NotNull
+    @Min(1900)
+    @Max(2099)
     private Integer year;
+    @NotBlank
     private String brand;
+    @NotBlank
     private String model;
     private long offerId;
     private LocalDateTime created;

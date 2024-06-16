@@ -52,9 +52,12 @@ public class OfferServiceImpl implements OfferService {
         Offer offer = offerRepository.findById(id);
         AddOfferDTO addOfferDTO = mapper.map(offer, AddOfferDTO.class);
 
-        System.out.println();
-
         return addOfferDTO;
+    }
+
+    @Override
+    public void deleteOffer(long offerId) {
+        offerRepository.deleteById(offerId);
     }
 
 }

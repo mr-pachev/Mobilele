@@ -5,4 +5,6 @@ import bg.mobilele.model.DTO.AddOfferDTO;
 public interface OfferService {
     void addOffer(AddOfferDTO addOfferDTO);
     AddOfferDTO offerDetails(long id);
+
+    void deleteOffer(long offerId);
 }

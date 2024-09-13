@@ -15,7 +15,7 @@
             <div class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0"
                  th:each="offer: ${offers}">
                 <div class="card-img-top-wrapper">
-                    <img class="card-img-top" src="/" alt="Car image">
+                    <img class="card-img-top" th:src="${offer.imageUrl}" alt="Car image">
                 </div>
                 <div class="card-body pb-1">
                     <h5 class="card-title">

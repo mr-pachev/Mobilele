@@ -1,9 +1,9 @@
 spring:
   datasource:
     username: root
+    password: 1234
     url: jdbc:mysql://localhost:3306/mobilele_db?useSSL=false&createDatabaseIfNotExist=true
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: '1234'
   jpa:
     properties:
       hibernate:

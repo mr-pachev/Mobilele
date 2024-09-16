@@ -21,7 +21,7 @@ public class SecurityConfig {
                 )
                 .formLogin(
                         formLogin -> {
-                            formLogin.loginPage("/login");
+                            formLogin.loginPage("/auth-login");
                             formLogin.usernameParameter("username");
                             formLogin.passwordParameter("password");
                             formLogin.defaultSuccessUrl("/", true);

@@ -57,4 +57,10 @@ public class LoginController {
 
         return "redirect:/";
     }
+
+    @GetMapping("users/login-error")
+    public String viewLoginError(Model model) { 	model.addAttribute("showErrorMessage", true); 	model.addAttribute("loginData", new UserLoginDTO());
+        return "login";
+    }
+
 }

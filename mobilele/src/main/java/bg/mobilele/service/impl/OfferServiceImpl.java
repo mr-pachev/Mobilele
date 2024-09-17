@@ -9,7 +9,6 @@ import bg.mobilele.repository.ModelRepository;
 import bg.mobilele.repository.OfferRepository;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.OfferService;
-import bg.mobilele.util.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +21,13 @@ public class OfferServiceImpl implements OfferService {
     private final OfferRepository offerRepository;
     private final ModelRepository modelRepository;
     private final BrandRepository brandRepository;
-    private final CurrentUser currentUser;
     private final UserRepository userRepository;
 
-    public OfferServiceImpl(ModelMapper mapper, OfferRepository offerRepository, ModelRepository modelRepository, BrandRepository brandRepository, CurrentUser currentUser, UserRepository userRepository) {
+    public OfferServiceImpl(ModelMapper mapper, OfferRepository offerRepository, ModelRepository modelRepository, BrandRepository brandRepository, UserRepository userRepository) {
         this.mapper = mapper;
         this.offerRepository = offerRepository;
         this.modelRepository = modelRepository;
         this.brandRepository = brandRepository;
-        this.currentUser = currentUser;
         this.userRepository = userRepository;
     }
 
@@ -43,7 +40,7 @@ public class OfferServiceImpl implements OfferService {
         offer.setBrand(brand);
 
         offer.setModel(model);
-        offer.setSeller(userRepository.findByUsername(currentUser.getUsername()).orElse(null));
+//        offer.setSeller(userRepository.findByUsername(currentUser.getUsername()).orElse(null));
 
         offerRepository.save(offer);
         return offer.getId();

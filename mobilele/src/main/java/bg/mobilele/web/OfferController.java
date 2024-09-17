@@ -1,16 +1,12 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.AddOfferDTO;
-import bg.mobilele.model.entity.Offer;
 import bg.mobilele.model.enums.Engine;
 import bg.mobilele.model.enums.Transmission;
-import bg.mobilele.repository.ModelRepository;
 import bg.mobilele.service.BrandService;
 import bg.mobilele.service.ModelService;
 import bg.mobilele.service.OfferService;
-import bg.mobilele.util.CurrentUser;
 import jakarta.validation.Valid;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -27,13 +22,11 @@ public class OfferController {
     private final OfferService offerService;
     private final BrandService brandService;
     private final ModelService modelService;
-    private final CurrentUser currentUser;
 
-    public OfferController(OfferService offerService, BrandService brandService, ModelService modelService, CurrentUser currentUser) {
+    public OfferController(OfferService offerService, BrandService brandService, ModelService modelService) {
         this.offerService = offerService;
         this.brandService = brandService;
         this.modelService = modelService;
-        this.currentUser = currentUser;
     }
 
     @GetMapping("offers/add")
@@ -43,9 +36,9 @@ public class OfferController {
             model.addAttribute("addOfferDTO", new AddOfferDTO());
         }
 
-        if(!currentUser.isLogin()){
-            return "redirect:/";
-        }
+//        if(!currentUser.isLogin()){
+//            return "redirect:/";
+//        }
 
         model.addAttribute("engineType", Engine.values());
         model.addAttribute("transmissionType", Transmission.values());
@@ -84,13 +77,13 @@ public class OfferController {
 
     @GetMapping("offers/all")
     public String viewAllOffer(Model model) {
-        if(!currentUser.isLogin()){
-            return "redirect:/";
-        }
+//        if(!currentUser.isLogin()){
+//            return "redirect:/";
+//        }
 
-        List<Offer> offerList = offerService.allOfferInCurrentSeller(currentUser.getCurrentUserId());
+//        List<Offer> offerList = offerService.allOfferInCurrentSeller(currentUser.getCurrentUserId());
 
-        model.addAttribute("offers", offerList);
+//        model.addAttribute("offers", offerList);
 
         return "offers";
     }

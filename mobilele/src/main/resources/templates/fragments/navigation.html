@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="navigation(activeLink)">
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
         <a class="navbar-brand" href="/"><img alt="car picture" src="/img/car.png" class="logo"></a>
@@ -9,22 +12,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto col-12 justify-content-between">
                 <li class="nav-item">
-                    <div th:if="${@currentUser.isLogin()}">
+                    <div sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/brands/all" th:classappend="${activeLink == 'brands'}? 'active'">All Brands</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div th:if="${@currentUser.isLogin()}">
+                    <div sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/offers/add" th:classappend="${activeLink == 'addOffer'}? 'active'">Add Offer</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div th:if="${@currentUser.isLogin()}">
+                    <div sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/offers/all" th:classappend="${activeLink == 'allOffer'}? 'active'">All Offers</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <div th:if="${@currentUser.isLogin()}">
+                    <div sec:authorize="isAuthenticated()">
                         <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Admin
@@ -38,7 +41,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div th:if="${@currentUser.isLogin()}" class="form-inline my-2 my-lg-0 border px-3">
+                    <div sec:authorize="isAuthenticated()" class="form-inline my-2 my-lg-0 border px-3">
                         <form th:method="post"
                               th:action="@{/users/logout}">
                             <input class="btn btn-link" type="submit" value="Logout" th:classappend="${activeLink == 'logout'}? 'active'"/>
@@ -46,12 +49,12 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div th:unless="${@currentUser.isLogin()}">
+                    <div sec:authorize="!isAuthenticated()">
                         <a class="nav-link" href="/users/register" th:classappend="${activeLink == 'register'}? 'active'">Register</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div th:unless="${@currentUser.isLogin()}">
+                    <div sec:authorize="!isAuthenticated()">
                         <a class="nav-link" href="/users/login" th:classappend="${activeLink == 'login'}? 'active'">Login</a>
                     </div>
                 </li>

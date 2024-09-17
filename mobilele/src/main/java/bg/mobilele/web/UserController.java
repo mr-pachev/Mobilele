@@ -32,7 +32,7 @@ public class UserController {
         }
         model.addAttribute("roles", Role.values());
 
-        return ("auth-register");
+        return ("registration");
     }
 
     @PostMapping("users/register")

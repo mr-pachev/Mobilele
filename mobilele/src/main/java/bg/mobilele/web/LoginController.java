@@ -3,64 +3,38 @@ package bg.mobilele.web;
 import bg.mobilele.model.DTO.UserLoginDTO;
 import bg.mobilele.service.UserService;
 import bg.mobilele.util.CurrentUser;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/")
 public class LoginController {
+    @ModelAttribute("userLoginDTO")
+    public UserLoginDTO userLoginDTO() {
+        return new UserLoginDTO();
+    }
 
     private final UserService userService;
     private final CurrentUser currentUser;
-
 
     public LoginController(UserService userService, CurrentUser currentUser) {
         this.userService = userService;
         this.currentUser = currentUser;
     }
 
-    @GetMapping("users/login")
-    public String showLoginForm(Model model, UserLoginDTO userLoginDTO) {
-        if (!model.containsAttribute("userLoginDTO")) {
-            model.addAttribute("userLoginDTO", new UserLoginDTO());
-        }
-        return "auth-login";
-    }
+    @GetMapping("login")
+    public String showLoginForm() {
 
-    @PostMapping("users/login")
-    public String login(@Valid UserLoginDTO userLoginDTO,
-                        BindingResult bindingResult,
-                        RedirectAttributes rAtt) {
-
-        if (!userService.isLogin(userLoginDTO)) {
-            rAtt.addFlashAttribute("userLoginDTO", userLoginDTO);
-            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
-
-            currentUser.logout();
-
-            return "redirect:/users/login";
-        }
-
-        return "redirect:/";
-    }
-
-    @PostMapping("users/logout")
-    public String logout() {
-
-        currentUser.logout();
-
-        return "redirect:/";
-    }
-
-    @GetMapping("users/login-error")
-    public String viewLoginError(Model model) { 	model.addAttribute("showErrorMessage", true); 	model.addAttribute("loginData", new UserLoginDTO());
         return "login";
     }
 
+    @GetMapping("login-error")
+    public String viewLoginError(Model model) {
+        model.addAttribute("showErrorMessage", true);
+        return "login";
+    }
 }

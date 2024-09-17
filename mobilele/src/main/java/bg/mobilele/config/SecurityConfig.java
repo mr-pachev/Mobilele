@@ -15,13 +15,13 @@ public class SecurityConfig {
                         authorizeRequest -> {
                             authorizeRequest
                                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                    .requestMatchers("/", "/auth-login", "/auth-register", "/login-error").permitAll()
+                                    .requestMatchers("/", "/login", "/registration", "/login-error").permitAll()
                                     .anyRequest().authenticated();
                         }
                 )
                 .formLogin(
                         formLogin -> {
-                            formLogin.loginPage("/auth-login");
+                            formLogin.loginPage("/login");
                             formLogin.usernameParameter("username");
                             formLogin.passwordParameter("password");
                             formLogin.defaultSuccessUrl("/", true);
@@ -31,11 +31,10 @@ public class SecurityConfig {
                 .logout(
                         logout -> {
                             logout.logoutUrl("/logout");
-                            logout.logoutSuccessUrl("/index");
+                            logout.logoutSuccessUrl("/");
                             logout.invalidateHttpSession(true);
                         }
                 )
                 .build();
     }
-
 }

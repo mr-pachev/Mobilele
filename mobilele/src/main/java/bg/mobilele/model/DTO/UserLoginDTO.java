@@ -1,15 +1,24 @@
 package bg.mobilele.model.DTO;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class UserLoginDTO {
-    @NotNull
-    @Size(min=4, max=10)
+    private long userId;
+    @NotBlank
+    @Size(min = 3, max = 15)
     private String username;
-    @Size(min=4, max=10)
+    @NotBlank
+    @Size(min = 4, max = 10)
     private String password;
-    private boolean isLoginUser;
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
     public String getUsername() {
         return username;
@@ -25,13 +34,5 @@ public class UserLoginDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isLoginUser() {
-        return isLoginUser;
-    }
-
-    public void setLoginUser(boolean loginUser) {
-        isLoginUser = loginUser;
     }
 }

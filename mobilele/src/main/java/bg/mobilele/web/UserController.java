@@ -24,7 +24,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("users/register")
+    @GetMapping("registration")
     public String showRegistrationForm(Model model) {
 
         if (!model.containsAttribute("userRegistrationDTO")) {
@@ -32,7 +32,7 @@ public class UserController {
         }
         model.addAttribute("roles", Role.values());
 
-        return ("registration");
+        return "registration";
     }
 
     @PostMapping("users/register")

@@ -35,7 +35,7 @@ public class UserController {
         return "registration";
     }
 
-    @PostMapping("users/register")
+    @PostMapping("registration")
     public String registerUser(@Valid UserRegistrationDTO userRegistrationDTO,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) {

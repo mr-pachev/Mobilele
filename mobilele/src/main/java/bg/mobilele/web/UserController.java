@@ -30,7 +30,6 @@ public class UserController {
         if (!model.containsAttribute("userRegistrationDTO")) {
             model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
         }
-        model.addAttribute("roles", Role.values());
 
         return "registration";
     }
@@ -55,7 +54,7 @@ public class UserController {
                 || userRegistrationDTO.isUnConfPass()) {
             redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
-            return "redirect:/users/register";
+            return "redirect:/registration";
         }
         userService.registrationUser(userRegistrationDTO);
 

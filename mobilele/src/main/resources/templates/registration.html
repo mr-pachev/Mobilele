@@ -96,19 +96,6 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
-            <label class="text-center text-white font-weight-bold" for="roles">Roles</label>
-            <select  id="roles" name="role"
-                     th:errorclass="is-invalid"
-                     class="form-control" multiple>
-                <option th:each="type :${roles}"
-                        th:value="${type}"
-                        th:text="${type}">User</option>
-            </select>
-            <p class="invalid-feedback errors alert alert-danger">
-                Selecting a role is required.
-            </p>
-        </div>
 
         <div class="row">
             <div class="col col-md-4">

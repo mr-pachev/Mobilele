@@ -41,22 +41,16 @@ public class UserServiceImpl implements UserService {
         //setting UserRole field
         UserRole userRole;
 
-        if(userRegistrationDTO.getRole().equals("User")){
-            userRole = userRoleRepository.findAllById(1);
-        }else {
+        if(userRepository.count() == 0){
             userRole = userRoleRepository.findAllById(2);
+        }else {
+            userRole = userRoleRepository.findAllById(1);
         }
 
         Set<User> users = userRole.getUsers();
         users.add(user);
 
         user.setUserRole(userRole);
-
-        //setting sessions currentUser
-//        currentUser.setLogin(true);
-//        currentUser.setUsername(user.getUsername());
-//        currentUser.setFirstName(user.getFirstName());
-//        currentUser.setLastName(user.getLastName());
 
         userRepository.save(user);
     }

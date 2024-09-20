@@ -2,32 +2,31 @@ package bg.mobilele.model.DTO;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class UserRegistrationDTO {
-    @NotNull
+    @NotBlank
     @Column(name="username", unique = true)
-    @Size(min = 4, max = 10)
+    @Size(min = 3, max = 10)
     private String username;
-    @NotNull
+    @NotBlank
     @Size(min = 4, max = 10)
     private String password;
-    @NotNull
+    @NotBlank
     @Size(min = 4, max = 10)
     private String confirmPassword;
     @Email
-    @NotNull
+    @NotBlank
     @Column(unique = true)
     private String email;
-    @NotNull
+    @NotBlank
     @Size(min = 3, max = 10)
     private String firstName;
-    @NotNull
+    @NotBlank
     @Size(min = 3, max = 10)
     private String lastName;
-    @NotNull
-    private String role;
 
     private boolean userIsExist;
 
@@ -80,14 +79,6 @@ public class UserRegistrationDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public boolean isUserIsExist() {

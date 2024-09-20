@@ -40,9 +40,9 @@ public class UserController {
                                RedirectAttributes redirectAttributes) {
 
         //checking and setting username if it exists
-        userRegistrationDTO.setUserIsExist(userRepository.findByUsername(userRegistrationDTO.getUsername()).isPresent());
+        userRegistrationDTO.setUserIsExist(userService.isExistUser(userRegistrationDTO.getUsername()));
         //checking and setting email if it exists
-        userRegistrationDTO.setEmailIsExist(userRepository.findByEmail(userRegistrationDTO.getEmail()).isPresent());
+        userRegistrationDTO.setEmailIsExist(userService.isExistEmail(userRegistrationDTO.getEmail()));
 
         if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())){
             userRegistrationDTO.setUnConfPass(true);

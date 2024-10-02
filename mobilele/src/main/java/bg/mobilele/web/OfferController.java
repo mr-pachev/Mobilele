@@ -1,11 +1,13 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.AddOfferDTO;
+import bg.mobilele.model.entity.Offer;
 import bg.mobilele.model.enums.Engine;
 import bg.mobilele.model.enums.Transmission;
 import bg.mobilele.service.BrandService;
 import bg.mobilele.service.ModelService;
 import bg.mobilele.service.OfferService;
+import bg.mobilele.service.UserHelperService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -22,11 +25,13 @@ public class OfferController {
     private final OfferService offerService;
     private final BrandService brandService;
     private final ModelService modelService;
+    private final UserHelperService userHelperService;
 
-    public OfferController(OfferService offerService, BrandService brandService, ModelService modelService) {
+    public OfferController(OfferService offerService, BrandService brandService, ModelService modelService, UserHelperService userHelperService) {
         this.offerService = offerService;
         this.brandService = brandService;
         this.modelService = modelService;
+        this.userHelperService = userHelperService;
     }
 
     @GetMapping("offers/add")
@@ -77,13 +82,10 @@ public class OfferController {
 
     @GetMapping("offers/all")
     public String viewAllOffer(Model model) {
-//        if(!currentUser.isLogin()){
-//            return "redirect:/";
-//        }
 
-//        List<Offer> offerList = offerService.allOfferInCurrentSeller(currentUser.getCurrentUserId());
+        List<Offer> offerList = offerService.allOfferInCurrentSeller(userHelperService.getUser().getId());
 
-//        model.addAttribute("offers", offerList);
+        model.addAttribute("offers", offerList);
 
         return "offers";
     }

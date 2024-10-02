@@ -1,7 +1,6 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.UserRegistrationDTO;
-import bg.mobilele.model.enums.Role;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
 import jakarta.validation.Valid;

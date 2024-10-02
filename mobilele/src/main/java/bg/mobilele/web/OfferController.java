@@ -34,16 +34,24 @@ public class OfferController {
         this.userHelperService = userHelperService;
     }
 
+    //view all offers
+    @GetMapping("offers/all")
+    public String viewAllOffer(Model model) {
+
+        List<Offer> offerList = offerService.allOfferInCurrentSeller(userHelperService.getUser().getId());
+
+        model.addAttribute("offers", offerList);
+
+        return "offers";
+    }
+
+    //add new offer
     @GetMapping("offers/add")
-    public String addOffer(Model model) {
+    public String viewAddOffer(Model model) {
 
         if (!model.containsAttribute("addOfferDTO")) {
             model.addAttribute("addOfferDTO", new AddOfferDTO());
         }
-
-//        if(!currentUser.isLogin()){
-//            return "redirect:/";
-//        }
 
         model.addAttribute("engineType", Engine.values());
         model.addAttribute("transmissionType", Transmission.values());
@@ -54,7 +62,7 @@ public class OfferController {
     }
 
     @PostMapping("offers/add")
-    public String addOffer(@Valid AddOfferDTO addOfferDTO,
+    public String creatOffer(@Valid AddOfferDTO addOfferDTO,
                            BindingResult bindingResult,
                            RedirectAttributes rAtt) {
 
@@ -71,6 +79,7 @@ public class OfferController {
         return "redirect:/details/" + offerId;
     }
 
+    //view offer details
     @GetMapping("details/{id}")
     public String viewOfferDetail(@PathVariable("id") long id, Model model) {
         AddOfferDTO addOfferDTO = offerService.offerDetails(id);
@@ -78,16 +87,6 @@ public class OfferController {
         model.addAttribute("addOfferDTO", offerService.offerDetails(id));
 
         return "details";
-    }
-
-    @GetMapping("offers/all")
-    public String viewAllOffer(Model model) {
-
-        List<Offer> offerList = offerService.allOfferInCurrentSeller(userHelperService.getUser().getId());
-
-        model.addAttribute("offers", offerList);
-
-        return "offers";
     }
 
     @DeleteMapping("details/{id}")

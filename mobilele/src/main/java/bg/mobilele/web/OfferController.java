@@ -79,7 +79,6 @@ public class OfferController {
         return "redirect:/details/" + offerId;
     }
 
-    //view offer details
     @GetMapping("details/{id}")
     public String viewOfferDetail(@PathVariable("id") long id, Model model) {
         AddOfferDTO addOfferDTO = offerService.offerDetails(id);
@@ -88,6 +87,24 @@ public class OfferController {
 
         return "details";
     }
+
+    //edit current department
+    @PostMapping("update/{id}")
+    public String referenceToEdithOfferForm(@PathVariable("id") Long id){
+
+        return "redirect:update/" + id;
+    }
+
+    @GetMapping("update/{id}")
+    public String fillOfferDetailsForm(@PathVariable("id") long id, Model model) {
+        AddOfferDTO addOfferDTO = offerService.offerDetails(id);
+
+        model.addAttribute("addOfferDTO", offerService.offerDetails(id));
+
+        return "update";
+    }
+
+
 
     @DeleteMapping("details/{id}")
     public String deleteOffer(@PathVariable("id") Long id) {

@@ -6,10 +6,7 @@
 
 <body>
 
-<div th:replace="~{fragments/navigation::navigation(activeLink=${'allOffer'})}"></div>
-
 <div class="container-fluid"
-     th:action="@{/details/{id}(id=${addOfferDTO.getOfferId()})}"
      th:object="${addOfferDTO}"
      th:method="POST">
     <h2 class="text-center text-white mt-5">Details</h2>

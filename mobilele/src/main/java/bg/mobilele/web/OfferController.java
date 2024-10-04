@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
 public class OfferController {
 
     private final OfferService offerService;
@@ -35,7 +34,7 @@ public class OfferController {
     }
 
     //view all offers
-    @GetMapping("offers/all")
+    @GetMapping("/offers/all")
     public String viewAllOffer(Model model) {
 
         List<Offer> offerList = offerService.allOfferInCurrentSeller(userHelperService.getUser().getId());
@@ -46,7 +45,7 @@ public class OfferController {
     }
 
     //add new offer
-    @GetMapping("offers/add")
+    @GetMapping("/offers/add")
     public String viewAddOffer(Model model) {
 
         if (!model.containsAttribute("addOfferDTO")) {
@@ -61,7 +60,7 @@ public class OfferController {
         return ("offer-add");
     }
 
-    @PostMapping("offers/add")
+    @PostMapping("/offers/add")
     public String creatOffer(@Valid AddOfferDTO addOfferDTO,
                            BindingResult bindingResult,
                            RedirectAttributes rAtt) {
@@ -79,7 +78,7 @@ public class OfferController {
         return "redirect:/details/" + offerId;
     }
 
-    @GetMapping("details/{id}")
+    @GetMapping("/details/{id}")
     public String viewOfferDetail(@PathVariable("id") long id, Model model) {
         AddOfferDTO addOfferDTO = offerService.offerDetails(id);
 
@@ -88,11 +87,11 @@ public class OfferController {
         return "details";
     }
 
-    //edit current department
-    @PostMapping("update/{id}")
+    //edit current offer
+    @PostMapping("/update/{id}")
     public String referenceToEdithOfferForm(@PathVariable("id") Long id){
 
-        return "redirect:update/" + id;
+        return "redirect:/update/" + id;
     }
 
     @GetMapping("update/{id}")
@@ -106,7 +105,7 @@ public class OfferController {
 
 
 
-    @DeleteMapping("details/{id}")
+    @DeleteMapping("/details/{id}")
     public String deleteOffer(@PathVariable("id") Long id) {
 
         offerService.deleteOffer(id);

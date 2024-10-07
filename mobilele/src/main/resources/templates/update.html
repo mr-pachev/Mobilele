@@ -10,6 +10,7 @@
 <div class="container">
     <h2 class="text-center text-white">Update Offer</h2>
     <form th:method="POST"
+          th:action="@{/update}"
           th:object="${addOfferDTO}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
 
@@ -19,9 +20,11 @@
 
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="brand">Brand</label>
-                <select id="brand" name="brand" class="form-control"
+                <select class="form-control" name="brand"
+                        id="brand"
+                        th:placeholder="${addOfferDTO.brand}"
+                        th:field="*{brand}"
                         th:errorclass="is-invalid">
-                    <option value="">- Select a brand -</option>
                     <option th:each="brand: ${brands}"
                             th:value="${brand.name}"
                             th:text="${brand.name}">
@@ -30,9 +33,11 @@
                 <p class="invalid-feedback errors alert alert-danger">
                     Vechicle brand is required.
                 </p>
-                <select id="model" name="model" class="form-control"
+                <select class="form-control" name="model"
+                        id="model"
+                        th:placeholder="${addOfferDTO.model}"
+                        th:field="*{model}"
                         th:errorclass="is-invalid">
-                    <option value="">- Select a model -</option>
                     <option th:each="model: ${models}"
                             th:value="${model.modelName}"
                             th:text="${model.modelName}">
@@ -56,9 +61,11 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="engine">Engine</label>
-                <select id="engine" name="engine" class="form-control"
+                <select class="form-control" name="engine"
+                        id="engine"
+                        th:placeholder="${addOfferDTO.engine}"
+                        th:field="*{engine}"
                         th:errorclass="is-invalid">
-                    <option value="">- Select engine type -</option>
                     <option th:each="type: ${engineType}"
                             th:value="${type}"
                             th:text="${type}">
@@ -70,9 +77,11 @@
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
-                <select id="transmission" name="transmission" class="form-control"
+                <select class="form-control" name="transmission"
+                        id="transmission"
+                        th:placeholder="${addOfferDTO.transmission}"
+                        th:field="*{transmission}"
                         th:errorclass="is-invalid">
-                    <option value="">- Select transmission type -</option>
                     <option th:each="type: ${transmissionType}"
                             th:value="${type}"
                             th:text="${type}"> Transmission type

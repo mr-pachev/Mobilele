@@ -99,6 +99,10 @@ public class OfferController {
         AddOfferDTO addOfferDTO = offerService.getAddOfferDTOById(id);
 
         model.addAttribute("addOfferDTO", offerService.getAddOfferDTOById(id));
+        model.addAttribute("engineType", Engine.values());
+        model.addAttribute("transmissionType", Transmission.values());
+        model.addAttribute("brands", brandService.allBrands());
+        model.addAttribute("models", modelService.allModel());
 
         return "update";
     }

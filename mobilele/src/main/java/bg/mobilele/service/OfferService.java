@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface OfferService {
     long addOffer(AddOfferDTO addOfferDTO);
-    AddOfferDTO offerDetails(long id);
+    //get offer by id
+    AddOfferDTO getAddOfferDTOById(long id);
 
     List<Offer> allOfferInCurrentSeller(long sellerId);
     void deleteOffer(long offerId);

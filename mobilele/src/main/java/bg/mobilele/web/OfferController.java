@@ -62,8 +62,8 @@ public class OfferController {
 
     @PostMapping("/offers/add")
     public String creatOffer(@Valid AddOfferDTO addOfferDTO,
-                           BindingResult bindingResult,
-                           RedirectAttributes rAtt) {
+                             BindingResult bindingResult,
+                             RedirectAttributes rAtt) {
 
         if (bindingResult.hasErrors()) {
             rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
@@ -80,30 +80,49 @@ public class OfferController {
 
     @GetMapping("/details/{id}")
     public String viewOfferDetail(@PathVariable("id") long id, Model model) {
-        AddOfferDTO addOfferDTO = offerService.offerDetails(id);
+        AddOfferDTO addOfferDTO = offerService.getAddOfferDTOById(id);
 
-        model.addAttribute("addOfferDTO", offerService.offerDetails(id));
+        model.addAttribute("addOfferDTO", offerService.getAddOfferDTOById(id));
 
         return "details";
     }
 
     //edit current offer
     @PostMapping("/update/{id}")
-    public String referenceToEdithOfferForm(@PathVariable("id") Long id){
+    public String referenceToEdithOfferForm(@PathVariable("id") Long id) {
 
         return "redirect:/update/" + id;
     }
 
-    @GetMapping("update/{id}")
+    @GetMapping("/update/{id}")
     public String fillOfferDetailsForm(@PathVariable("id") long id, Model model) {
-        AddOfferDTO addOfferDTO = offerService.offerDetails(id);
+        AddOfferDTO addOfferDTO = offerService.getAddOfferDTOById(id);
 
-        model.addAttribute("addOfferDTO", offerService.offerDetails(id));
+        model.addAttribute("addOfferDTO", offerService.getAddOfferDTOById(id));
 
         return "update";
     }
 
-
+//    @PostMapping("/update")
+//    public String edithOffer(@RequestParam("id") Long id,
+//                             @Valid AddOfferDTO addOfferDTO,
+//                             BindingResult bindingResult,
+//                             RedirectAttributes rAtt,
+//                             Model model) {
+//
+//        addOfferDTO.setOfferId(id);
+//
+//        if (bindingResult.hasErrors()) {
+//            rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
+//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
+//
+//            model.addAttribute("offer", offerService.getAddOfferDTOById(id));
+//            return "update";
+//        }
+//
+//        departmentService.editDepartment(departmentDTO);
+//        return "redirect:/departments";
+//    }
 
     @DeleteMapping("/details/{id}")
     public String deleteOffer(@PathVariable("id") Long id) {

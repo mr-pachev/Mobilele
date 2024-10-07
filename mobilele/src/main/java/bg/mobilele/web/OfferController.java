@@ -44,7 +44,7 @@ public class OfferController {
         return "offers";
     }
 
-    //add new offer
+    //add offer
     @GetMapping("/offers/add")
     public String viewAddOffer(Model model) {
 
@@ -107,29 +107,29 @@ public class OfferController {
         return "update";
     }
 
-//    @PostMapping("/update")
-//    public String edithOffer(@RequestParam("id") Long id,
-//                             @Valid AddOfferDTO addOfferDTO,
-//                             BindingResult bindingResult,
-//                             RedirectAttributes rAtt,
-//                             Model model) {
-//
-//        addOfferDTO.setOfferId(id);
-//
-//        if (bindingResult.hasErrors()) {
-//            rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
-//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
-//
-//            model.addAttribute("offer", offerService.getAddOfferDTOById(id));
-//            return "update";
-//        }
-//
-//        departmentService.editDepartment(departmentDTO);
-//        return "redirect:/departments";
-//    }
+    @PostMapping("/update")
+    public String edithOffer(@RequestParam("offerId") Long id,
+                             @Valid AddOfferDTO addOfferDTO,
+                             BindingResult bindingResult,
+                             RedirectAttributes rAtt,
+                             Model model) {
+
+        addOfferDTO.setOfferId(id);
+
+        if (bindingResult.hasErrors()) {
+            rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
+
+            model.addAttribute("offer", offerService.getAddOfferDTOById(id));
+            return "update";
+        }
+
+        offerService.editOffer(addOfferDTO);
+        return "redirect:/details/" + addOfferDTO.getOfferId();
+    }
 
     @DeleteMapping("/details/{id}")
-    public String deleteOffer(@PathVariable("id") Long id) {
+    public String deleteOffer(@PathVariable("offerId") Long id) {
 
         offerService.deleteOffer(id);
 

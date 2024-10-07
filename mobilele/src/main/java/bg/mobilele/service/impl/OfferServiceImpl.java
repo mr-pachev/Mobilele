@@ -31,6 +31,7 @@ public class OfferServiceImpl implements OfferService {
         this.userRepository = userRepository;
     }
 
+    //add offer
     @Override
     public long addOffer(AddOfferDTO addOfferDTO) {
         Offer offer = mapper.map(addOfferDTO, Offer.class);
@@ -46,6 +47,7 @@ public class OfferServiceImpl implements OfferService {
         return offer.getId();
     }
 
+    //get offer by id
     @Override
     public AddOfferDTO getAddOfferDTOById(long id) {
         Offer offer = offerRepository.findById(id);
@@ -55,12 +57,24 @@ public class OfferServiceImpl implements OfferService {
         return addOfferDTO;
     }
 
+    //get all offers by current user id
     @Override
     public List<Offer> allOfferInCurrentSeller(long sellerId) {
 
         return offerRepository.findAllBySeller_Id(sellerId);
     }
 
+    //edit offer
+    @Override
+    public void editOffer(AddOfferDTO addOfferDTO) {
+        Offer offer = offerRepository.findById(addOfferDTO.getOfferId());
+
+        mapper.map(addOfferDTO, offer);
+
+        offerRepository.save(offer);
+    }
+
+    //delete offer by id
     @Override
     public void deleteOffer(long offerId) {
         offerRepository.deleteById(offerId);

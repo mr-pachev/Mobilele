@@ -41,7 +41,6 @@ public class OfferServiceImpl implements OfferService {
         offer.setBrand(brand);
         offer.setModel(model);
         offer.setSeller(userRepository.getReferenceById(userId));
-//        offer.setSeller(userRepository.findByUsername(currentUser.getUsername()).orElse(null));
 
         offerRepository.save(offer);
         return offer.getId();

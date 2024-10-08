@@ -6,6 +6,8 @@
 
 <body>
 
+<div th:replace="~{fragments/navigation::navigation(activeLink=${'allOffer'})}"></div>
+
 <div class="container-fluid"
      th:object="${addOfferDTO}"
      th:method="POST">

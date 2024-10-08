@@ -73,7 +73,8 @@ public class OfferController {
         addOfferDTO.setCreated(LocalDateTime.now());
         addOfferDTO.setModified(LocalDateTime.now());
 
-        long offerId = offerService.addOffer(addOfferDTO);
+        long userId = userHelperService.getUser().getId();
+        long offerId = offerService.addOffer(addOfferDTO, userId);
 
         return "redirect:/details/" + offerId;
     }

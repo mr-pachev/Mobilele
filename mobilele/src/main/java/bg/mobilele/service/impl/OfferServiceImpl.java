@@ -33,14 +33,14 @@ public class OfferServiceImpl implements OfferService {
 
     //add offer
     @Override
-    public long addOffer(AddOfferDTO addOfferDTO) {
+    public long addOffer(AddOfferDTO addOfferDTO, long userId) {
         Offer offer = mapper.map(addOfferDTO, Offer.class);
         Model model = modelRepository.findModelByModelName(addOfferDTO.getModel());
         Brand brand = brandRepository.findByName(addOfferDTO.getBrand());
 
         offer.setBrand(brand);
-
         offer.setModel(model);
+        offer.setSeller(userRepository.getReferenceById(userId));
 //        offer.setSeller(userRepository.findByUsername(currentUser.getUsername()).orElse(null));
 
         offerRepository.save(offer);
@@ -51,6 +51,7 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public AddOfferDTO getAddOfferDTOById(long id) {
         Offer offer = offerRepository.findById(id);
+
         AddOfferDTO addOfferDTO = mapper.map(offer, AddOfferDTO.class);
         addOfferDTO.setBrand(offer.getBrand().getName());
 

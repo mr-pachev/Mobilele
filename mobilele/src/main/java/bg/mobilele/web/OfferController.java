@@ -130,7 +130,7 @@ public class OfferController {
     }
 
     @DeleteMapping("/details/{id}")
-    public String deleteOffer(@PathVariable("offerId") Long id) {
+    public String deleteOffer(@PathVariable("id") Long id) {
 
         offerService.deleteOffer(id);
 

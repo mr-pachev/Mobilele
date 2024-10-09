@@ -30,7 +30,7 @@ public class BrandController {
     }
 
     //add new brand
-    @GetMapping("add-brand")
+    @GetMapping("/add-brand")
     public String viewAddBrand(Model model) {
         model.addAttribute("brands", brandService.allBrands());
         model.addAttribute("models", modelService.allModel());

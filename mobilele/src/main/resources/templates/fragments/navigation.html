@@ -28,14 +28,14 @@
                         <a class="nav-link" th:href="@{/offers/all}" th:classappend="${activeLink == 'allOffer'}? 'active'">All Offers</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                <li class="nav-item dropdown">
                     <div>
-                        <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Admin
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/">Action</a>
+                            <a class="dropdown-item" th:href="@{/add-brand}" th:classappend="${activeLink == 'admin'}? 'active'" >Add Brand</a>
                             <a class="dropdown-item" href="/">Another action</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/">Something else here</a>

@@ -1,10 +1,12 @@
 package bg.mobilele.web;
 
+import bg.mobilele.model.DTO.BrandDTO;
 import bg.mobilele.service.BrandService;
 import bg.mobilele.service.ModelService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +20,11 @@ public class BrandController {
     public BrandController(BrandService brandService, ModelService modelService) {
         this.brandService = brandService;
         this.modelService = modelService;
+    }
+
+    @ModelAttribute("brandDTO")
+    public BrandDTO brandDTO() {
+        return new BrandDTO();
     }
 
     //view all brands
@@ -35,7 +42,7 @@ public class BrandController {
         model.addAttribute("brands", brandService.allBrands());
         model.addAttribute("models", modelService.allModel());
 
-        return "add-brabd";
+        return "add-brand";
     }
 
 }

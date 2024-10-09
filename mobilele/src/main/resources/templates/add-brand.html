@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head.html}"></head>
+
+<body>
+
+<div th:replace="~{fragments/navigation::navigation(activeLink=${'brands'})}"></div>
+
+<div class="container">
+    <h2 class="text-center text-white m-3">Добавяне на нова марка</h2>
+
+    <form action="#" th:action="@{/brands/add}" method="post" class="was-validated">
+        <div class="form-group">
+            <label for="brandName" class="form-label">Име на марката:</label>
+            <input type="text" id="brandName" name="name" class="form-control" required>
+            <div class="invalid-feedback">
+                Моля, въведете име на марката.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="brandCountry" class="form-label">Страна на произход:</label>
+            <input type="text" id="brandCountry" name="country" class="form-control" required>
+            <div class="invalid-feedback">
+                Моля, въведете страна на произход.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="brandFoundationYear" class="form-label">Година на основаване:</label>
+            <input type="number" id="brandFoundationYear" name="foundationYear" class="form-control" required>
+            <div class="invalid-feedback">
+                Моля, въведете година на основаване.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="brandLogoUrl" class="form-label">Лого URL:</label>
+            <input type="url" id="brandLogoUrl" name="logoUrl" class="form-control">
+            <div class="invalid-feedback">
+                Моля, въведете валиден URL.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Добави марка</button>
+    </form>
+
+    <div>
+        <footer th:replace="~{fragments/footer}"></footer>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<html lang="bg" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/head.html}"></head>
 
 <body>
@@ -12,23 +13,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto col-12 justify-content-between">
-                <li class="nav-item">
-                    <div th:if="${@userHelperService.isAuthenticated()}">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <div>
                         <a class="nav-link" th:href="@{/brands/all}" th:classappend="${activeLink == 'brands'}? 'active'">All Brands</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <div th:if="${@userHelperService.isAuthenticated()}">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <div>
                         <a class="nav-link" th:href="@{/offers/add}" th:classappend="${activeLink == 'addOffer'}? 'active'">Add Offer</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <div th:if="${@userHelperService.isAuthenticated()}">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <div>
                         <a class="nav-link" th:href="@{/offers/all}" th:classappend="${activeLink == 'allOffer'}? 'active'">All Offers</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <div th:if="${@userHelperService.isAuthenticated()}">
+                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                    <div>
                         <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Admin
@@ -41,21 +42,21 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <div th:if="${@userHelperService.isAuthenticated()}" class="form-inline my-2 my-lg-0 border px-3">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <div class="form-inline my-2 my-lg-0 border px-3">
                         <form th:method="post"
                               th:action="@{logout}">
                             <input class="btn btn-link" type="submit" value="Logout" th:classappend="${activeLink == 'logout'}? 'active'"/>
                         </form>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <div th:unless="${@userHelperService.isAuthenticated()}">
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <div>
                         <a class="nav-link" th:href="@{/registration}" th:classappend="${activeLink == 'registration'}? 'active'">Register</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <div th:unless="${@userHelperService.isAuthenticated()}">
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <div>
                         <a class="nav-link" th:href="@{/login}" th:classappend="${activeLink == 'login'}? 'active'">Login</a>
                     </div>
                 </li>

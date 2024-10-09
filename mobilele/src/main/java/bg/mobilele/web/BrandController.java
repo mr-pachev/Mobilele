@@ -20,6 +20,7 @@ public class BrandController {
         this.modelService = modelService;
     }
 
+    //view all brands
     @GetMapping("brands/all")
     public String viewBrands(Model model) {
         model.addAttribute("brands", brandService.allBrands());
@@ -27,4 +28,14 @@ public class BrandController {
 
         return "brands";
     }
+
+    //add new brand
+    @GetMapping("add-brand")
+    public String viewAddBrand(Model model) {
+        model.addAttribute("brands", brandService.allBrands());
+        model.addAttribute("models", modelService.allModel());
+
+        return "add-brabd";
+    }
+
 }

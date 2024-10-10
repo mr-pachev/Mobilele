@@ -1,12 +1,7 @@
 package bg.mobilele.model.DTO;
 
-import bg.mobilele.model.entity.Model;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
-import java.time.LocalDateTime;
-import java.util.Set;
 
 public class BrandDTO {
     @NotBlank
@@ -19,6 +14,9 @@ public class BrandDTO {
     @NotBlank
     @Size(min = 3, max = 15)
     private String models;
+
+    @NotBlank
+    private String category;
 
     public String getName() {
         return name;
@@ -50,5 +48,13 @@ public class BrandDTO {
 
     public void setModels(String models) {
         this.models = models;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

@@ -1,6 +1,7 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.BrandDTO;
+import bg.mobilele.model.enums.Category;
 import bg.mobilele.service.BrandService;
 import bg.mobilele.service.ModelService;
 import org.springframework.stereotype.Controller;
@@ -39,8 +40,8 @@ public class BrandController {
     //add new brand
     @GetMapping("/add-brand")
     public String viewAddBrand(Model model) {
-        model.addAttribute("brands", brandService.allBrands());
-        model.addAttribute("models", modelService.allModel());
+
+        model.addAttribute("categoryType", Category.values());
 
         return "add-brand";
     }

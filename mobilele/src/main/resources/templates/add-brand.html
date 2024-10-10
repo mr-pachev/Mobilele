@@ -11,11 +11,7 @@
 <div class="container">
     <h2 class="text-center text-white m-3">Add New Brand</h2>
     <div class='row mb-4 d-flex justify-content-around'>
-        <div class="brand-section col-md-5 mr-auto d-flex flex-column mb-4"
-             th:each="brand: ${brands}">
-            <h2>Car brand:
-                <span th:text="${brand.name}">Brand name</span>
-            </h2>
+        <div class="brand-section col-md-5 mr-auto d-flex flex-column mb-4">
             <form th:action="@{/add-brand}"
                   th:object="${brandDTO}"
                   th:method="POST"
@@ -31,32 +27,34 @@
                         Brand name must contain 3 to 15 letters.
                     </p>
                 </div>
-
-            <div>Models:
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Start Year</th>
-                        <th>End Year</th>
-                        <th>Picture</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="model: ${brand.models}">
-                        <td th:text="${model.id}">No</td>
-                        <td th:text="${model.modelName}">Model Name</td>
-                        <td th:text="${model.category}">Model Category</td>
-                        <td th:text="${model.startYear}">Model Start Year</td>
-                        <td th:text="${model.endYear}">Model End Year</td>
-                        <td><img alt="image" th:src="${model.imageUrl}"
-                                 class="img-thumbnail rounded" style="max-width: 100px;"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                <div class="form-group">
+                    <label th:for="model">Model</label>
+                    <input type="text" class="form-control"
+                           id="model"
+                           name="model"
+                           th:field="*{models}"
+                           th:errorclass="is-invalid">
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Model must contain 3 to 15 letters.
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label th:for="category">Category</label>
+                    <select class="form-control"
+                           id="category"
+                           name="category"
+                           th:field="*{category}"
+                           th:errorclass="is-invalid">
+                    <option value="">-- Select Category --</option>
+                    <option th:each="category: ${categoryType}"
+                            th:value="${category.name()}"
+                            th:text="${category.name()}">Category</option>
+                    </select>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        You must select category.
+                    </p>
+                </div>
+            </form>
         </div>
     </div>
     <div>

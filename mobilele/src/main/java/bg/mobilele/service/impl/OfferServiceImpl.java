@@ -35,7 +35,7 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public long addOffer(AddOfferDTO addOfferDTO, long userId) {
         Offer offer = mapper.map(addOfferDTO, Offer.class);
-        Model model = modelRepository.findModelByModelName(addOfferDTO.getModel());
+        Model model = modelRepository.findModelByModelName(addOfferDTO.getModel()).orElseThrow();
         Brand brand = brandRepository.findByName(addOfferDTO.getBrand()).orElseThrow();
 
         offer.setBrand(brand);

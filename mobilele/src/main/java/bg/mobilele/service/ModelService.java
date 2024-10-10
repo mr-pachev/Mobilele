@@ -9,4 +9,6 @@ import java.util.Map;
 
 public interface ModelService {
     public List<Model> allModel();
+
+    boolean isExistModel(String modelName);
 }

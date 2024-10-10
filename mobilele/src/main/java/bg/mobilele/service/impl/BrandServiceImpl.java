@@ -1,5 +1,6 @@
 package bg.mobilele.service.impl;
 
+import bg.mobilele.model.DTO.AddBrandDTO;
 import bg.mobilele.model.entity.Brand;
 import bg.mobilele.model.entity.Model;
 import bg.mobilele.repository.BrandRepository;
@@ -25,6 +26,17 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public Brand findByBrandName(String brandName) {
 
-        return brandRepository.findByName(brandName);
+        return brandRepository.findByName(brandName).orElseThrow();
+    }
+
+    @Override
+    public boolean isExistBrand(String brandName) {
+
+        return brandRepository.findByName(brandName).isPresent();
+    }
+
+    @Override
+    public void addBrand(AddBrandDTO addBrandDTO) {
+
     }
 }

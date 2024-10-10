@@ -1,15 +1,18 @@
 package bg.mobilele.web;
 
-import bg.mobilele.model.DTO.BrandDTO;
+import bg.mobilele.model.DTO.AddBrandDTO;
 import bg.mobilele.model.enums.Category;
 import bg.mobilele.service.BrandService;
 import bg.mobilele.service.ModelService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/")
@@ -23,9 +26,9 @@ public class BrandController {
         this.modelService = modelService;
     }
 
-    @ModelAttribute("brandDTO")
-    public BrandDTO brandDTO() {
-        return new BrandDTO();
+    @ModelAttribute("addBrandDTO")
+    public AddBrandDTO addBrandDTO() {
+        return new AddBrandDTO();
     }
 
     //view all brands
@@ -46,6 +49,29 @@ public class BrandController {
         return "add-brand";
     }
 
+    @PostMapping("/add-brand")
+    public String creatBrand(
+            @Valid AddBrandDTO addBrandDTO,
+            BindingResult bindingResult,
+            RedirectAttributes rAtt) {
 
+        if (bindingResult.hasErrors()) {
+            rAtt.addFlashAttribute("addBrandDTO", addBrandDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addBrandDTO", bindingResult);
+
+            return "redirect:/add-brand";
+        }
+
+        if (brandService.isExistBrand(addBrandDTO.getName())){
+            rAtt.addFlashAttribute("addBrandDTO", addBrandDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addDepartmentDTO", bindingResult);
+
+            return "redirect:/add-brand";
+        }
+
+        brandService.addBrand(addBrandDTO);
+
+        return "redirect:/brands";
+    }
 
 }

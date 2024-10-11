@@ -5,6 +5,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,7 +16,7 @@ public class Brand extends BaseEntity{
     private LocalDateTime modifier;
 
     @OneToMany(targetEntity = Model.class, mappedBy = "brand")
-    private Set<Model> models;
+    private List<Model> models;
 
     public String getName() {
         return name;
@@ -41,11 +42,11 @@ public class Brand extends BaseEntity{
         this.modifier = modifier;
     }
 
-    public Set<Model> getModels() {
+    public List<Model> getModels() {
         return models;
     }
 
-    public void setModels(Set<Model> models) {
+    public void setModels(List<Model> models) {
         this.models = models;
     }
 }

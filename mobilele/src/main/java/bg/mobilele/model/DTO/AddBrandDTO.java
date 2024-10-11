@@ -3,9 +3,14 @@ package bg.mobilele.model.DTO;
 import jakarta.validation.constraints.*;
 
 public class AddBrandDTO {
+
     @NotBlank
     @Size(min = 3, max = 15)
     private String name;
+
+    @NotBlank
+    @Size(min = 3, max = 15)
+    private String modelName;
 
     @NotBlank
     private String category;
@@ -30,6 +35,14 @@ public class AddBrandDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 
     public String getCategory() {

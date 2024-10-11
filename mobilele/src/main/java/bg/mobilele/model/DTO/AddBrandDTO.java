@@ -15,10 +15,6 @@ public class AddBrandDTO {
     @NotBlank
     private String category;
 
-    @NotBlank
-    @Size(min = 3, max = 15)
-    private String models;
-
     @NotNull
     @Min(1920)
     @Max(2024)
@@ -28,6 +24,8 @@ public class AddBrandDTO {
     @Min(1920)
     @Max(2024)
     private Integer endYear;
+
+    private String imageUrl;
 
     public String getName() {
         return name;
@@ -53,14 +51,6 @@ public class AddBrandDTO {
         this.category = category;
     }
 
-    public String getModels() {
-        return models;
-    }
-
-    public void setModels(String models) {
-        this.models = models;
-    }
-
     public Integer getStartYear() {
         return startYear;
     }
@@ -75,5 +65,13 @@ public class AddBrandDTO {
 
     public void setEndYear(Integer endYear) {
         this.endYear = endYear;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

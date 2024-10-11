@@ -62,7 +62,7 @@ public class BrandController {
             return "redirect:/add-brand";
         }
 
-        if (modelService.isExistModel(addBrandDTO.getModels())){
+        if (modelService.isExistModel(addBrandDTO.getModelName())){
             rAtt.addFlashAttribute("addBrandDTO", addBrandDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addDepartmentDTO", bindingResult);
 

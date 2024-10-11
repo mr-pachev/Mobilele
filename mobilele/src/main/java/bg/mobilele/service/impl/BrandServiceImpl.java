@@ -8,8 +8,11 @@ import bg.mobilele.repository.ModelRepository;
 import bg.mobilele.service.BrandService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,23 +39,28 @@ public class BrandServiceImpl implements BrandService {
         return brandRepository.findByName(brandName).orElseThrow();
     }
 
+    @Transactional
     @Override
     public void addBrand(AddBrandDTO addBrandDTO) {
         Model model = mapper.map(addBrandDTO, Model.class);
         model.setCreated(LocalDateTime.now());
         model.setModified(LocalDateTime.now());
 
-        if(brandRepository.findByName(addBrandDTO.))
-
         Brand brand = mapper.map(addBrandDTO, Brand.class);
-
-        Set<Model> currentModels = brand.getModels();
-        currentModels.add(model);
-
-        brand.setModels(currentModels);
         brand.setCreated(LocalDateTime.now());
         brand.setModifier(LocalDateTime.now());
 
-        System.out.println();
+        Set<Model> currentModels = new LinkedHashSet<>();
+
+        if(brandRepository.findByName(addBrandDTO.getName()).isPresent()){
+            Brand currentBrand = brandRepository.findByName(addBrandDTO.getName()).orElseThrow();
+            currentModels = currentBrand.getModels();
+        }
+
+        currentModels.add(model);
+        brand.setModels(currentModels);
+
+        brandRepository.save(brand);
+        modelRepository.save(model);
     }
 }

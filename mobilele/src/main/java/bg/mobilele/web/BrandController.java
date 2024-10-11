@@ -71,7 +71,7 @@ public class BrandController {
 
         brandService.addBrand(addBrandDTO);
 
-        return "redirect:/brands";
+        return "redirect:/brands/all";
     }
 
 }

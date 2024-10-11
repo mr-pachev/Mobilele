@@ -41,17 +41,15 @@ public class BrandServiceImpl implements BrandService {
         List<Model> currentModels = new ArrayList<>();
         Brand brand;
 
-        if(brandRepository.findByName(addBrandDTO.getName()).isPresent()){
+        if (brandRepository.findByName(addBrandDTO.getName()).isPresent()) {
             brand = brandRepository.findByName(addBrandDTO.getName()).orElseThrow();
 
             currentModels = brand.getModels();
-        }else {
+        } else {
             brand = mapper.map(addBrandDTO, Brand.class);
             brand.setCreated(LocalDateTime.now());
         }
         brand.setModifier(LocalDateTime.now());
-
-        brandRepository.save(brand);
 
         Model model = mapper.map(addBrandDTO, Model.class);
         model.setBrand(brand);

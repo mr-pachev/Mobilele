@@ -65,6 +65,7 @@ public class BrandController {
         if (modelService.isExistModel(addBrandDTO.getModelName())){
             rAtt.addFlashAttribute("addBrandDTO", addBrandDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addDepartmentDTO", bindingResult);
+            rAtt.addFlashAttribute("isExist", true);
 
             return "redirect:/add-brand";
         }

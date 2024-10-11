@@ -9,7 +9,12 @@
 <div th:replace="~{fragments/navigation::navigation(activeLink=${'brands'})}"></div>
 
 <div class="container">
-    <h2 class="text-center text-white m-3">Add New Brand</h2>
+    <div class="bg-danger text-center" th:if="${isExist}">
+        <p class="d-block">The model already exists</p>
+    </div>
+    <div th:unless="${isExist}">
+        <h2 class="text-center text-white m-3">Add New Brand</h2>
+    </div>
     <div class='row mb-4 d-flex justify-content-around'>
         <div class="brand-section col-md-5 mr-auto d-flex flex-column mb-4">
             <form th:action="@{/add-brand}"

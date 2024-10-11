@@ -17,12 +17,9 @@ public class AddBrandDTO {
 
     @NotNull
     @Min(1920)
-    @Max(2024)
     private Integer startYear;
 
-    @NotNull
     @Min(1920)
-    @Max(2024)
     private Integer endYear;
 
     private String imageUrl;

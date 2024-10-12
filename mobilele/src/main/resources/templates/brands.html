@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{fragments/head.html}">
 </head>
@@ -26,6 +27,7 @@
                         <th>Start Year</th>
                         <th>End Year</th>
                         <th>Picture</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,6 +39,11 @@
                         <td th:text="${model.endYear}">Model End Year</td>
                         <td><img alt="image" th:src="${model.imageUrl}"
                                  class="img-thumbnail rounded" style="max-width: 100px;"></td>
+                        <td sec:authorize="hasRole('Admin')">
+                            <form th:method="POST" th:action="@{/add-brand/{id}(id=${model.id})}" class="d-inline">
+                                <input class="btn btn-primary btn-sm" type="submit" value="Edit"/>
+                            </form>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

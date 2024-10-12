@@ -8,10 +8,10 @@ import bg.mobilele.repository.ModelRepository;
 import bg.mobilele.service.BrandService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -25,17 +25,20 @@ public class BrandServiceImpl implements BrandService {
         this.mapper = mapper;
     }
 
+    //get all brands
     @Override
     public List<Brand> allBrands() {
         return brandRepository.findAll();
     }
 
+    //get brand by name
     @Override
     public Brand findByBrandName(String brandName) {
 
         return brandRepository.findByName(brandName).orElseThrow();
     }
 
+    //add new brand
     @Override
     public void addBrand(AddBrandDTO addBrandDTO) {
         List<Model> currentModels = new ArrayList<>();

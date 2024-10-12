@@ -10,7 +10,12 @@ import java.util.Map;
 import java.util.Set;
 
 public interface BrandService {
+    //get all brands
     public List<Brand> allBrands();
+
+    //get brand by name
     public Brand findByBrandName(String brandName);
+
+    //add new brand
     void addBrand(AddBrandDTO addBrandDTO);
 }

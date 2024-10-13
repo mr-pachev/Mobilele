@@ -4,6 +4,8 @@ import jakarta.validation.constraints.*;
 
 public class BrandDTO {
 
+    private long id;
+
     @NotBlank
     @Size(min = 3, max = 15)
     private String name;
@@ -23,6 +25,14 @@ public class BrandDTO {
     private Integer endYear;
 
     private String imageUrl;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

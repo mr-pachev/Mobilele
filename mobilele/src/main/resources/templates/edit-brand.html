@@ -9,18 +9,15 @@
 <div th:replace="~{fragments/navigation::navigation(activeLink=${'brands'})}"></div>
 
 <div class="container">
-    <div class="bg-danger text-center" th:if="${isExist}">
-        <p class="d-block">The model already exists</p>
-    </div>
-    <div th:unless="${isExist}">
-        <h2 class="text-center text-white m-3">Add New Brand</h2>
+    <div>
+        <h2 class="text-center text-white m-3">Edit Brand</h2>
     </div>
     <div class='row mb-4 d-flex justify-content-around'>
         <div class="brand-section col-md-5 mr-auto d-flex flex-column mb-4">
             <form th:action="@{/add-brand}"
                   th:object="${brandDTO}"
                   th:method="POST"
-                  id="addBrand">
+                  id="brandDTO">
                 <div class="form-group">
                     <label th:for="name">Brand</label>
                     <input type="text" class="form-control"
@@ -92,7 +89,7 @@
                 <div class="row">
                     <div class="col col-md-4">
                         <div class="button-holder d-flex">
-                            <input type="submit" class="btn btn-info btn-lg" value="Submit Brand"/>
+                            <input type="submit" class="btn btn-info btn-lg" value="Save"/>
                         </div>
                     </div>
                 </div>

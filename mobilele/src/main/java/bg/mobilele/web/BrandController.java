@@ -62,9 +62,6 @@ public class BrandController {
             rAtt.addFlashAttribute("brandDTO", brandDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.brandDTO", bindingResult);
             rAtt.addFlashAttribute("isExist", true);
-            rAtt.addFlashAttribute("isNew", false);
-            rAtt.addFlashAttribute("isEdit", false);
-
 
             return "redirect:/add-brand";
         }
@@ -75,43 +72,39 @@ public class BrandController {
     }
 
     //edit current brand
-    @PostMapping("/add-brand/{id}")
+    @PostMapping("/edit-brand/{id}")
     public String referenceToEdithBrandForm(@PathVariable("id") Long id){
 
-        return "redirect:/add-brand/" + id;
+        return "redirect:/edit-brand/" + id;
     }
 
-    @GetMapping("/add-brand/{id}")
-    public String fillAddBrandForm(@PathVariable("id") Long id, Model model) {
+    @GetMapping("/edit-brand/{id}")
+    public String fillEditBrandForm(@PathVariable("id") Long id, Model model) {
         BrandDTO brandDTO = brandService.findByModelId(id);
 
         model.addAttribute("categoryType", Category.values());
         model.addAttribute(brandDTO);
-        model.addAttribute("isEdit", true);
-        model.addAttribute("isExist", false);
-        model.addAttribute("isNew", false);
 
-        return "add-brand";
+        return "edit-brand";
     }
-//
-//    @PostMapping("/department-details")
-//    public String edithDepartment(@RequestParam("id") Long id,
-//                                  @Valid DepartmentDTO departmentDTO,
-//                                  BindingResult bindingResult,
-//                                  RedirectAttributes rAtt,
-//                                  Model model){
-//
-//        departmentDTO.setId(id);
-//
-//        if(bindingResult.hasErrors()){
-//            rAtt.addFlashAttribute("departmentDTO", departmentDTO);
-//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.departmentDTO", bindingResult);
-//
-//            model.addAttribute("allEmployees", employeeService.getAllEmployeesNames());
-//            return "department-details";
-//        }
-//
+
+    @PostMapping("/edit-brand")
+    public String edithBrand(@RequestParam("id") Long id,
+                             @Valid BrandDTO brandDTO,
+                             BindingResult bindingResult,
+                             RedirectAttributes rAtt,
+                             Model model){
+
+        brandDTO.setId(id);
+
+        if (bindingResult.hasErrors()) {
+            rAtt.addFlashAttribute("brandDTO", brandDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.brandDTO", bindingResult);
+
+            return "redirect:/edit-brand";
+        }
+
 //        departmentService.editDepartment(departmentDTO);
-//        return "redirect:/departments";
-//    }
+        return "redirect:/brands/all";
+    }
 }

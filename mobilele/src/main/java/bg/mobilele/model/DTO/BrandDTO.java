@@ -2,7 +2,7 @@ package bg.mobilele.model.DTO;
 
 import jakarta.validation.constraints.*;
 
-public class AddBrandDTO {
+public class BrandDTO {
 
     @NotBlank
     @Size(min = 3, max = 15)

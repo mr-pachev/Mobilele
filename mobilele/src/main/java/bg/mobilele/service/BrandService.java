@@ -1,21 +1,20 @@
 package bg.mobilele.service;
 
-import bg.mobilele.model.DTO.AddBrandDTO;
+import bg.mobilele.model.DTO.BrandDTO;
 import bg.mobilele.model.entity.Brand;
-import bg.mobilele.model.entity.Model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public interface BrandService {
     //get all brands
-    public List<Brand> allBrands();
+    List<Brand> allBrands();
 
     //get brand by name
-    public Brand findByBrandName(String brandName);
+    Brand findByBrandName(String brandName);
+
+    //get brandDTO
+    BrandDTO findByModelId(long id);
 
     //add new brand
-    void addBrand(AddBrandDTO addBrandDTO);
+    void brandDTO(BrandDTO brandDTO);
 }

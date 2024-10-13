@@ -1,6 +1,6 @@
 package bg.mobilele.web;
 
-import bg.mobilele.model.DTO.AddBrandDTO;
+import bg.mobilele.model.DTO.BrandDTO;
 import bg.mobilele.model.enums.Category;
 import bg.mobilele.service.BrandService;
 import bg.mobilele.service.ModelService;
@@ -22,9 +22,9 @@ public class BrandController {
         this.modelService = modelService;
     }
 
-    @ModelAttribute("addBrandDTO")
-    public AddBrandDTO addBrandDTO() {
-        return new AddBrandDTO();
+    @ModelAttribute("brandDTO")
+    public BrandDTO brandDTO() {
+        return new BrandDTO();
     }
 
     //view all brands
@@ -47,26 +47,26 @@ public class BrandController {
 
     @PostMapping("/add-brand")
     public String creatBrand(
-            @Valid AddBrandDTO addBrandDTO,
+            @Valid BrandDTO brandDTO,
             BindingResult bindingResult,
             RedirectAttributes rAtt) {
 
         if (bindingResult.hasErrors()) {
-            rAtt.addFlashAttribute("addBrandDTO", addBrandDTO);
-            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addBrandDTO", bindingResult);
+            rAtt.addFlashAttribute("brandDTO", brandDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.brandDTO", bindingResult);
 
             return "redirect:/add-brand";
         }
 
-        if (modelService.isExistModel(addBrandDTO.getModelName())) {
-            rAtt.addFlashAttribute("addBrandDTO", addBrandDTO);
-            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addDepartmentDTO", bindingResult);
+        if (modelService.isExistModel(brandDTO.getModelName())) {
+            rAtt.addFlashAttribute("brandDTO", brandDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.brandDTO", bindingResult);
             rAtt.addFlashAttribute("isExist", true);
 
             return "redirect:/add-brand";
         }
 
-        brandService.addBrand(addBrandDTO);
+        brandService.brandDTO(brandDTO);
 
         return "redirect:/brands/all";
     }
@@ -77,16 +77,16 @@ public class BrandController {
 
         return "redirect:/add-brand/" + id;
     }
-//
-//    @GetMapping("/add-brand/{id}")
-//    public String fillAddBrandForm(@PathVariable("id") Long id, Model model) {
-//        AddBrandDTO addBrandDTO = departmentService.getDepartmentDTOByID(id);
-//
-//        model.addAttribute("allEmployees", employeeService.getAllEmployeesNames());
-//        model.addAttribute(departmentDTO);
-//
-//        return "department-details";
-//    }
+
+    @GetMapping("/add-brand/{id}")
+    public String fillAddBrandForm(@PathVariable("id") Long id, Model model) {
+        BrandDTO brandDTO = brandService.findByModelId(id);
+
+        model.addAttribute("categoryType", Category.values());
+        model.addAttribute(brandDTO);
+
+        return "add-brand";
+    }
 //
 //    @PostMapping("/department-details")
 //    public String edithDepartment(@RequestParam("id") Long id,

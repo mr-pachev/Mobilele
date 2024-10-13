@@ -1,6 +1,6 @@
 package bg.mobilele.service.impl;
 
-import bg.mobilele.model.DTO.AddBrandDTO;
+import bg.mobilele.model.DTO.BrandDTO;
 import bg.mobilele.model.entity.Brand;
 import bg.mobilele.model.entity.Model;
 import bg.mobilele.repository.BrandRepository;
@@ -38,23 +38,31 @@ public class BrandServiceImpl implements BrandService {
         return brandRepository.findByName(brandName).orElseThrow();
     }
 
+    @Override
+    public BrandDTO findByModelId(long id) {
+        Model currentModel = modelRepository.findById(id).orElseThrow();
+        BrandDTO brandDTO = mapper.map(currentModel, BrandDTO.class);
+
+        return brandDTO;
+    }
+
     //add new brand
     @Override
-    public void addBrand(AddBrandDTO addBrandDTO) {
+    public void brandDTO(BrandDTO brandDTO) {
         List<Model> currentModels = new ArrayList<>();
         Brand brand;
 
-        if (brandRepository.findByName(addBrandDTO.getName()).isPresent()) {
-            brand = brandRepository.findByName(addBrandDTO.getName()).orElseThrow();
+        if (brandRepository.findByName(brandDTO.getName()).isPresent()) {
+            brand = brandRepository.findByName(brandDTO.getName()).orElseThrow();
 
             currentModels = brand.getModels();
         } else {
-            brand = mapper.map(addBrandDTO, Brand.class);
+            brand = mapper.map(brandDTO, Brand.class);
             brand.setCreated(LocalDateTime.now());
         }
         brand.setModifier(LocalDateTime.now());
 
-        Model model = mapper.map(addBrandDTO, Model.class);
+        Model model = mapper.map(brandDTO, Model.class);
         model.setBrand(brand);
         model.setCreated(LocalDateTime.now());
         model.setModified(LocalDateTime.now());
@@ -66,3 +74,5 @@ public class BrandServiceImpl implements BrandService {
         modelRepository.save(model);
     }
 }
+
+

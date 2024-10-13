@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface ModelService {
+    //get all models
     public List<Model> allModel();
 
+    //checking is exist model by name
     boolean isExistModel(String modelName);
 }

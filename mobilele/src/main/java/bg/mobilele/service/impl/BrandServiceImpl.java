@@ -51,7 +51,7 @@ public class BrandServiceImpl implements BrandService {
 
     //add new brand
     @Override
-    public void brandDTO(BrandDTO brandDTO) {
+    public void addBrand(BrandDTO brandDTO) {
         List<Model> currentModels = new ArrayList<>();
         Brand brand;
 

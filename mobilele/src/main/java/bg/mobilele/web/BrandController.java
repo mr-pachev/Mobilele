@@ -66,14 +66,14 @@ public class BrandController {
             return "redirect:/add-brand";
         }
 
-        brandService.brandDTO(brandDTO);
+        brandService.addBrand(brandDTO);
 
         return "redirect:/brands/all";
     }
 
     //edit current brand
     @PostMapping("/edit-brand/{id}")
-    public String referenceToEdithBrandForm(@PathVariable("id") Long id){
+    public String referenceToEdithBrandForm(@PathVariable("id") Long id) {
 
         return "redirect:/edit-brand/" + id;
     }
@@ -89,22 +89,21 @@ public class BrandController {
     }
 
     @PostMapping("/edit-brand")
-    public String edithBrand(@RequestParam("id") Long id,
-                             @Valid BrandDTO brandDTO,
-                             BindingResult bindingResult,
-                             RedirectAttributes rAtt,
-                             Model model){
+    public String editBrand(@Valid BrandDTO brandDTO,
+                            BindingResult bindingResult,
+                            RedirectAttributes rAtt,
+                            Model model) {
 
-        brandDTO.setId(id);
+        model.addAttribute("categoryType", Category.values());
 
         if (bindingResult.hasErrors()) {
             rAtt.addFlashAttribute("brandDTO", brandDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.brandDTO", bindingResult);
 
-            return "redirect:/edit-brand";
+            return "edit-brand";
         }
 
-//        departmentService.editDepartment(departmentDTO);
+        brandService.addBrand(brandDTO);
         return "redirect:/brands/all";
     }
 }

@@ -38,10 +38,13 @@ public class BrandServiceImpl implements BrandService {
         return brandRepository.findByName(brandName).orElseThrow();
     }
 
+    //get BrandDTO by model id
     @Override
     public BrandDTO findByModelId(long id) {
         Model currentModel = modelRepository.findById(id).orElseThrow();
+
         BrandDTO brandDTO = mapper.map(currentModel, BrandDTO.class);
+        brandDTO.setName(currentModel.getBrand().getName());
 
         return brandDTO;
     }

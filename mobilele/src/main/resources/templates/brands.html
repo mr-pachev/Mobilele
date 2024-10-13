@@ -12,7 +12,7 @@
 <div class="container">
     <h2 class="text-center text-white m-3">All Brands</h2>
     <div class='row mb-4 d-flex justify-content-around'>
-        <div class="brand-section col-md-5 mr-auto d-flex flex-column mb-4"
+        <div class="brand-section col-md-6 mr-auto d-flex flex-column mb-4"
              th:each="brand: ${brands}">
             <h2>Car brand:
                 <span th:text="${brand.name}">Brand name</span>
@@ -41,7 +41,7 @@
                                  class="img-thumbnail rounded" style="max-width: 100px;"></td>
                         <td sec:authorize="hasRole('Admin')">
                             <form th:method="POST" th:action="@{/edit-brand/{id}(id=${model.id})}" class="d-inline">
-                                <input class="btn btn-primary btn-sm" type="submit" value="Edit"/>
+                                <input class="btn btn-info btn-sm" type="submit" value="Edit"/>
                             </form>
                         </td>
                     </tr>

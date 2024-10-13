@@ -62,6 +62,9 @@ public class BrandController {
             rAtt.addFlashAttribute("brandDTO", brandDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.brandDTO", bindingResult);
             rAtt.addFlashAttribute("isExist", true);
+            rAtt.addFlashAttribute("isNew", false);
+            rAtt.addFlashAttribute("isEdit", false);
+
 
             return "redirect:/add-brand";
         }
@@ -84,6 +87,9 @@ public class BrandController {
 
         model.addAttribute("categoryType", Category.values());
         model.addAttribute(brandDTO);
+        model.addAttribute("isEdit", true);
+        model.addAttribute("isExist", false);
+        model.addAttribute("isNew", false);
 
         return "add-brand";
     }

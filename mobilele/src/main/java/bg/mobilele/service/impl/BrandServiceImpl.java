@@ -49,7 +49,7 @@ public class BrandServiceImpl implements BrandService {
         return brandDTO;
     }
 
-    //add new brand
+    //add new brand or model
     @Override
     public void addBrand(BrandDTO brandDTO) {
         List<Model> currentModels = new ArrayList<>();
@@ -73,7 +73,6 @@ public class BrandServiceImpl implements BrandService {
         currentModels.add(model);
         brand.setModels(currentModels);
 
-        brandRepository.save(brand);
         modelRepository.save(model);
     }
 

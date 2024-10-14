@@ -15,7 +15,7 @@ public interface BrandService {
     //get brandDTO
     BrandDTO findByModelId(long id);
 
-    //add new brand
+    //add new brand or model
     void addBrand(BrandDTO brandDTO);
 
     //delete model by id

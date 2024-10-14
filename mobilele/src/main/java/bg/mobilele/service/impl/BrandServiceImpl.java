@@ -65,15 +65,18 @@ public class BrandServiceImpl implements BrandService {
         }
         brand.setModifier(LocalDateTime.now());
 
+        brandRepository.save(brand);
+        brand = brandRepository.findByName(brandDTO.getName()).orElseThrow();
+
         Model model = mapper.map(brandDTO, Model.class);
         model.setBrand(brand);
         model.setCreated(LocalDateTime.now());
         model.setModified(LocalDateTime.now());
 
+        modelRepository.save(model);
+
         currentModels.add(model);
         brand.setModels(currentModels);
-
-        modelRepository.save(model);
     }
 
     //delete model by id

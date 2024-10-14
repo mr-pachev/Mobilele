@@ -2,7 +2,6 @@ package bg.mobilele.model.entity;
 
 import bg.mobilele.model.enums.Category;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
@@ -105,6 +104,4 @@ public class Model extends BaseEntity{
     public void setOffer(Set<Offer> offer) {
         this.offer = offer;
     }
-
-
 }

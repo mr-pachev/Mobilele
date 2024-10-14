@@ -36,7 +36,7 @@ public class BrandController {
         return "brands";
     }
 
-    //add new brand
+    //add new brand or model
     @GetMapping("/add-brand")
     public String viewAddBrand(Model model) {
 

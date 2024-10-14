@@ -76,6 +76,12 @@ public class BrandServiceImpl implements BrandService {
         brandRepository.save(brand);
         modelRepository.save(model);
     }
+
+    //delete model by id
+    @Override
+    public void removeModel(long id) {
+        modelRepository.deleteById(id);
+    }
 }
 
 

@@ -106,4 +106,13 @@ public class BrandController {
         brandService.addBrand(brandDTO);
         return "redirect:/brands/all";
     }
+
+    //delete model by id
+    @PostMapping("/delete-brand/{id}")
+    public String deleteBrand(@PathVariable("id") Long id) {
+
+        brandService.removeModel(id);
+
+        return "redirect:/brands/all";
+    }
 }

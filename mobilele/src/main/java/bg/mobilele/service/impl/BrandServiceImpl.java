@@ -57,13 +57,11 @@ public class BrandServiceImpl implements BrandService {
     }
 
     private void addNewBrand(BrandDTO brandDTO) {
-        List<Model> currentModels = new ArrayList<>();
         Brand brand;
 
         if (brandRepository.findByName(brandDTO.getName()).isPresent()) {
             brand = brandRepository.findByName(brandDTO.getName()).orElseThrow();
 
-            currentModels = brand.getModels();
         } else {
             brand = mapper.map(brandDTO, Brand.class);
             brand.setCreated(LocalDateTime.now());
@@ -73,7 +71,7 @@ public class BrandServiceImpl implements BrandService {
         brandRepository.save(brand);
     }
 
-    private Brand addNewModel (BrandDTO brandDTO){
+    private Brand addNewModel(BrandDTO brandDTO) {
         Brand brand = brandRepository.findByName(brandDTO.getName()).orElseThrow();
 
         Model model = mapper.map(brandDTO, Model.class);
@@ -83,7 +81,10 @@ public class BrandServiceImpl implements BrandService {
 
         modelRepository.save(model);
 
-        List<Model> currentModels = brand.getModels();
+        List<Model> currentModels = new ArrayList<>();
+        if (brand.getModels() != null) {
+            currentModels = brand.getModels();
+        }
         currentModels.add(model);
         brand.setModels(currentModels);
         return brand;

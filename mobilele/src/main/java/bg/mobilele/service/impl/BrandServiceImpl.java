@@ -52,6 +52,11 @@ public class BrandServiceImpl implements BrandService {
     //add new brand or model
     @Override
     public void addBrand(BrandDTO brandDTO) {
+        addNewBrand(brandDTO);
+        addNewModel(brandDTO);
+    }
+
+    private void addNewBrand(BrandDTO brandDTO) {
         List<Model> currentModels = new ArrayList<>();
         Brand brand;
 
@@ -66,7 +71,10 @@ public class BrandServiceImpl implements BrandService {
         brand.setModifier(LocalDateTime.now());
 
         brandRepository.save(brand);
-        brand = brandRepository.findByName(brandDTO.getName()).orElseThrow();
+    }
+
+    private Brand addNewModel (BrandDTO brandDTO){
+        Brand brand = brandRepository.findByName(brandDTO.getName()).orElseThrow();
 
         Model model = mapper.map(brandDTO, Model.class);
         model.setBrand(brand);
@@ -75,8 +83,10 @@ public class BrandServiceImpl implements BrandService {
 
         modelRepository.save(model);
 
+        List<Model> currentModels = brand.getModels();
         currentModels.add(model);
         brand.setModels(currentModels);
+        return brand;
     }
 
     //delete model by id

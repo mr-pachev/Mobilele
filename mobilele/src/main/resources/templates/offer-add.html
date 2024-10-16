@@ -7,10 +7,10 @@
 
 <div class="container">
     <h2 class="text-center text-white">Add Offer</h2>
-    <form th:action="@{/offers/add}"
+    <form class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center"
+          th:action="@{/offers/add}"
           th:method="POST"
-          th:object="${addOfferDTO}"
-          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+          th:object="${addOfferDTO}">
 
         <div class="row">
 

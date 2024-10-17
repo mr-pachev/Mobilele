@@ -7,6 +7,7 @@ import bg.mobilele.repository.BrandRepository;
 import bg.mobilele.repository.ModelRepository;
 import bg.mobilele.service.BrandService;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -94,6 +95,21 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void removeModel(long id) {
         modelRepository.deleteById(id);
+    }
+
+    @Override
+    public void removeBrand(long id) {
+        Brand brand = brandRepository.findById(id).orElseThrow();
+
+        removeModels(brand.getModels());
+
+        brandRepository.deleteById(id);
+    }
+
+    void removeModels(List<Model> modelList) {
+        for (Model model : modelList) {
+            removeModel(model.getId());
+        }
     }
 }
 

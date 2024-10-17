@@ -16,10 +16,10 @@
              th:each="brand: ${brands}">
             <h2>Car brand:
                 <span th:text="${brand.name}">Brand name</span>
-                <form th:method="POST" th:action="@{/delete-brand/{id}(id=${brand.id})}">
-                    <input class="btn btn-danger btn-sm" type="submit" value="Delete"/>
-                </form>
             </h2>
+            <form th:method="POST" th:action="@{/delete-brand/{id}(id=${brand.id})}">
+                <input class="btn btn-danger btn-sm" type="submit" value="Delete"/>
+            </form>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -47,7 +47,7 @@
                                 <form th:method="POST" th:action="@{/edit-brand/{id}(id=${model.id})}">
                                     <input class="btn btn-info btn-sm" type="submit" value="Edit"/>
                                 </form>
-                                <form th:method="POST" th:action="@{/delete-brand/{id}(id=${model.id})}">
+                                <form th:method="POST" th:action="@{/delete-model/{id}(id=${model.id})}">
                                     <input class="btn btn-danger btn-sm" type="submit" value="Delete"/>
                                 </form>
                             </div>

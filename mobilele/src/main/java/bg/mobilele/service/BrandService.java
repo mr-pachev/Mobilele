@@ -20,4 +20,7 @@ public interface BrandService {
 
     //delete model by id
     void removeModel(long id);
+
+    //delete brand
+    void removeBrand(long id);
 }

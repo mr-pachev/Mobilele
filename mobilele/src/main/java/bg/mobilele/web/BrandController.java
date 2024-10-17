@@ -108,10 +108,19 @@ public class BrandController {
     }
 
     //delete model by id
+    @PostMapping("/delete-model/{id}")
+    public String deleteModel(@PathVariable("id") Long id) {
+
+        brandService.removeModel(id);
+
+        return "redirect:/brands/all";
+    }
+
+    //delete brand
     @PostMapping("/delete-brand/{id}")
     public String deleteBrand(@PathVariable("id") Long id) {
 
-        brandService.removeModel(id);
+        brandService.removeBrand(id);
 
         return "redirect:/brands/all";
     }

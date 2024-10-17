@@ -16,6 +16,9 @@
              th:each="brand: ${brands}">
             <h2>Car brand:
                 <span th:text="${brand.name}">Brand name</span>
+                <form th:method="POST" th:action="@{/delete-brand/{id}(id=${brand.id})}">
+                    <input class="btn btn-danger btn-sm" type="submit" value="Delete"/>
+                </form>
             </h2>
             <div class="table-responsive">
                 <table class="table table-striped">

@@ -116,7 +116,7 @@ public class BrandController {
         return "redirect:/brands/all";
     }
 
-    //delete brand
+    //delete brand by id
     @PostMapping("/delete-brand/{id}")
     public String deleteBrand(@PathVariable("id") Long id) {
 

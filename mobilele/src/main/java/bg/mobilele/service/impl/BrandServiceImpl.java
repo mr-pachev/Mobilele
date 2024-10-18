@@ -97,6 +97,7 @@ public class BrandServiceImpl implements BrandService {
         modelRepository.deleteById(id);
     }
 
+    //delete brand by id
     @Override
     public void removeBrand(long id) {
         Brand brand = brandRepository.findById(id).orElseThrow();

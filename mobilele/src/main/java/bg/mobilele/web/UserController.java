@@ -1,5 +1,6 @@
 package bg.mobilele.web;
 
+import bg.mobilele.model.DTO.UserDTO;
 import bg.mobilele.model.DTO.UserRegistrationDTO;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
@@ -67,10 +68,8 @@ public class UserController {
     @GetMapping("/users")
     public String getAllUsers(Model model){
         List<UserDTO> userDTOS = userService.getAllUsers();
-        String username = userHelperService.getUser().getUsername();
 
         model.addAttribute("userDTOS", userDTOS);
-        model.addAttribute("loginUsername", username);
 
         return "users";
     }

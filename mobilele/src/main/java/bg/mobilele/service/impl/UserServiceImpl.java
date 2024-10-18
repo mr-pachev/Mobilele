@@ -1,5 +1,6 @@
 package bg.mobilele.service.impl;
 
+import bg.mobilele.model.DTO.UserDTO;
 import bg.mobilele.model.DTO.UserRegistrationDTO;
 import bg.mobilele.model.entity.User;
 import bg.mobilele.model.entity.UserRole;
@@ -11,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -42,9 +45,9 @@ public class UserServiceImpl implements UserService {
         //setting UserRole field
         UserRole userRole;
 
-        if(userRepository.count() == 0){
+        if (userRepository.count() == 0) {
             userRole = userRoleRepository.findAllById(2);
-        }else {
+        } else {
             userRole = userRoleRepository.findAllById(1);
         }
 
@@ -67,5 +70,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isExistEmail(String email) {
         return userRepository.findByEmail(email).isPresent();
+    }
+
+    //get all users
+    @Override
+    public List<UserDTO> getAllUsers() {
+        List<UserDTO> users = new ArrayList<>();
+
+        for (User user : userRepository.findAll()) {
+            users.add(mapToUserDTO(user));
+        }
+        return users;
+    }
+
+    private UserDTO mapToUserDTO(User user) {
+        UserDTO userDTO = mapper.map(user, UserDTO.class);
+        userDTO.setUserRole(user.getUserRole().getRole().name());
+        return userDTO;
     }
 }

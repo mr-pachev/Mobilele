@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
         this.mapper = mapper;
     }
 
+    //add  new user
     @Override
     public void registrationUser(UserRegistrationDTO userRegistrationDTO) {
         //setting new user fields
@@ -55,12 +56,14 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    //check is exist user by username
     @Override
     public boolean isExistUser(String username) {
 
         return userRepository.findByUsername(username).isPresent();
     }
 
+    //check is exist email
     @Override
     public boolean isExistEmail(String email) {
         return userRepository.findByEmail(email).isPresent();

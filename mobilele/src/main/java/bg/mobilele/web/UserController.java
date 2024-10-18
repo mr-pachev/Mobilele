@@ -1,5 +1,6 @@
 package bg.mobilele.web;
 
+import bg.mobilele.model.DTO.UserDTO;
 import bg.mobilele.model.DTO.UserRegistrationDTO;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -60,4 +63,13 @@ public class UserController {
         return "redirect:/";
     }
 
+    //view all users
+    @GetMapping("/users")
+    public String getAllUsers(Model model){
+        List<UserDTO> userDTOS = userService.getAllUsers();
+
+        model.addAttribute("userDTOS", userDTOS);
+
+        return "users";
+    }
 }

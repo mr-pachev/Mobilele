@@ -12,10 +12,12 @@
 <div class="container-fluid"
      th:object="${userDTOS}"
      th:method="POST">
+
     <h2 class="text-center text-white mt-5">All Users</h2>
-    <div class="offers row mx-auto d-flex flex-row justify-content-center">
-        <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
-            <table class="departments-form justify-content-center table table-striped">
+
+    <div class="row mx-auto d-flex flex-row justify-content-center">
+        <div class="card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
+            <table class="justify-content-center table table-striped">
                 <thead>
                 <tr>
                     <th>Username</th>
@@ -34,14 +36,16 @@
                     <td th:text="${user.lastName}">Last Name</td>
                     <td th:text="${user.isActive()}">Is Active</td>
                     <td th:text="${user.userRole}">Role</td>
-<!--                    <td th:href="@{/add-employee}" sec:authorize="hasRole('ADMIN')" th:if="${user.username} != ${loginUsername}">-->
-<!--                        <form th:method="POST" th:action="@{/user-details/{id}(id=${user.userId})}" class="d-inline">-->
-<!--                            <input class="btn btn-primary btn-sm" type="submit" th:value="#{edit}"/>-->
-<!--                        </form>-->
-<!--                        <form th:method="POST" th:action="@{/delete-user/{id}(id=${user.userId})}" class="d-inline">-->
-<!--                            <input class="btn btn-danger btn-sm" type="submit" th:value="#{remove}"/>-->
-<!--                        </form>-->
-<!--                    </td>-->
+                    <td>
+                        <div class="d-flex gap-2">
+                        <form th:method="POST" th:action="@{/edit-user/{id}(id=${user.id})}">
+                            <input class="btn btn-info btn-sm" type="submit" value="Edit"/>
+                        </form>
+                        <form th:method="POST" th:action="@{/delete-user/{id}(id=${user.id})}">
+                            <input class="btn btn-danger btn-sm" type="submit" value="Delete"/>
+                        </form>
+                    </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>

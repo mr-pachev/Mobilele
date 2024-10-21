@@ -104,10 +104,6 @@ public class UserController {
 
         userDTO.setId(userId);
 
-//        if(userDTO.getRole() == null){
-//            userDTO.setRole(userHelperService.getUser().getRole().getRoleName().name());
-//        }
-
         if(bindingResult.hasErrors()){
             rAtt.addFlashAttribute("userDTO", userDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userDTO", bindingResult);

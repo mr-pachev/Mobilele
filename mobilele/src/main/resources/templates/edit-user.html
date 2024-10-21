@@ -88,6 +88,22 @@
                     </option>
                 </select>
             </div>
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold"
+                       th:for="isActive"
+                       th:placeholder="${userDTO.isActive()}">Is Active</label>
+                <select class="form-control"
+                        id="isActive"
+                        name="isActive"
+                        th:field="*{active}">
+                    <option th:value="${true}"
+                            th:text="${true}">Is Active
+                    </option>
+                    <option th:value="${false}"
+                            th:text="${false}">Is Active
+                    </option>
+                </select>
+            </div>
         </div>
 
         <div class="row">

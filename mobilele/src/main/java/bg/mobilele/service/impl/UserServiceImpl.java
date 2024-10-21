@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     //add new user
     @Override
     public void registrationUser(UserRegistrationDTO userRegistrationDTO) {
-        //setting new user fields
+
         User user = mapper.map(userRegistrationDTO, User.class);
 
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService {
         user.setCreated(LocalDateTime.now());
         user.setModified(LocalDateTime.now());
 
-        //setting UserRole field
         UserRole userRole;
 
         if (userRepository.count() == 0) {

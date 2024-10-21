@@ -9,8 +9,11 @@
 <div th:replace="~{fragments/navigation::navigation(activeLink=${'admin'})}"></div>
 
 <div class="container-fluid"
-     th:object="${userDTOS}"
+     th:object="${userDTO}"
      th:method="POST">
+
+    <!--Sends employee id with a POST request-->
+    <input type="hidden" th:field="*{id}"/>
 
     <div class="entity-form">
         <h2 class="text-center">All Users</h2>

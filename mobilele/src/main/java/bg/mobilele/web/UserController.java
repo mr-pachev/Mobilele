@@ -24,6 +24,11 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
+    @ModelAttribute("userDTO")
+    public UserDTO userDTO() {
+        return new UserDTO();
+    }
+
     @GetMapping("registration")
     public String showRegistrationForm(Model model) {
 

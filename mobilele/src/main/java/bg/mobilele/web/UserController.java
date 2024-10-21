@@ -8,9 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -72,4 +70,73 @@ public class UserController {
 
         return "users";
     }
+
+    //edit current user
+    @PostMapping("/edit-user/{id}")
+    public String referenceToEditUserForm(@PathVariable("id") Long id){
+
+        return "redirect:/edit-user/" + id;
+    }
+
+    @GetMapping("/edit-user/{id}")
+    public String fillEditUserForm(@PathVariable("id") Long id, Model model) {
+        UserDTO userDTO = userService.getUserDetails(id);
+
+        model.addAttribute(userDTO);
+
+        return "edit-user";
+    }
+
+//    @PostMapping("/edit-user")
+//    public String editUser(@RequestParam("userId") Long userId,
+//                           @Valid UserDTO userDTO,
+//                           BindingResult bindingResult,
+//                           RedirectAttributes rAtt,
+//                           Model model){
+//
+//        userDTO.setUserId(userId);
+//
+//        if(userDTO.getRole() == null){
+//            userDTO.setRole(userHelperService.getUser().getRole().getRoleName().name());
+//        }
+//
+//        if(bindingResult.hasErrors()){
+//            rAtt.addFlashAttribute("userDTO", userDTO);
+//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userDTO", bindingResult);
+//
+//            model.addAttribute("roles", RoleName.values());
+//
+//            return "edit-user";
+//        }
+//
+//        String currentUsernameForEdit = userRepository.findById(userId)
+//                .orElseThrow(ObjectNotFoundException::new)
+//                .getUsername();
+//
+//        boolean isChangedUsername = !currentUsernameForEdit.equals(userDTO.getUsername());
+//
+//        if(userService.isExistUser(userDTO.getUsername()) && isChangedUsername){
+//            rAtt.addFlashAttribute("userDTO", userDTO);
+//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userDTO", bindingResult);
+//
+//            model.addAttribute("isExistUsername", true);
+//            model.addAttribute("roles", RoleName.values());
+//
+//            return "edit-user";
+//        }
+//
+//        userService.editUser(userDTO);
+//
+//        String loginUser = userHelperService.getUserDetails().getUsername();
+//
+//        if(currentUsernameForEdit.equals(loginUser)){
+//            userHelperService.updateCurrentUserUsername(userDTO.getUsername());
+//        }
+//
+//        if(userHelperService.hasRole("ADMIN")){
+//            return "redirect:/users";
+//        }
+//
+//        return "redirect:/";
+//    }
 }

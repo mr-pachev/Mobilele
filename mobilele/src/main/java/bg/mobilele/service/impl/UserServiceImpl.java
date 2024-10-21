@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
         this.mapper = mapper;
     }
 
-    //add  new user
+    //add new user
     @Override
     public void registrationUser(UserRegistrationDTO userRegistrationDTO) {
         //setting new user fields
@@ -70,6 +70,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isExistEmail(String email) {
         return userRepository.findByEmail(email).isPresent();
+    }
+
+    //get user details by id
+    @Override
+    public UserDTO getUserDetails(long id) {
+        User currentUser = userRepository.findById(id).orElseThrow();
+
+        UserDTO userDTO = mapper.map(currentUser, UserDTO.class);
+        userDTO.setUserRole(currentUser.getUserRole().getRole().name());
+
+        return userDTO;
     }
 
     //get all users

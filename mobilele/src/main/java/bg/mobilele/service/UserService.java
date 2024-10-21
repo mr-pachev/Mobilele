@@ -20,4 +20,7 @@ public interface UserService {
 
     //get all users
     List<UserDTO> getAllUsers();
+
+    //edit user
+    void editUser(UserDTO userDTO);
 }

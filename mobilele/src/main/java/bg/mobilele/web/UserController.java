@@ -2,6 +2,8 @@ package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.UserDTO;
 import bg.mobilele.model.DTO.UserRegistrationDTO;
+import bg.mobilele.model.entity.UserRole;
+import bg.mobilele.model.enums.Role;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
 import jakarta.validation.Valid;
@@ -88,60 +90,66 @@ public class UserController {
         UserDTO userDTO = userService.getUserDetails(id);
 
         model.addAttribute(userDTO);
+        model.addAttribute("roles", Role.values());
 
         return "edit-user";
     }
 
-//    @PostMapping("/edit-user")
-//    public String editUser(@RequestParam("userId") Long userId,
-//                           @Valid UserDTO userDTO,
-//                           BindingResult bindingResult,
-//                           RedirectAttributes rAtt,
-//                           Model model){
-//
-//        userDTO.setUserId(userId);
-//
+    @PostMapping("/edit-user")
+    public String editUser(@RequestParam("id") Long userId,
+                           @Valid UserDTO userDTO,
+                           BindingResult bindingResult,
+                           RedirectAttributes rAtt,
+                           Model model){
+
+        userDTO.setId(userId);
+
 //        if(userDTO.getRole() == null){
 //            userDTO.setRole(userHelperService.getUser().getRole().getRoleName().name());
 //        }
-//
-//        if(bindingResult.hasErrors()){
-//            rAtt.addFlashAttribute("userDTO", userDTO);
-//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userDTO", bindingResult);
-//
-//            model.addAttribute("roles", RoleName.values());
-//
-//            return "edit-user";
-//        }
-//
-//        String currentUsernameForEdit = userRepository.findById(userId)
-//                .orElseThrow(ObjectNotFoundException::new)
-//                .getUsername();
-//
-//        boolean isChangedUsername = !currentUsernameForEdit.equals(userDTO.getUsername());
-//
-//        if(userService.isExistUser(userDTO.getUsername()) && isChangedUsername){
-//            rAtt.addFlashAttribute("userDTO", userDTO);
-//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userDTO", bindingResult);
-//
-//            model.addAttribute("isExistUsername", true);
-//            model.addAttribute("roles", RoleName.values());
-//
-//            return "edit-user";
-//        }
-//
-//        userService.editUser(userDTO);
-//
-//        String loginUser = userHelperService.getUserDetails().getUsername();
-//
-//        if(currentUsernameForEdit.equals(loginUser)){
-//            userHelperService.updateCurrentUserUsername(userDTO.getUsername());
-//        }
-//
-//        if(userHelperService.hasRole("ADMIN")){
-//            return "redirect:/users";
-//        }
-//
-//        return "redirect:/";
-//    }
+
+        if(bindingResult.hasErrors()){
+            rAtt.addFlashAttribute("userDTO", userDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userDTO", bindingResult);
+            model.addAttribute("roles", Role.values());
+
+            return "edit-user";
+        }
+
+        String currentUsernameForEdit = userRepository.findById(userId)
+                .orElseThrow()
+                .getUsername();
+
+        boolean isChangedUsername = !currentUsernameForEdit.equals(userDTO.getUsername());
+
+        if(userService.isExistUser(userDTO.getUsername()) && isChangedUsername){
+            rAtt.addFlashAttribute("userDTO", userDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userDTO", bindingResult);
+            model.addAttribute("roles", Role.values());
+
+            model.addAttribute("isExistUsername", true);
+
+            return "edit-user";
+        }
+
+        String currentUsernameEmailForEdit = userRepository.findById(userId)
+                .orElseThrow()
+                .getEmail();
+
+        boolean isChangedEmail = !currentUsernameEmailForEdit.equals(userDTO.getEmail());
+
+        if(userService.isExistEmail(userDTO.getEmail()) && isChangedEmail){
+            rAtt.addFlashAttribute("userDTO", userDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userDTO", bindingResult);
+            model.addAttribute("roles", Role.values());
+
+            model.addAttribute("isExistEmail", true);
+
+            return "edit-user";
+        }
+
+        userService.editUser(userDTO);
+
+        return "redirect:/";
+    }
 }

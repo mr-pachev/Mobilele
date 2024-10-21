@@ -94,6 +94,11 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+    @Override
+    public void editUser(UserDTO userDTO) {
+
+    }
+
     private UserDTO mapToUserDTO(User user) {
         UserDTO userDTO = mapper.map(user, UserDTO.class);
         userDTO.setUserRole(user.getUserRole().getRole().name());

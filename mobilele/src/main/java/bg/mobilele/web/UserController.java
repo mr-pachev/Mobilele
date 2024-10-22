@@ -146,6 +146,6 @@ public class UserController {
 
         userService.editUser(userDTO);
 
-        return "redirect:/";
+        return "redirect:/users";
     }
 }

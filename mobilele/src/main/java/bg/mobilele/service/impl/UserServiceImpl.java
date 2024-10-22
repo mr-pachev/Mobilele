@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
     private void userDTOmapToUser(User user, UserDTO userDTO){
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
-        user.setUsername(user.getUsername());
+        user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         user.setUserRole(userRoleRepository.findByRole(Role.valueOf(userDTO.getUserRole())));
         user.setActive(userDTO.isActive());

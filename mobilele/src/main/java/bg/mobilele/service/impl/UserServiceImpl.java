@@ -65,8 +65,6 @@ public class UserServiceImpl implements UserService {
         User userForEdit = userRepository.findById(userDTO.getId()).orElseThrow();
 
         userDTOmapToUser(userForEdit, userDTO);
-
-        System.out.println();
     }
 
     private void userDTOmapToUser(User user, UserDTO userDTO){
@@ -74,10 +72,11 @@ public class UserServiceImpl implements UserService {
         user.setLastName(userDTO.getLastName());
         user.setUsername(user.getUsername());
         user.setEmail(userDTO.getEmail());
-//        user.setUserRole(Role.valueOf(userRoleRepository.findBy(userDTO.getUserRole().)));
+        user.setUserRole(userRoleRepository.findByRole(Role.valueOf(userDTO.getUserRole())));
         user.setActive(userDTO.isActive());
+        user.setModified(LocalDateTime.now());
 
-        System.out.println();
+        userRepository.save(user);
     }
 
     //check is exist user by username

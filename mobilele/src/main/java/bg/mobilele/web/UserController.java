@@ -31,6 +31,7 @@ public class UserController {
         return new UserDTO();
     }
 
+    //add new user
     @GetMapping("registration")
     public String showRegistrationForm(Model model) {
 
@@ -46,9 +47,8 @@ public class UserController {
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) {
 
-        //checking and setting username if it exists
         userRegistrationDTO.setUserIsExist(userService.isExistUser(userRegistrationDTO.getUsername()));
-        //checking and setting email if it exists
+
         userRegistrationDTO.setEmailIsExist(userService.isExistEmail(userRegistrationDTO.getEmail()));
 
         if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())){

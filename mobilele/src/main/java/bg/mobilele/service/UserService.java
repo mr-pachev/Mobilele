@@ -9,6 +9,9 @@ public interface UserService {
     //add  new user
     void registrationUser(UserRegistrationDTO userRegistrationDTO);
 
+    //edit user
+    void editUser(UserDTO userDTO);
+
     //check is exist user by username
     boolean isExistUser(String username);
 
@@ -20,7 +23,4 @@ public interface UserService {
 
     //get all users
     List<UserDTO> getAllUsers();
-
-    //edit user
-    void editUser(UserDTO userDTO);
 }

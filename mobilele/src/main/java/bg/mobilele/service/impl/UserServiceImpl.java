@@ -4,6 +4,7 @@ import bg.mobilele.model.DTO.UserDTO;
 import bg.mobilele.model.DTO.UserRegistrationDTO;
 import bg.mobilele.model.entity.User;
 import bg.mobilele.model.entity.UserRole;
+import bg.mobilele.model.enums.Role;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.repository.UserRoleRepository;
 import bg.mobilele.service.UserService;
@@ -58,6 +59,27 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    //edit user
+    @Override
+    public void editUser(UserDTO userDTO) {
+        User userForEdit = userRepository.findById(userDTO.getId()).orElseThrow();
+
+        userDTOmapToUser(userForEdit, userDTO);
+
+        System.out.println();
+    }
+
+    private void userDTOmapToUser(User user, UserDTO userDTO){
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setUsername(user.getUsername());
+        user.setEmail(userDTO.getEmail());
+//        user.setUserRole(Role.valueOf(userRoleRepository.findBy(userDTO.getUserRole().)));
+        user.setActive(userDTO.isActive());
+
+        System.out.println();
+    }
+
     //check is exist user by username
     @Override
     public boolean isExistUser(String username) {
@@ -91,11 +113,6 @@ public class UserServiceImpl implements UserService {
             users.add(mapToUserDTO(user));
         }
         return users;
-    }
-
-    @Override
-    public void editUser(UserDTO userDTO) {
-
     }
 
     private UserDTO mapToUserDTO(User user) {

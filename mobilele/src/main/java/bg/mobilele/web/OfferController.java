@@ -45,25 +45,21 @@ public class OfferController {
     }
 
     //add offer
-    @PostMapping("/offers/add/{brand}")
-    public String referenceToAddOfferForm(@PathVariable("brand") String brand) {
-
-        return "redirect:/offers/add/" + brand;
-    }
-
-    @GetMapping("/offers/add/{brand}")
-    public String viewAddOffer(@PathVariable("brand") String brand, Model model) {
+    @GetMapping("/offers/add")
+    public String viewAddOffer(Model model) {
 
         if (!model.containsAttribute("addOfferDTO")) {
             model.addAttribute("addOfferDTO", new AddOfferDTO());
         }
 
-        List<String> models = brandService.modelsByBrand(brand);
-
         model.addAttribute("engineType", Engine.values());
         model.addAttribute("transmissionType", Transmission.values());
         model.addAttribute("brands", brandService.allBrands());
-        model.addAttribute("models", models);
+        model.addAttribute("models", modelService.allModel());
+
+        if (!model.containsAttribute("isNoMatchModel")) {
+            model.addAttribute("isNoMatchModel", false);
+        }
 
         return "offer-add";
     }
@@ -73,11 +69,24 @@ public class OfferController {
                              BindingResult bindingResult,
                              RedirectAttributes rAtt) {
 
-        if (bindingResult.hasErrors()) {
+        boolean isNoMatchModel = false;
+
+        if(!addOfferDTO.getBrand().isEmpty()){
+            isNoMatchModel = !brandService.modelsByBrand(addOfferDTO.getBrand())
+                    .contains(addOfferDTO.getModel());
+        }
+
+        if (bindingResult.hasErrors() || isNoMatchModel) {
             rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
+
+            if (isNoMatchModel) {
+                rAtt.addFlashAttribute("isNoMatchModel", true);
+            }
+
             return "redirect:/offers/add";
         }
+
         addOfferDTO.setCreated(LocalDateTime.now());
         addOfferDTO.setModified(LocalDateTime.now());
 
@@ -86,6 +95,7 @@ public class OfferController {
 
         return "redirect:/details/" + offerId;
     }
+
 
     @GetMapping("/details/{id}")
     public String viewOfferDetail(@PathVariable("id") long id, Model model) {

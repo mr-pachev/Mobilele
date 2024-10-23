@@ -45,19 +45,27 @@ public class OfferController {
     }
 
     //add offer
-    @GetMapping("/offers/add")
-    public String viewAddOffer(Model model) {
+    @PostMapping("/offers/add/{brand}")
+    public String referenceToAddOfferForm(@PathVariable("brand") String brand) {
+
+        return "redirect:/offers/add/" + brand;
+    }
+
+    @GetMapping("/offers/add/{brand}")
+    public String viewAddOffer(@PathVariable("brand") String brand, Model model) {
 
         if (!model.containsAttribute("addOfferDTO")) {
             model.addAttribute("addOfferDTO", new AddOfferDTO());
         }
 
+        List<String> models = brandService.modelsByBrand(brand);
+
         model.addAttribute("engineType", Engine.values());
         model.addAttribute("transmissionType", Transmission.values());
         model.addAttribute("brands", brandService.allBrands());
-        model.addAttribute("models", modelService.allModel());
+        model.addAttribute("models", models);
 
-        return ("offer-add");
+        return "offer-add";
     }
 
     @PostMapping("/offers/add")

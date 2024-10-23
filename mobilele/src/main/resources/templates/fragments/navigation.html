@@ -20,7 +20,7 @@
                 </li>
                 <li class="nav-item">
                     <div sec:authorize="isAuthenticated()">
-                        <a class="nav-link" th:href="@{/offers/add}" th:classappend="${activeLink == 'addOffer'}? 'active'">Add Offer</a>
+                        <a class="nav-link" th:href="@{/offers/add/{brand}}" th:classappend="${activeLink == 'addOffer'}? 'active'">Add Offer</a>
                     </div>
                 </li>
                 <li class="nav-item">

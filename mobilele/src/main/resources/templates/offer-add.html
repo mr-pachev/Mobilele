@@ -12,6 +12,9 @@
           th:method="POST"
           th:object="${addOfferDTO}">
 
+        <!--Sends employee id with a POST request-->
+        <input type="hidden" th:field="*{brand}"/>
+
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">

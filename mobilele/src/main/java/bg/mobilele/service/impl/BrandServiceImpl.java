@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+
 public class BrandServiceImpl implements BrandService {
     private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
@@ -30,6 +32,15 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public List<Brand> allBrands() {
         return brandRepository.findAll();
+    }
+
+    @Override
+    public List<String> modelsByBrand(String branName) {
+        List<String> models = findByBrandName(branName).getModels().stream()
+                .map(Model::getModelName)
+                .toList();
+
+        return models;
     }
 
     //get brand by name

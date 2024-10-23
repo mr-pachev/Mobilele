@@ -9,6 +9,9 @@ public interface BrandService {
     //get all brands
     List<Brand> allBrands();
 
+    //get models by brand
+    List<String> modelsByBrand (String branName);
+
     //get brand by name
     Brand findByBrandName(String brandName);
 

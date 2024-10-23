@@ -17,7 +17,9 @@
             <h2>Car brand:
                 <span th:text="${brand.name}">Brand name</span>
             </h2>
-            <form th:method="POST" th:action="@{/delete-brand/{id}(id=${brand.id})}">
+            <form sec:authorize="hasRole('Admin')"
+                  th:method="POST"
+                  th:action="@{/delete-brand/{id}(id=${brand.id})}">
                 <input class="btn btn-danger btn-sm" type="submit" value="Delete"/>
             </form>
             <div class="table-responsive">
@@ -30,7 +32,7 @@
                         <th>Start Year</th>
                         <th>End Year</th>
                         <th>Picture</th>
-                        <th>Action</th>
+                        <th sec:authorize="hasRole('Admin')">Action</th>
                     </tr>
                     </thead>
                     <tbody>

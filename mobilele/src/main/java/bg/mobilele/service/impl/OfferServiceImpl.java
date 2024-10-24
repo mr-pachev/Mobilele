@@ -43,6 +43,7 @@ public class OfferServiceImpl implements OfferService {
         offer.setSeller(userRepository.getReferenceById(userId));
 
         offerRepository.save(offer);
+
         return offer.getId();
     }
 

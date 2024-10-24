@@ -79,6 +79,11 @@ public class OfferController {
         if (bindingResult.hasErrors() || isNoMatchModel) {
             rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
+             rAtt.addFlashAttribute("engineType", Engine.values());
+             rAtt.addFlashAttribute("transmissionType", Transmission.values());
+             rAtt.addFlashAttribute("brands", brandService.allBrands());
+             rAtt.addFlashAttribute("models", modelService.allModel());
+
 
             if (isNoMatchModel) {
                 rAtt.addFlashAttribute("isNoMatchModel", true);

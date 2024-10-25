@@ -12,7 +12,6 @@ import bg.mobilele.service.OfferService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -34,23 +33,21 @@ public class OfferServiceImpl implements OfferService {
     //add offer
     @Override
     public long addOffer(AddOfferDTO addOfferDTO, long userId) {
-        Offer offer = mapper.map(addOfferDTO, Offer.class);
         Model model = modelRepository.findModelByModelName(addOfferDTO.getModel()).orElseThrow();
         Brand brand = brandRepository.findByName(addOfferDTO.getBrand()).orElseThrow();
+        Offer offer = mapper.map(addOfferDTO, Offer.class);
 
         offer.setBrand(brand);
         offer.setModel(model);
         offer.setSeller(userRepository.getReferenceById(userId));
 
-        offerRepository.save(offer);
-
-        return offer.getId();
+        return offerRepository.save(offer).getId();
     }
 
     //get offer by id
     @Override
     public AddOfferDTO getAddOfferDTOById(long id) {
-        Offer offer = offerRepository.findById(id);
+        Offer offer = offerRepository.findById(id).orElseThrow();
 
         AddOfferDTO addOfferDTO = mapper.map(offer, AddOfferDTO.class);
         addOfferDTO.setBrand(offer.getBrand().getName());
@@ -68,7 +65,7 @@ public class OfferServiceImpl implements OfferService {
     //edit offer
     @Override
     public void editOffer(AddOfferDTO addOfferDTO) {
-        Offer offer = offerRepository.findById(addOfferDTO.getOfferId());
+        Offer offer = offerRepository.findById(addOfferDTO.getOfferId()).orElseThrow();
 
         mapper.map(addOfferDTO, offer);
 

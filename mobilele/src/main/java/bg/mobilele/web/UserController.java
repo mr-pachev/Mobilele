@@ -2,7 +2,6 @@ package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.UserDTO;
 import bg.mobilele.model.DTO.UserRegistrationDTO;
-import bg.mobilele.model.entity.UserRole;
 import bg.mobilele.model.enums.Role;
 import bg.mobilele.repository.UserRepository;
 import bg.mobilele.service.UserService;
@@ -148,4 +147,6 @@ public class UserController {
 
         return "redirect:/users";
     }
+
+
 }

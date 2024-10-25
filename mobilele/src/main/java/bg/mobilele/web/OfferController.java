@@ -71,7 +71,7 @@ public class OfferController {
 
         boolean isNoMatchModel = false;
 
-        if(!addOfferDTO.getBrand().isEmpty()){
+        if (!addOfferDTO.getBrand().isEmpty()) {
             isNoMatchModel = !brandService.modelsByBrand(addOfferDTO.getBrand())
                     .contains(addOfferDTO.getModel());
         }
@@ -79,11 +79,10 @@ public class OfferController {
         if (bindingResult.hasErrors() || isNoMatchModel) {
             rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
-             rAtt.addFlashAttribute("engineType", Engine.values());
-             rAtt.addFlashAttribute("transmissionType", Transmission.values());
-             rAtt.addFlashAttribute("brands", brandService.allBrands());
-             rAtt.addFlashAttribute("models", modelService.allModel());
-
+            rAtt.addFlashAttribute("engineType", Engine.values());
+            rAtt.addFlashAttribute("transmissionType", Transmission.values());
+            rAtt.addFlashAttribute("brands", brandService.allBrands());
+            rAtt.addFlashAttribute("models", modelService.allModel());
 
             if (isNoMatchModel) {
                 rAtt.addFlashAttribute("isNoMatchModel", true);
@@ -106,7 +105,7 @@ public class OfferController {
     public String viewOfferDetail(@PathVariable("id") long id, Model model) {
         AddOfferDTO addOfferDTO = offerService.getAddOfferDTOById(id);
 
-        model.addAttribute("addOfferDTO", offerService.getAddOfferDTOById(id));
+        model.addAttribute("addOfferDTO", addOfferDTO);
 
         return "details";
     }

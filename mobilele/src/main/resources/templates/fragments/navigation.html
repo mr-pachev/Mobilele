@@ -42,8 +42,8 @@
                 </li>
                 <li class="nav-item">
                     <div class="form-inline my-2 my-lg-0 border px-3" sec:authorize="isAuthenticated()">
-                        <form th:method="post"
-                              th:action="@{logout}">
+                        <form th:method="POST"
+                              th:action="@{/logout}">
                             <input class="btn btn-link" type="submit" value="Logout" th:classappend="${activeLink == 'logout'}? 'active'"/>
                         </form>
                     </div>

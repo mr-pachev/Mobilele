@@ -137,11 +137,18 @@ public class OfferController {
 
         offerDTO.setOfferId(id);
 
+        model.addAttribute("offerDTO", offerDTO);
+        model.addAttribute("engineType", Engine.values());
+        model.addAttribute("transmissionType", Transmission.values());
+        model.addAttribute("brands", brandService.allBrands());
+        model.addAttribute("models", modelService.allModel());
+
         if (bindingResult.hasErrors()) {
+            offerDTO = offerService.getOfferDTOById(id);
+
             rAtt.addFlashAttribute("offerDTO", offerDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.offerDTO", bindingResult);
 
-            model.addAttribute("offer", offerService.getOfferDTOById(id));
             return "update";
         }
 

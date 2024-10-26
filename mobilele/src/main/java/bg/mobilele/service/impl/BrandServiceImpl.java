@@ -7,13 +7,11 @@ import bg.mobilele.repository.BrandRepository;
 import bg.mobilele.repository.ModelRepository;
 import bg.mobilele.service.BrandService;
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 
@@ -43,24 +41,6 @@ public class BrandServiceImpl implements BrandService {
         return models;
     }
 
-    //get brand by name
-    @Override
-    public Brand findByBrandName(String brandName) {
-
-        return brandRepository.findByName(brandName).orElseThrow();
-    }
-
-    //get BrandDTO by model id
-    @Override
-    public BrandDTO findByModelId(long id) {
-        Model currentModel = modelRepository.findById(id).orElseThrow();
-
-        BrandDTO brandDTO = mapper.map(currentModel, BrandDTO.class);
-        brandDTO.setName(currentModel.getBrand().getName());
-
-        return brandDTO;
-    }
-
     //add new brand or model
     @Override
     public void addBrand(BrandDTO brandDTO) {
@@ -83,7 +63,7 @@ public class BrandServiceImpl implements BrandService {
         brandRepository.save(brand);
     }
 
-    private Brand addNewModel(BrandDTO brandDTO) {
+    private void addNewModel(BrandDTO brandDTO) {
         Brand brand = brandRepository.findByName(brandDTO.getName()).orElseThrow();
 
         Model model = mapper.map(brandDTO, Model.class);
@@ -99,7 +79,24 @@ public class BrandServiceImpl implements BrandService {
         }
         currentModels.add(model);
         brand.setModels(currentModels);
-        return brand;
+    }
+
+    //get brand by name
+    @Override
+    public Brand findByBrandName(String brandName) {
+
+        return brandRepository.findByName(brandName).orElseThrow();
+    }
+
+    //get BrandDTO by model id
+    @Override
+    public BrandDTO findByModelId(long id) {
+        Model currentModel = modelRepository.findById(id).orElseThrow();
+
+        BrandDTO brandDTO = mapper.map(currentModel, BrandDTO.class);
+        brandDTO.setName(currentModel.getBrand().getName());
+
+        return brandDTO;
     }
 
     //delete model by id

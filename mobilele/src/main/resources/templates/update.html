@@ -12,7 +12,7 @@
     <h2 class="text-center text-white">Update Offer</h2>
     <form th:method="POST"
           th:action="@{/update}"
-          th:object="${addOfferDTO}"
+          th:object="${offerDTO}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
 
         <!--Sends employee id with a POST request-->
@@ -24,7 +24,7 @@
                 <label class="text-center text-white font-weight-bold" for="brand">Brand</label>
                 <select class="form-control" name="brand"
                         id="brand"
-                        th:placeholder="${addOfferDTO.brand}"
+                        th:placeholder="${offerDTO.brand}"
                         th:field="*{brand}"
                         th:errorclass="is-invalid">
                     <option th:each="brand: ${brands}"
@@ -37,7 +37,7 @@
                 </p>
                 <select class="form-control" name="model"
                         id="model"
-                        th:placeholder="${addOfferDTO.model}"
+                        th:placeholder="${offerDTO.model}"
                         th:field="*{model}"
                         th:errorclass="is-invalid">
                     <option th:each="model: ${models}"
@@ -65,7 +65,7 @@
                 <label class="text-center text-white font-weight-bold" for="engine">Engine</label>
                 <select class="form-control" name="engine"
                         id="engine"
-                        th:placeholder="${addOfferDTO.engine}"
+                        th:placeholder="${offerDTO.engine}"
                         th:field="*{engine}"
                         th:errorclass="is-invalid">
                     <option th:each="type: ${engineType}"
@@ -81,7 +81,7 @@
                 <label class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
                 <select class="form-control" name="transmission"
                         id="transmission"
-                        th:placeholder="${addOfferDTO.transmission}"
+                        th:placeholder="${offerDTO.transmission}"
                         th:field="*{transmission}"
                         th:errorclass="is-invalid">
                     <option th:each="type: ${transmissionType}"

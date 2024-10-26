@@ -70,7 +70,7 @@ public class OfferServiceImpl implements OfferService {
 
     //edit offer
     @Override
-    public void editOffer(AddOfferDTO addOfferDTO) {
+    public void editOffer(OfferDTO offerDTO) {
 
     }
 

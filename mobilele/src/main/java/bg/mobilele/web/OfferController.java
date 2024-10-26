@@ -130,23 +130,23 @@ public class OfferController {
 
     @PostMapping("/update")
     public String edithOffer(@RequestParam("offerId") Long id,
-                             @Valid AddOfferDTO addOfferDTO,
+                             @Valid OfferDTO offerDTO,
                              BindingResult bindingResult,
                              RedirectAttributes rAtt,
                              Model model) {
 
-        addOfferDTO.setOfferId(id);
+        offerDTO.setOfferId(id);
 
         if (bindingResult.hasErrors()) {
-            rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
-            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
+            rAtt.addFlashAttribute("offerDTO", offerDTO);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.offerDTO", bindingResult);
 
             model.addAttribute("offer", offerService.getOfferDTOById(id));
             return "update";
         }
 
-        offerService.editOffer(addOfferDTO);
-        return "redirect:/details/" + addOfferDTO.getOfferId();
+        offerService.editOffer(offerDTO);
+        return "redirect:/details/" + offerDTO.getOfferId();
     }
 
     @DeleteMapping("/details/{id}")

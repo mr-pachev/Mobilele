@@ -17,7 +17,7 @@ public interface OfferService {
     List<Offer> allOfferInCurrentSeller(long sellerId);
 
     //edit offer
-    void editOffer(AddOfferDTO addOfferDTO);
+    void editOffer(OfferDTO offerDTO);
 
     //delete offer by id
     void deleteOffer(long offerId);

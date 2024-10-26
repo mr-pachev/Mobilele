@@ -1,6 +1,7 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.AddOfferDTO;
+import bg.mobilele.model.DTO.OfferDTO;
 import bg.mobilele.model.entity.Offer;
 import bg.mobilele.model.enums.Engine;
 import bg.mobilele.model.enums.Transmission;
@@ -100,9 +101,9 @@ public class OfferController {
 
     @GetMapping("/details/{id}")
     public String viewOfferDetail(@PathVariable("id") long id, Model model) {
-        AddOfferDTO addOfferDTO = offerService.getAddOfferDTOById(id);
+        OfferDTO offerDTO = offerService.getOfferDTOById(id);
 
-        model.addAttribute("addOfferDTO", addOfferDTO);
+        model.addAttribute("offerDTO", offerDTO);
 
         return "details";
     }
@@ -116,9 +117,9 @@ public class OfferController {
 
     @GetMapping("/update/{id}")
     public String fillOfferDetailsForm(@PathVariable("id") long id, Model model) {
-        AddOfferDTO addOfferDTO = offerService.getAddOfferDTOById(id);
+        OfferDTO offerDTO = offerService.getOfferDTOById(id);
 
-        model.addAttribute("addOfferDTO", addOfferDTO);
+        model.addAttribute("offerDTO", offerDTO);
         model.addAttribute("engineType", Engine.values());
         model.addAttribute("transmissionType", Transmission.values());
         model.addAttribute("brands", brandService.allBrands());
@@ -140,7 +141,7 @@ public class OfferController {
             rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
 
-            model.addAttribute("offer", offerService.getAddOfferDTOById(id));
+            model.addAttribute("offer", offerService.getOfferDTOById(id));
             return "update";
         }
 

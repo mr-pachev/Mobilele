@@ -1,6 +1,7 @@
 package bg.mobilele.service.impl;
 
 import bg.mobilele.model.DTO.AddOfferDTO;
+import bg.mobilele.model.DTO.OfferDTO;
 import bg.mobilele.model.entity.Brand;
 import bg.mobilele.model.entity.Model;
 import bg.mobilele.model.entity.Offer;
@@ -13,7 +14,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -52,13 +52,13 @@ public class OfferServiceImpl implements OfferService {
 
     //get offer by id
     @Override
-    public AddOfferDTO getAddOfferDTOById(long id) {
+    public OfferDTO getOfferDTOById(long id) {
         Offer offer = offerRepository.findById(id).orElseThrow();
 
-        AddOfferDTO addOfferDTO = mapper.map(offer, AddOfferDTO.class);
-        addOfferDTO.setBrand(offer.getBrand().getName());
+        OfferDTO offerDTO = mapper.map(offer, OfferDTO.class);
+        offerDTO.setBrand(offer.getBrand().getName());
 
-        return addOfferDTO;
+        return offerDTO;
     }
 
     //get all offers by current user id

@@ -28,6 +28,7 @@
                     <div class="card-text"><span>• Price: <span th:text="*{price}"></span></span></div>
                     <div class="card-text"><span>• Engine type: <span th:text="*{engine}"></span></span></div>
                     <div class="card-text"><span>• Transmission type: <span th:text="*{transmission}"></span></span></div>
+                    <div class="card-text"><span>• Description: <span th:text="*{description}"></span></span></div>
                     <div class="card-text"><span>• Offer created: <span th:text="*{created}"></span></span></div>
                     <div class="card-text"><span>• Offer modified: <span th:text="*{modified}"></span></span></div>
                     <div class="card-text"><span>• Seller - <span th:text="${@userHelperService.getUser().firstName} + ' ' + ${@userHelperService.getUser().lastName}"></span></span></div>

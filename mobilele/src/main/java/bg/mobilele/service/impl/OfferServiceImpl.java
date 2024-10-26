@@ -40,11 +40,8 @@ public class OfferServiceImpl implements OfferService {
 
         Offer offer = mapper.map(addOfferDTO, Offer.class);
 
-        LocalDate createdDate = mapper.map(addOfferDTO.getCreated(), LocalDate.class);
-        offer.setCreated(createdDate);
-
-        LocalDate modifiedDate = mapper.map(addOfferDTO.getModified(), LocalDate.class);
-        offer.setModified(modifiedDate);
+        offer.setCreated(LocalDate.now());
+        offer.setModified(LocalDate.now());
 
         offer.setBrand(brand);
         offer.setModel(model);
@@ -74,17 +71,7 @@ public class OfferServiceImpl implements OfferService {
     //edit offer
     @Override
     public void editOffer(AddOfferDTO addOfferDTO) {
-        Offer offer = offerRepository.findById(addOfferDTO.getOfferId()).orElseThrow();
 
-//        LocalDateTime createdDate = mapper.map(addOfferDTO.getCreated(), LocalDateTime.class);
-//        offer.setCreated(createdDate);
-
-        LocalDate modifiedDate = mapper.map(addOfferDTO.getModified(), LocalDate.class);
-        offer.setModified(modifiedDate);
-
-        mapper.map(addOfferDTO, offer);
-
-        offerRepository.save(offer);
     }
 
     //delete offer by id

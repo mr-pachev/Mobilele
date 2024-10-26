@@ -3,8 +3,9 @@ package bg.mobilele.model.DTO;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
-public class AddOfferDTO {
+public class OfferDTO {
     @NotBlank
     @Size(min = 10, max = 500)
     private String description;
@@ -29,6 +30,9 @@ public class AddOfferDTO {
     @NotBlank
     private String model;
     private long offerId;
+
+    private String created;
+    private String modified;
 
     public String getDescription() {
         return description;
@@ -86,14 +90,6 @@ public class AddOfferDTO {
         this.year = year;
     }
 
-    public long getOfferId() {
-        return offerId;
-    }
-
-    public void setOfferId(long offerId) {
-        this.offerId = offerId;
-    }
-
     public String getBrand() {
         return brand;
     }
@@ -108,5 +104,29 @@ public class AddOfferDTO {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public long getOfferId() {
+        return offerId;
+    }
+
+    public void setOfferId(long offerId) {
+        this.offerId = offerId;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getModified() {
+        return modified;
+    }
+
+    public void setModified(String modified) {
+        this.modified = modified;
     }
 }

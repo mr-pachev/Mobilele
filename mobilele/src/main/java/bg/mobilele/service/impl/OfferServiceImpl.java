@@ -12,6 +12,8 @@ import bg.mobilele.service.OfferService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,7 +37,14 @@ public class OfferServiceImpl implements OfferService {
     public long addOffer(AddOfferDTO addOfferDTO, long userId) {
         Model model = modelRepository.findModelByModelName(addOfferDTO.getModel()).orElseThrow();
         Brand brand = brandRepository.findByName(addOfferDTO.getBrand()).orElseThrow();
+
         Offer offer = mapper.map(addOfferDTO, Offer.class);
+
+        LocalDate createdDate = mapper.map(addOfferDTO.getCreated(), LocalDate.class);
+        offer.setCreated(createdDate);
+
+        LocalDate modifiedDate = mapper.map(addOfferDTO.getModified(), LocalDate.class);
+        offer.setModified(modifiedDate);
 
         offer.setBrand(brand);
         offer.setModel(model);
@@ -66,6 +75,12 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public void editOffer(AddOfferDTO addOfferDTO) {
         Offer offer = offerRepository.findById(addOfferDTO.getOfferId()).orElseThrow();
+
+//        LocalDateTime createdDate = mapper.map(addOfferDTO.getCreated(), LocalDateTime.class);
+//        offer.setCreated(createdDate);
+
+        LocalDate modifiedDate = mapper.map(addOfferDTO.getModified(), LocalDate.class);
+        offer.setModified(modifiedDate);
 
         mapper.map(addOfferDTO, offer);
 

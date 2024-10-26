@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,8 +25,8 @@ public class Offer extends BaseEntity{
     private Transmission transmission;
 
     private Integer year;
-    private LocalDateTime created;
-    private LocalDateTime modified;
+    private LocalDate created;
+    private LocalDate modified;
     @ManyToOne
     @JoinColumn(name = "model_id", referencedColumnName = "id")
     private Model model;
@@ -94,19 +95,19 @@ public class Offer extends BaseEntity{
         this.year = year;
     }
 
-    public LocalDateTime getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 
-    public LocalDateTime getModified() {
+    public LocalDate getModified() {
         return modified;
     }
 
-    public void setModified(LocalDateTime modified) {
+    public void setModified(LocalDate modified) {
         this.modified = modified;
     }
 

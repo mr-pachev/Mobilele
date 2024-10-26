@@ -3,8 +3,6 @@ package bg.mobilele.model.DTO;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class AddOfferDTO {
     @NotBlank
@@ -31,8 +29,8 @@ public class AddOfferDTO {
     @NotBlank
     private String model;
     private long offerId;
-    private LocalDateTime created;
-    private LocalDateTime modified;
+    private String created;
+    private String modified;
 
     public String getDescription() {
         return description;
@@ -114,19 +112,19 @@ public class AddOfferDTO {
         this.model = model;
     }
 
-    public LocalDateTime getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 
-    public LocalDateTime getModified() {
+    public String getModified() {
         return modified;
     }
 
-    public void setModified(LocalDateTime modified) {
+    public void setModified(String modified) {
         this.modified = modified;
     }
 }

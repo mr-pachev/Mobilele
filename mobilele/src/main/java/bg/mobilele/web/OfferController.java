@@ -91,9 +91,6 @@ public class OfferController {
             return "redirect:/offers/add";
         }
 
-        addOfferDTO.setCreated(LocalDateTime.now());
-        addOfferDTO.setModified(LocalDateTime.now());
-
         long userId = userHelperService.getUser().getId();
         long offerId = offerService.addOffer(addOfferDTO, userId);
 
@@ -121,7 +118,7 @@ public class OfferController {
     public String fillOfferDetailsForm(@PathVariable("id") long id, Model model) {
         AddOfferDTO addOfferDTO = offerService.getAddOfferDTOById(id);
 
-        model.addAttribute("addOfferDTO", offerService.getAddOfferDTOById(id));
+        model.addAttribute("addOfferDTO", addOfferDTO);
         model.addAttribute("engineType", Engine.values());
         model.addAttribute("transmissionType", Transmission.values());
         model.addAttribute("brands", brandService.allBrands());

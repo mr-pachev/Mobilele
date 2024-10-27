@@ -5,6 +5,8 @@ import bg.mobilele.model.DTO.OfferDTO;
 import bg.mobilele.model.entity.Brand;
 import bg.mobilele.model.entity.Model;
 import bg.mobilele.model.entity.Offer;
+import bg.mobilele.model.enums.Engine;
+import bg.mobilele.model.enums.Transmission;
 import bg.mobilele.repository.BrandRepository;
 import bg.mobilele.repository.ModelRepository;
 import bg.mobilele.repository.OfferRepository;
@@ -71,7 +73,31 @@ public class OfferServiceImpl implements OfferService {
     //edit offer
     @Override
     public void editOffer(OfferDTO offerDTO) {
+       Offer offer = offerDTOmapToOffer(offerDTO);
 
+        offerRepository.save(offer);
+    }
+
+    private Offer offerDTOmapToOffer(OfferDTO offerDTO){
+        Offer offer = offerRepository.findById(offerDTO.getOfferId()).orElseThrow();
+
+        offer.setDescription(offerDTO.getDescription());
+        offer.setEngine(Engine.valueOf(offerDTO.getEngine()));
+        offer.setImageUrl(offerDTO.getImageUrl());
+        offer.setMileage(offerDTO.getMileage());
+        offer.setPrice(offerDTO.getPrice());
+        offer.setTransmission(Transmission.valueOf(offerDTO.getTransmission()));
+        offer.setYear(offerDTO.getYear());
+
+        Model model = modelRepository.findModelByModelName(offerDTO.getModel()).orElseThrow();
+        Brand brand = brandRepository.findByName(offerDTO.getBrand()).orElseThrow();
+
+        offer.setBrand(brand);
+        offer.setModel(model);
+//        offer.setSeller(userRepository.getReferenceById(offer.getSeller().getId()));
+        offer.setModified(LocalDate.now());
+
+        return offer;
     }
 
     //delete offer by id

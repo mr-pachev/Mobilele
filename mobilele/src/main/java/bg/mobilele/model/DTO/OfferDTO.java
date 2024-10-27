@@ -31,8 +31,8 @@ public class OfferDTO {
     private String model;
     private long offerId;
 
-    private String created;
-    private String modified;
+    private LocalDate created;
+    private LocalDate modified;
 
     public String getDescription() {
         return description;
@@ -114,19 +114,19 @@ public class OfferDTO {
         this.offerId = offerId;
     }
 
-    public String getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 
-    public String getModified() {
+    public LocalDate getModified() {
         return modified;
     }
 
-    public void setModified(String modified) {
+    public void setModified(LocalDate modified) {
         this.modified = modified;
     }
 }

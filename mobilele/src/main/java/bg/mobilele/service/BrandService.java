@@ -18,7 +18,7 @@ public interface BrandService {
     //get brand by name
     Brand findByBrandName(String brandName);
 
-    //get brandDTO
+    //get BrandDTO by model id
     BrandDTO findByModelId(long id);
 
     //delete model by id

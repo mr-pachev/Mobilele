@@ -15,11 +15,13 @@ public class ModelServiceImpl implements ModelService {
         this.modelRepository = modelRepository;
     }
 
+    //get all models
     @Override
     public List<Model> allModel() {
         return modelRepository.findAll();
     }
 
+    //check is exist model by model name
     @Override
     public boolean isExistModel(String modelName) {
         return modelRepository.findModelByModelName(modelName).isPresent();

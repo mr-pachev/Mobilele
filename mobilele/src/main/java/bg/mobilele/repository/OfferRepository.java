@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface OfferRepository extends JpaRepository<Offer, Long> {
     Optional<Offer> findById(long offerId);
     List<Offer> findAllBySeller_Id(long sellerId);
+
+    List<Offer> findAllByBrandId(long brandId);
 }

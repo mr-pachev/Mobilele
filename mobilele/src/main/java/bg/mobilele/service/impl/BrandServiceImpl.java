@@ -5,6 +5,7 @@ import bg.mobilele.model.entity.Brand;
 import bg.mobilele.model.entity.Model;
 import bg.mobilele.repository.BrandRepository;
 import bg.mobilele.repository.ModelRepository;
+import bg.mobilele.repository.OfferRepository;
 import bg.mobilele.service.BrandService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,13 @@ import java.util.List;
 public class BrandServiceImpl implements BrandService {
     private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
+    private final OfferRepository offerRepository;
     private final ModelMapper mapper;
 
-    public BrandServiceImpl(BrandRepository brandRepository, ModelRepository modelRepository, ModelMapper mapper) {
+    public BrandServiceImpl(BrandRepository brandRepository, ModelRepository modelRepository, OfferRepository offerRepository, ModelMapper mapper) {
         this.brandRepository = brandRepository;
         this.modelRepository = modelRepository;
+        this.offerRepository = offerRepository;
         this.mapper = mapper;
     }
 
@@ -102,6 +105,7 @@ public class BrandServiceImpl implements BrandService {
     //delete model by id
     @Override
     public void removeModel(long id) {
+        offerRepository.deleteById(id);
         modelRepository.deleteById(id);
     }
 

@@ -1,6 +1,7 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.BrandDTO;
+import bg.mobilele.model.entity.Offer;
 import bg.mobilele.model.enums.Category;
 import bg.mobilele.service.BrandService;
 import bg.mobilele.service.ModelService;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/")

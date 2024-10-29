@@ -73,12 +73,12 @@ public class OfferServiceImpl implements OfferService {
     //edit offer
     @Override
     public void editOffer(OfferDTO offerDTO) {
-       Offer offer = offerDTOmapToOffer(offerDTO);
+        Offer offer = offerDTOmapToOffer(offerDTO);
 
         offerRepository.save(offer);
     }
 
-    private Offer offerDTOmapToOffer(OfferDTO offerDTO){
+    private Offer offerDTOmapToOffer(OfferDTO offerDTO) {
         Offer offer = offerRepository.findById(offerDTO.getOfferId()).orElseThrow();
 
         offer.setDescription(offerDTO.getDescription());
@@ -104,6 +104,18 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public void deleteOffer(long offerId) {
         offerRepository.deleteById(offerId);
+    }
+
+    //get all offers by current user id
+    @Override
+    public void deleteOfferByBrand(long brandId) {
+        List<Offer> offersByBrand = offerRepository.findAllByBrandId(brandId);
+
+        if (!offersByBrand.isEmpty()) {
+            for (Offer offer : offersByBrand) {
+                offerRepository.deleteById(offer.getId());
+            }
+        }
     }
 
 }

@@ -1,10 +1,10 @@
 package bg.mobilele.web;
 
 import bg.mobilele.model.DTO.BrandDTO;
-import bg.mobilele.model.entity.Offer;
 import bg.mobilele.model.enums.Category;
 import bg.mobilele.service.BrandService;
 import bg.mobilele.service.ModelService;
+import bg.mobilele.service.OfferService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,17 +12,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/")
 public class BrandController {
     private final BrandService brandService;
     private final ModelService modelService;
 
-    public BrandController(BrandService brandService, ModelService modelService) {
+    private final OfferService offerService;
+
+    public BrandController(BrandService brandService, ModelService modelService, OfferService offerService) {
         this.brandService = brandService;
         this.modelService = modelService;
+        this.offerService = offerService;
     }
 
     @ModelAttribute("brandDTO")
@@ -122,6 +123,8 @@ public class BrandController {
     //delete brand by id
     @PostMapping("/delete-brand/{id}")
     public String deleteBrand(@PathVariable("id") Long id) {
+
+        offerService.deleteOfferByBrand(id);
 
         brandService.removeBrand(id);
 

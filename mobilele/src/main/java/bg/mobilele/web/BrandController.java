@@ -115,6 +115,8 @@ public class BrandController {
     @PostMapping("/delete-model/{id}")
     public String deleteModel(@PathVariable("id") Long id) {
 
+        offerService.deleteOfferByModel(id);
+
         brandService.removeModel(id);
 
         return "redirect:/brands/all";

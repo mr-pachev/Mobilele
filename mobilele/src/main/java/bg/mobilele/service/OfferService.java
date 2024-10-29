@@ -24,4 +24,7 @@ public interface OfferService {
 
     //delete offer by brand id
     void deleteOfferByBrand(long brandId);
+
+    //delete offer by model id
+    void deleteOfferByModel(long modelId);
 }

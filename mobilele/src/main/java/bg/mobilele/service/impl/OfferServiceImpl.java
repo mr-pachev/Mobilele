@@ -118,4 +118,16 @@ public class OfferServiceImpl implements OfferService {
         }
     }
 
+    //delete offer by model id
+    @Override
+    public void deleteOfferByModel(long modelId) {
+        List<Offer> offersByModel = offerRepository.findAllByModelId(modelId);
+
+        if (!offersByModel.isEmpty()) {
+            for (Offer offer : offersByModel) {
+                offerRepository.deleteById(offer.getId());
+            }
+        }
+    }
+
 }

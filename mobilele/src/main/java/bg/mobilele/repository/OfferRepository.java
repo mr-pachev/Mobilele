@@ -13,4 +13,6 @@ public interface OfferRepository extends JpaRepository<Offer, Long> {
     List<Offer> findAllBySeller_Id(long sellerId);
 
     List<Offer> findAllByBrandId(long brandId);
+
+    List<Offer> findAllByModelId(long modelId);
 }

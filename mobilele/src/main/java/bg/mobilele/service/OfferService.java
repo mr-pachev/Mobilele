@@ -7,14 +7,14 @@ import bg.mobilele.model.entity.Offer;
 import java.util.List;
 
 public interface OfferService {
-    //add offer
-    long addOffer(AddOfferDTO addOfferDTO, long userId);
+    //get all offers by current user id
+    List<Offer> allOfferInCurrentSeller(long sellerId);
 
     //get offerDTO by id
     OfferDTO getOfferDTOById(long id);
 
-    //get all offers by current user id
-    List<Offer> allOfferInCurrentSeller(long sellerId);
+    //add offer
+    long addOffer(AddOfferDTO addOfferDTO, long userId);
 
     //edit offer
     void editOffer(OfferDTO offerDTO);

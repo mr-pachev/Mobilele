@@ -34,6 +34,24 @@ public class OfferServiceImpl implements OfferService {
         this.userRepository = userRepository;
     }
 
+    //get all offers by current user id
+    @Override
+    public List<Offer> allOfferInCurrentSeller(long sellerId) {
+
+        return offerRepository.findAllBySeller_Id(sellerId);
+    }
+
+    //get offerDTO by id
+    @Override
+    public OfferDTO getOfferDTOById(long id) {
+        Offer offer = offerRepository.findById(id).orElseThrow();
+
+        OfferDTO offerDTO = mapper.map(offer, OfferDTO.class);
+        offerDTO.setBrand(offer.getBrand().getName());
+
+        return offerDTO;
+    }
+
     //add offer
     @Override
     public long addOffer(AddOfferDTO addOfferDTO, long userId) {
@@ -50,24 +68,6 @@ public class OfferServiceImpl implements OfferService {
         offer.setSeller(userRepository.getReferenceById(userId));
 
         return offerRepository.save(offer).getId();
-    }
-
-    //get offer by id
-    @Override
-    public OfferDTO getOfferDTOById(long id) {
-        Offer offer = offerRepository.findById(id).orElseThrow();
-
-        OfferDTO offerDTO = mapper.map(offer, OfferDTO.class);
-        offerDTO.setBrand(offer.getBrand().getName());
-
-        return offerDTO;
-    }
-
-    //get all offers by current user id
-    @Override
-    public List<Offer> allOfferInCurrentSeller(long sellerId) {
-
-        return offerRepository.findAllBySeller_Id(sellerId);
     }
 
     //edit offer
@@ -94,7 +94,6 @@ public class OfferServiceImpl implements OfferService {
 
         offer.setBrand(brand);
         offer.setModel(model);
-//        offer.setSeller(userRepository.getReferenceById(offer.getSeller().getId()));
         offer.setModified(LocalDate.now());
 
         return offer;
@@ -106,7 +105,7 @@ public class OfferServiceImpl implements OfferService {
         offerRepository.deleteById(offerId);
     }
 
-    //get all offers by current user id
+    //delete offer by brand id
     @Override
     public void deleteOfferByBrand(long brandId) {
         List<Offer> offersByBrand = offerRepository.findAllByBrandId(brandId);
@@ -129,5 +128,4 @@ public class OfferServiceImpl implements OfferService {
             }
         }
     }
-
 }

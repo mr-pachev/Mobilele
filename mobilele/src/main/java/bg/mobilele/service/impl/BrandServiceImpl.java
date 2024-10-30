@@ -35,6 +35,14 @@ public class BrandServiceImpl implements BrandService {
         return brandRepository.findAll();
     }
 
+    //get brand by name
+    @Override
+    public Brand findByBrandName(String brandName) {
+
+        return brandRepository.findByName(brandName).orElseThrow();
+    }
+
+    //get models by brand
     @Override
     public List<String> modelsByBrand(String branName) {
         List<String> models = findByBrandName(branName).getModels().stream()
@@ -42,6 +50,17 @@ public class BrandServiceImpl implements BrandService {
                 .toList();
 
         return models;
+    }
+
+    //get BrandDTO by model id
+    @Override
+    public BrandDTO findByModelId(long id) {
+        Model currentModel = modelRepository.findById(id).orElseThrow();
+
+        BrandDTO brandDTO = mapper.map(currentModel, BrandDTO.class);
+        brandDTO.setName(currentModel.getBrand().getName());
+
+        return brandDTO;
     }
 
     //add new brand or model
@@ -82,24 +101,6 @@ public class BrandServiceImpl implements BrandService {
         }
         currentModels.add(model);
         brand.setModels(currentModels);
-    }
-
-    //get brand by name
-    @Override
-    public Brand findByBrandName(String brandName) {
-
-        return brandRepository.findByName(brandName).orElseThrow();
-    }
-
-    //get BrandDTO by model id
-    @Override
-    public BrandDTO findByModelId(long id) {
-        Model currentModel = modelRepository.findById(id).orElseThrow();
-
-        BrandDTO brandDTO = mapper.map(currentModel, BrandDTO.class);
-        brandDTO.setName(currentModel.getBrand().getName());
-
-        return brandDTO;
     }
 
     //delete model by id

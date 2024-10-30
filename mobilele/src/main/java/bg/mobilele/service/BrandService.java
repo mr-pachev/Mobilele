@@ -9,17 +9,17 @@ public interface BrandService {
     //get all brands
     List<Brand> allBrands();
 
-    //add new brand or model
-    void addBrand(BrandDTO brandDTO);
+    //get brand by name
+    Brand findByBrandName(String brandName);
 
     //get models by brand
     List<String> modelsByBrand (String branName);
 
-    //get brand by name
-    Brand findByBrandName(String brandName);
-
     //get BrandDTO by model id
     BrandDTO findByModelId(long id);
+
+    //add new brand or model
+    void addBrand(BrandDTO brandDTO);
 
     //delete model by id
     void removeModel(long id);

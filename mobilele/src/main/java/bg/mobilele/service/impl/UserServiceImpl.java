@@ -32,6 +32,36 @@ public class UserServiceImpl implements UserService {
         this.mapper = mapper;
     }
 
+    //get all users
+    @Override
+    public List<UserDTO> getAllUsers() {
+        List<UserDTO> users = new ArrayList<>();
+
+        for (User user : userRepository.findAll()) {
+            users.add(mapToUserDTO(user));
+        }
+        return users;
+    }
+
+    private UserDTO mapToUserDTO(User user) {
+        UserDTO userDTO = mapper.map(user, UserDTO.class);
+        userDTO.setUserRole(user.getUserRole().getRole().name());
+        return userDTO;
+    }
+
+    //check is exist user by username
+    @Override
+    public boolean isExistUser(String username) {
+
+        return userRepository.findByUsername(username).isPresent();
+    }
+
+    //check is exist email
+    @Override
+    public boolean isExistEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
     //add new user
     @Override
     public void registrationUser(UserRegistrationDTO userRegistrationDTO) {
@@ -79,19 +109,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    //check is exist user by username
-    @Override
-    public boolean isExistUser(String username) {
-
-        return userRepository.findByUsername(username).isPresent();
-    }
-
-    //check is exist email
-    @Override
-    public boolean isExistEmail(String email) {
-        return userRepository.findByEmail(email).isPresent();
-    }
-
     //get user details by id
     @Override
     public UserDTO getUserDetails(long id) {
@@ -100,23 +117,6 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = mapper.map(currentUser, UserDTO.class);
         userDTO.setUserRole(currentUser.getUserRole().getRole().name());
 
-        return userDTO;
-    }
-
-    //get all users
-    @Override
-    public List<UserDTO> getAllUsers() {
-        List<UserDTO> users = new ArrayList<>();
-
-        for (User user : userRepository.findAll()) {
-            users.add(mapToUserDTO(user));
-        }
-        return users;
-    }
-
-    private UserDTO mapToUserDTO(User user) {
-        UserDTO userDTO = mapper.map(user, UserDTO.class);
-        userDTO.setUserRole(user.getUserRole().getRole().name());
         return userDTO;
     }
 }
